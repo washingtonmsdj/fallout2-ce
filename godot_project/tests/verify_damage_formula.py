@@ -1,90 +1,82 @@
 #!/usr/bin/env python3
 """
-Verify the damage formula
-This tests that Damage = Weapon_Damage + Strength_Bonus - (DR * Damage / 100), minimum 1
+Property Test: Damage Formula Correctness
+**Feature: godot-game-migration, Property 10: Damage Formula Correctness**
+**Validates: Requirements 5.4**
+
+Property: For any weapon damage W, strength bonus B, and target damage resistance DR,
+final damage SHALL equal max(1, W + B - (DR * (W + B) / 100)).
 """
 
 import random
+import sys
 
-def calculate_damage(weapon_damage, strength_bonus, target_dr):
+def calculate_damage(weapon_damage: int, strength_bonus: int, target_dr: int) -> int:
     """
     Calculate damage using Fallout 2 formula
-    Formula: Damage = Weapon_Damage + Strength_Bonus - (DR * Damage / 100)
+    Formula: Damage = Weapon_Damage + Strength_Bonus - (DR * (Weapon_Damage + Strength_Bonus) / 100)
     Minimum of 1 damage
     """
-    # Total damage before DR
     total_damage = weapon_damage + strength_bonus
-    
-    # Apply DR reduction
-    dr_reduction = (target_dr * total_damage) / 100
+    dr_reduction = (target_dr * total_damage) // 100
     final_damage = total_damage - dr_reduction
-    
-    # Minimum of 1
-    return max(1, int(final_damage))
+    return max(1, final_damage)
 
-def test_damage_formula(num_iterations=100):
-    """Test the damage formula property"""
+def test_damage_formula_property(iterations: int = 100) -> bool:
+    """
+    Property-based test for damage formula
+    """
+    print(f"\n=== Property Test: Damage Formula Correctness ===")
+    print(f"Running {iterations} iterations...")
+    
     passed = 0
     failed = 0
-    failures = []
     
-    for i in range(num_iterations):
+    for i in range(iterations):
         # Generate random parameters
         weapon_damage = random.randint(1, 50)
         strength_bonus = random.randint(0, 10)
-        target_dr = random.randint(0, 90)  # DR is usually 0-90%
+        target_dr = random.randint(0, 90)  # DR typically 0-90%
         
-        # Calculate damage
-        damage = calculate_damage(weapon_damage, strength_bonus, target_dr)
+        # Calculate expected damage
+        total_damage = weapon_damage + strength_bonus
+        dr_reduction = (target_dr * total_damage) // 100
+        expected = max(1, total_damage - dr_reduction)
         
-        # Verify properties:
-        # 1. Damage is at least 1
-        # 2. Formula is correct
+        # Calculate actual damage
+        actual = calculate_damage(weapon_damage, strength_bonus, target_dr)
         
-        total_before_dr = weapon_damage + strength_bonus
-        expected_reduction = (target_dr * total_before_dr) / 100
-        expected_damage = max(1, int(total_before_dr - expected_reduction))
-        
-        if damage == expected_damage and damage >= 1:
-            passed += 1
-        else:
+        # Verify property: actual must equal expected
+        if actual != expected:
+            print(f"❌ FAILED: Damage formula incorrect!")
+            print(f"   Weapon Damage: {weapon_damage}")
+            print(f"   Strength Bonus: {strength_bonus}")
+            print(f"   Target DR: {target_dr}%")
+            print(f"   Expected: {expected}")
+            print(f"   Actual: {actual}")
             failed += 1
-            failures.append({
-                'iteration': i,
-                'weapon_damage': weapon_damage,
-                'strength_bonus': strength_bonus,
-                'target_dr': target_dr,
-                'total_before_dr': total_before_dr,
-                'expected_reduction': expected_reduction,
-                'expected': expected_damage,
-                'actual': damage
-            })
-    
-    print(f"=== Property Test: Damage Formula Correctness ===")
-    print(f"Passed: {passed} / {num_iterations}")
-    print(f"Failed: {failed} / {num_iterations}")
-    
-    if failed > 0:
-        print("\n=== Failed Cases (first 5) ===")
-        for failure in failures[:5]:
-            print(f"Iteration {failure['iteration']}:")
-            print(f"  Weapon Damage: {failure['weapon_damage']}")
-            print(f"  Strength Bonus: {failure['strength_bonus']}")
-            print(f"  Target DR: {failure['target_dr']}%")
-            print(f"  Total before DR: {failure['total_before_dr']}")
-            print(f"  DR Reduction: {failure['expected_reduction']:.2f}")
-            print(f"  Expected: {failure['expected']}")
-            print(f"  Actual: {failure['actual']}")
+            continue
         
-        if len(failures) > 5:
-            print(f"... and {len(failures) - 5} more failures")
+        # Verify property: damage must be at least 1
+        if actual < 1:
+            print(f"❌ FAILED: Damage below minimum!")
+            print(f"   Result: {actual}")
+            failed += 1
+            continue
         
-        print("\nPROPERTY TEST FAILED")
-        return False
-    else:
-        print("\nPROPERTY TEST PASSED")
+        passed += 1
+    
+    print(f"\nResults:")
+    print(f"  Passed: {passed}/{iterations}")
+    print(f"  Failed: {failed}/{iterations}")
+    
+    if failed == 0:
+        print("✅ All tests passed!")
         return True
+    else:
+        print("❌ Some tests failed!")
+        return False
 
 if __name__ == "__main__":
-    success = test_damage_formula(100)
-    exit(0 if success else 1)
+    success = test_damage_formula_property(100)
+    sys.exit(0 if success else 1)

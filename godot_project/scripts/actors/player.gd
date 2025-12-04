@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 ## Player do Fallout 2 - Controle de movimento e stats
-## Fiel ao comportamento do jogo original
+## Usa AnimatedSprite2D com animações extraídas do jogo original
 
 signal hp_changed(current: int, maximum: int)
 signal ap_changed(current: int, maximum: int)
@@ -44,7 +44,7 @@ var critical_chance: int = 0
 # Estado
 var is_moving: bool = false
 var is_running: bool = false
-var current_direction: int = 0  # 0-5 para as 6 direcoes isometricas
+var current_direction: int = 2  # 0-5 para as 6 direcoes isometricas (começa SE)
 var target_position: Vector2 = Vector2.ZERO
 var move_to_target: bool = false
 
@@ -53,49 +53,28 @@ var current_path: Array[Vector2i] = []
 var path_index: int = 0
 var following_path: bool = false
 
-# Animacao de caminhada (bobbing)
-var walk_time: float = 0.0
-var walk_bob_amount: float = 3.0  # Pixels de movimento vertical
-var walk_bob_speed: float = 12.0  # Velocidade do bob
-var sprite_base_offset: Vector2 = Vector2(0, -30)
+# Nomes das direções para animações
+const DIRECTION_NAMES: Array[String] = ["ne", "e", "se", "sw", "w", "nw"]
 
 # Referencias
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
-# Texturas das 6 direcoes
-var direction_textures: Array[Texture2D] = []
-var texture_paths: Array[String] = [
-	"res://assets/sprites/player/player_ne.png",  # 0 = NE
-	"res://assets/sprites/player/player_e.png",   # 1 = E
-	"res://assets/sprites/player/player_se.png",  # 2 = SE
-	"res://assets/sprites/player/player_sw.png",  # 3 = SW
-	"res://assets/sprites/player/player_w.png",   # 4 = W
-	"res://assets/sprites/player/player_nw.png"   # 5 = NW
-]
+# Estado da animação
+var current_anim_state: String = "idle"
 
 func _ready():
 	add_to_group("player")
-	_load_direction_textures()
 	_calculate_derived_stats()
-	
-	# Guardar offset base do sprite
-	if sprite:
-		sprite_base_offset = sprite.offset
-	
+	_setup_animations()
 	print("Player: Inicializado - HP:", hp, "/", max_hp, " AP:", action_points)
 
-func _load_direction_textures():
-	"""Carrega as texturas das 6 direcoes"""
-	direction_textures.clear()
-	for path in texture_paths:
-		var tex = load(path)
-		if tex:
-			direction_textures.append(tex)
-		else:
-			print("Player: AVISO - Textura nao encontrada: ", path)
-			direction_textures.append(null)
-	print("Player: ", direction_textures.size(), " texturas direcionais carregadas")
+func _setup_animations():
+	"""Configura as animações do player"""
+	if animated_sprite:
+		# Começar com idle na direção SE
+		_play_animation("idle")
+		print("Player: Animações configuradas")
 
 func _calculate_derived_stats():
 	"""Calcula stats derivados baseado em SPECIAL (igual ao original)"""
@@ -116,15 +95,13 @@ func _calculate_derived_stats():
 func _physics_process(delta):
 	_handle_input()
 	_handle_movement(delta)
-	_update_walk_animation(delta)
+	_update_animation()
 	move_and_slide()
 
 func _handle_input():
 	"""Processa input do jogador"""
-	# Verificar encumbrance - bloquear movimento se peso > capacidade
 	var inventory = get_node_or_null("/root/InventorySystem")
 	if inventory and inventory.is_encumbered():
-		# Bloquear movimento se encumbered
 		velocity = Vector2.ZERO
 		is_moving = false
 		return
@@ -154,27 +131,16 @@ func _handle_input():
 
 func _handle_movement(_delta):
 	"""Processa movimento para posicao alvo (click) ou seguindo caminho"""
-	# Verificar encumbrance - bloquear movimento se peso > capacidade
 	var inventory = get_node_or_null("/root/InventorySystem")
 	if inventory and inventory.is_encumbered():
-		# Bloquear movimento se encumbered
 		velocity = Vector2.ZERO
 		is_moving = false
 		move_to_target = false
 		following_path = false
-		if not has_meta("encumbrance_warning_shown"):
-			print("Player: Muito pesado para se mover! (Encumbered)")
-			set_meta("encumbrance_warning_shown", true)
 		return
 	
-	# Limpar flag de aviso se não estiver mais encumbered
-	if has_meta("encumbrance_warning_shown"):
-		remove_meta("encumbrance_warning_shown")
-	
-	# Seguir caminho calculado pelo pathfinding
 	if following_path and current_path.size() > 0:
 		_follow_path()
-	# Movimento direto (fallback)
 	elif move_to_target:
 		var dir = (target_position - global_position).normalized()
 		var dist = global_position.distance_to(target_position)
@@ -192,11 +158,9 @@ func _handle_movement(_delta):
 func _follow_path():
 	"""Segue o caminho calculado pelo pathfinding"""
 	if path_index >= current_path.size():
-		# Chegou ao fim do caminho
 		_stop_following_path()
 		return
 	
-	# Obter próximo waypoint
 	var renderer = get_node_or_null("/root/IsometricRenderer")
 	if renderer == null:
 		_stop_following_path()
@@ -204,23 +168,17 @@ func _follow_path():
 	
 	var next_tile = current_path[path_index]
 	var next_world_pos = renderer.tile_to_screen(next_tile, 0)
-	
-	# Mover em direção ao waypoint
 	var dir = (next_world_pos - global_position).normalized()
 	var dist = global_position.distance_to(next_world_pos)
 	
-	if dist < 10:  # Chegou ao waypoint
+	if dist < 10:
 		path_index += 1
-		
-		# Consumir AP em combate
 		var combat_system = get_node_or_null("/root/CombatSystem")
 		if combat_system != null and combat_system.is_in_combat():
 			if not use_action_points(1):
-				# Sem AP, parar movimento
 				_stop_following_path()
 				return
 	else:
-		# Continuar movendo
 		var speed = base_speed * (run_speed_multiplier if is_running else 1.0)
 		velocity = dir * speed
 		is_moving = true
@@ -234,60 +192,90 @@ func _stop_following_path():
 	velocity = Vector2.ZERO
 	is_moving = false
 
-func _update_walk_animation(delta):
-	"""Atualiza animacao de caminhada (bobbing)"""
-	if not sprite:
-		return
+func _update_animation():
+	"""Atualiza a animação baseado no estado atual"""
+	var new_state: String
 	
 	if is_moving:
-		# Incrementar tempo de caminhada
-		var speed_mult = walk_bob_speed * (1.5 if is_running else 1.0)
-		walk_time += delta * speed_mult
-		
-		# Calcular bob vertical (simula pernas se movendo)
-		var bob_y = abs(sin(walk_time)) * walk_bob_amount
-		
-		# Pequeno movimento horizontal para simular balanco
-		var bob_x = sin(walk_time * 0.5) * (walk_bob_amount * 0.3)
-		
-		sprite.offset = sprite_base_offset + Vector2(bob_x, -bob_y)
+		new_state = "run" if is_running else "walk"
 	else:
-		# Voltar suavemente para posicao original
-		walk_time = 0.0
-		sprite.offset = sprite.offset.lerp(sprite_base_offset, 0.2)
+		new_state = "idle"
+	
+	if new_state != current_anim_state:
+		current_anim_state = new_state
+		_play_animation(new_state)
+
+func _play_animation(anim_name: String):
+	"""Toca uma animação específica na direção atual"""
+	if not animated_sprite or not animated_sprite.sprite_frames:
+		return
+	
+	var dir_name = DIRECTION_NAMES[current_direction]
+	var full_anim_name = "%s_%s" % [anim_name, dir_name]
+	
+	# Tentar tocar a animação com direção
+	if animated_sprite.sprite_frames.has_animation(full_anim_name):
+		animated_sprite.play(full_anim_name)
+	# Fallback: tentar só o nome base
+	elif animated_sprite.sprite_frames.has_animation(anim_name):
+		animated_sprite.play(anim_name)
+	# Fallback final: default
+	elif animated_sprite.sprite_frames.has_animation("default"):
+		animated_sprite.play("default")
 
 func _update_direction(dir: Vector2):
-	"""Atualiza direcao do sprite (6 direcoes isometricas)"""
+	"""
+	Atualiza direcao do sprite (6 direcoes isometricas)
+	
+	Mapeamento de direções do Fallout 2:
+	- 0 = NE (nordeste) - diagonal cima-direita
+	- 1 = E  (leste)    - direita
+	- 2 = SE (sudeste)  - diagonal baixo-direita
+	- 3 = SW (sudoeste) - diagonal baixo-esquerda
+	- 4 = W  (oeste)    - esquerda
+	- 5 = NW (noroeste) - diagonal cima-esquerda
+	
+	Ângulos em Godot (Y para baixo):
+	- 0° = direita (+X)
+	- 90° = baixo (+Y)
+	- 180° = esquerda (-X)
+	- 270° = cima (-Y)
+	"""
 	var angle = dir.angle()
 	var deg = rad_to_deg(angle)
 	
+	# Normalizar para 0-360
 	if deg < 0:
 		deg += 360
 	
+	# Mapear ângulo para direção isométrica
+	# Dividimos o círculo em 6 setores de 60° cada
 	var new_direction: int
+	
+	# Direita pura (0°) = E
+	# Baixo-direita (60°) = SE  
+	# Baixo-esquerda (120°) = SW
+	# Esquerda pura (180°) = W
+	# Cima-esquerda (240°) = NW
+	# Cima-direita (300°) = NE
+	
 	if deg >= 330 or deg < 30:
-		new_direction = 1  # E
+		new_direction = 1  # E (direita)
 	elif deg >= 30 and deg < 90:
-		new_direction = 2  # SE
+		new_direction = 2  # SE (baixo-direita)
 	elif deg >= 90 and deg < 150:
-		new_direction = 3  # SW
+		new_direction = 3  # SW (baixo-esquerda)
 	elif deg >= 150 and deg < 210:
-		new_direction = 4  # W
+		new_direction = 4  # W (esquerda)
 	elif deg >= 210 and deg < 270:
-		new_direction = 5  # NW
-	else:
-		new_direction = 0  # NE
+		new_direction = 5  # NW (cima-esquerda)
+	else:  # 270-330
+		new_direction = 0  # NE (cima-direita)
 	
 	if new_direction != current_direction:
 		current_direction = new_direction
-		_set_sprite_direction(current_direction)
-
-func _set_sprite_direction(dir_index: int):
-	"""Troca a textura do sprite para a direcao especificada"""
-	if sprite and dir_index >= 0 and dir_index < direction_textures.size():
-		var tex = direction_textures[dir_index]
-		if tex:
-			sprite.texture = tex
+		# Atualizar animação para nova direção
+		_play_animation(current_anim_state)
 
 func move_to(pos: Vector2):
 	"""Move o player para uma posicao especifica"""
@@ -295,34 +283,23 @@ func move_to(pos: Vector2):
 	move_to_target = true
 
 func move_to_tile(tile: Vector2i):
-	"""
-	Move o player para um tile específico usando pathfinding
-	Calcula caminho e segue
-	"""
+	"""Move o player para um tile específico usando pathfinding"""
 	var pathfinder = get_node_or_null("/root/Pathfinder")
 	var renderer = get_node_or_null("/root/IsometricRenderer")
 	
 	if pathfinder == null or renderer == null:
-		# Fallback para movimento direto
 		var world_pos = renderer.tile_to_screen(tile, 0) if renderer else Vector2(tile)
 		move_to(world_pos)
 		return
 	
-	# Obter tile atual do player
 	var current_tile = renderer.screen_to_tile(global_position, 0)
-	
-	# Calcular caminho
 	var path = pathfinder.find_path(current_tile, tile, 0)
 	
 	if path.size() > 0:
-		# Seguir caminho
 		current_path = path
 		path_index = 0
 		following_path = true
 		move_to_target = false
-		print("Player: Caminho calculado com ", path.size(), " tiles")
-	else:
-		print("Player: Nenhum caminho encontrado para ", tile)
 
 func stop_movement():
 	"""Para o movimento"""
@@ -359,8 +336,21 @@ func heal(amount: int):
 	hp = min(hp + amount, max_hp)
 	hp_changed.emit(hp, max_hp)
 
+func play_attack_animation(attack_type: String = "unarmed"):
+	"""Toca animação de ataque"""
+	match attack_type:
+		"unarmed":
+			_play_animation("attack_unarmed")
+		"melee":
+			_play_animation("attack_melee")
+		"ranged":
+			_play_animation("attack_ranged")
+		_:
+			_play_animation("attack_unarmed")
+
 func _die():
 	print("Player: MORTO!")
+	_play_animation("death_1")
 	died.emit()
 
 # === SISTEMA DE EXPERIENCIA ===
@@ -387,8 +377,6 @@ func _on_level_up():
 	level_changed.emit(level)
 	hp_changed.emit(hp, max_hp)
 	print("Player: Subiu para nivel ", level, "! HP:", max_hp)
-
-# === INTERACAO ===
 
 func interact():
 	var space = get_world_2d().direct_space_state

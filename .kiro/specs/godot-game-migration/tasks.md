@@ -157,23 +157,33 @@
 
 
 
+
+
+
   - [x] 6.1 Implementar ordenação por Sequence
+
 
     - Calcular Sequence = Perception * 2
     - Ordenar combatentes em ordem decrescente
     - _Requirements: 5.1_
 
+
   - [x] 6.2 Escrever property test para ordem de turno
+
 
     - **Property 8: Combat Turn Order by Sequence**
     - **Validates: Requirements 5.1**
+
   - [x] 6.3 Implementar fórmula de hit chance
+
 
 
     - Hit = Skill - (Distance * 4) - Target_AC + (Perception * 2)
     - Clampar entre 5% e 95%
     - _Requirements: 5.3_
+
   - [x] 6.4 Escrever property test para hit chance
+
 
 
     - **Property 9: Hit Chance Formula Correctness**
@@ -181,27 +191,38 @@
   - [x] 6.5 Implementar fórmula de dano
 
 
+
+
     - Damage = Weapon_Damage + Strength_Bonus - (DR * Damage / 100)
     - Mínimo de 1 de dano
     - _Requirements: 5.4_
+
   - [x] 6.6 Escrever property test para dano
+
 
 
     - **Property 10: Damage Formula Correctness**
     - **Validates: Requirements 5.4**
+
+
   - [x] 6.7 Implementar condições de fim de combate
 
 
     - Detectar quando todos inimigos morrem
     - Transicionar para estado INACTIVE
     - _Requirements: 5.5, 5.6_
+
   - [x] 6.8 Escrever property test para consistência de estado
+
 
 
     - **Property 11: Combat State Consistency**
     - **Validates: Requirements 5.5, 5.6**
 
 - [x] 7. Checkpoint - Verificar Pathfinding e Combate
+
+
+
   - Ensure all tests pass, ask the user if questions arise.
 
 - [x] 8. Expandir Sistema de Inventário
@@ -234,275 +255,275 @@
     - **Property 15: Encumbrance Movement Block**
     - **Validates: Requirements 6.4**
 
-- [ ] 9. Expandir Sistema de Diálogo
-  - [ ] 9.1 Implementar verificação de requisitos
+- [x] 9. Expandir Sistema de Diálogo
+  - [x] 9.1 Implementar verificação de requisitos
     - Checar skill, stat, item, reputação
     - Habilitar/desabilitar opções baseado em requisitos
     - _Requirements: 7.2_
-  - [ ] 9.2 Escrever property test para requisitos de diálogo
+  - [x] 9.2 Escrever property test para requisitos de diálogo
     - **Property 16: Dialog Option Requirement Check**
     - **Validates: Requirements 7.2**
-  - [ ] 9.3 Implementar substituição de variáveis
+  - [x] 9.3 Implementar substituição de variáveis
     - Parsear placeholders {var_name}
     - Substituir por valores do game state
     - _Requirements: 7.5_
-  - [ ] 9.4 Escrever property test para substituição de variáveis
+  - [x] 9.4 Escrever property test para substituição de variáveis
     - **Property 17: Dialog Variable Substitution**
     - **Validates: Requirements 7.5**
-  - [ ] 9.5 Implementar ações de diálogo
+  - [x] 9.5 Implementar ações de diálogo
     - Dar/remover item, XP, reputação
     - Iniciar combate, abrir comércio
     - _Requirements: 7.3_
 
-- [ ] 10. Checkpoint - Verificar Inventário e Diálogo
+- [x] 10. Checkpoint - Verificar Inventário e Diálogo
   - Ensure all tests pass, ask the user if questions arise.
 
 ---
 
 ## FASE 3: CARREGAMENTO DE DADOS E MAPAS
 
-- [ ] 11. Implementar MapLoader
-  - [ ] 11.1 Criar parser de mapas JSON
+- [x] 11. Implementar MapLoader
+  - [x] 11.1 Criar parser de mapas JSON
     - Ler estrutura de mapa (tiles, objetos, NPCs)
     - Validar dados antes de instanciar
     - _Requirements: 8.1_
-  - [ ] 11.2 Implementar instanciação de tiles
+  - [x] 11.2 Implementar instanciação de tiles
     - Criar TileMapLayer para cada elevação
     - Posicionar tiles usando IsometricRenderer
     - _Requirements: 8.1, 8.2_
-  - [ ] 11.3 Implementar spawn de objetos e NPCs
+  - [x] 11.3 Implementar spawn de objetos e NPCs
     - Instanciar objetos interagíveis
     - Spawnar NPCs com protótipos
     - _Requirements: 8.1_
-  - [ ] 11.4 Escrever property test para completude de carregamento
+  - [x] 11.4 Escrever property test para completude de carregamento
     - **Property 18: Map Loading Completeness**
     - **Validates: Requirements 8.1, 8.2, 8.5**
-  - [ ] 11.5 Implementar persistência de estado do mapa
+  - [x] 11.5 Implementar persistência de estado do mapa
     - Salvar modificações ao descarregar
     - Restaurar estado ao recarregar
     - _Requirements: 8.4_
-  - [ ] 11.6 Escrever property test para persistência de mapa
+  - [x] 11.6 Escrever property test para persistência de mapa
     - **Property 19: Map State Persistence**
     - **Validates: Requirements 8.4**
-  - [ ] 11.7 Implementar transições de mapa
+  - [x] 11.7 Implementar transições de mapa
     - Detectar áreas de saída
     - Carregar novo mapa na entrada correta
     - _Requirements: 8.3_
 
-- [ ] 12. Implementar PrototypeSystem
-  - [ ] 12.1 Criar loader de protótipos JSON
+- [x] 12. Implementar PrototypeSystem
+  - [x] 12.1 Criar loader de protótipos JSON
     - Carregar item_prototypes.json
     - Carregar critter_prototypes.json
     - _Requirements: 9.1, 9.2_
-  - [ ] 12.2 Implementar criação de instâncias
+  - [x] 12.2 Implementar criação de instâncias
     - Criar ItemData a partir de protótipo
     - Criar CritterData a partir de protótipo
     - _Requirements: 9.1, 9.2_
-  - [ ] 12.3 Escrever property test para aplicação de protótipos
+  - [x] 12.3 Escrever property test para aplicação de protótipos
     - **Property 20: Prototype Application Correctness**
     - **Validates: Requirements 9.1, 9.2**
-  - [ ] 12.4 Implementar isolamento de instâncias
+  - [x] 12.4 Implementar isolamento de instâncias
     - Modificações em instância não afetam protótipo
     - _Requirements: 9.4_
-  - [ ] 12.5 Escrever property test para isolamento
+  - [x] 12.5 Escrever property test para isolamento
     - **Property 21: Prototype Instance Isolation**
     - **Validates: Requirements 9.4**
 
-- [ ] 13. Implementar ScriptSystem básico
-  - [ ] 13.1 Criar parser de scripts JSON
+- [x] 13. Implementar ScriptSystem básico
+  - [x] 13.1 Criar parser de scripts JSON
     - Ler estrutura de script (triggers, procedures)
     - Validar sintaxe
     - _Requirements: 10.1_
-  - [ ] 13.2 Implementar variáveis globais
+  - [x] 13.2 Implementar variáveis globais
     - Armazenar variáveis em dicionário global
     - Permitir leitura/escrita por scripts
     - _Requirements: 10.3_
-  - [ ] 13.3 Escrever property test para variáveis globais
+  - [x] 13.3 Escrever property test para variáveis globais
     - **Property 22: Script Global Variable Round-Trip**
     - **Validates: Requirements 10.3**
-  - [ ] 13.4 Implementar funções builtin básicas
+  - [x] 13.4 Implementar funções builtin básicas
     - display_msg, give_item, add_xp, etc.
     - _Requirements: 10.4_
 
-- [ ] 14. Checkpoint - Verificar Carregamento de Dados
+- [x] 14. Checkpoint - Verificar Carregamento de Dados
   - Ensure all tests pass, ask the user if questions arise.
 
 ---
 
 ## FASE 4: NPCs E CRIATURAS
 
-- [ ] 15. Expandir Sistema de NPCs
-  - [ ] 15.1 Integrar NPCs com PrototypeSystem
+- [x] 15. Expandir Sistema de NPCs
+  - [x] 15.1 Integrar NPCs com PrototypeSystem
     - Carregar stats e comportamento do protótipo
     - Aplicar aparência (sprites) do protótipo
     - _Requirements: 11.1_
-  - [ ] 15.2 Implementar morte de NPC
+  - [x] 15.2 Implementar morte de NPC
     - Criar corpo com inventário acessível
     - Manter corpo no mapa
     - _Requirements: 11.5_
-  - [ ] 15.3 Escrever property test para inventário de corpo
+  - [x] 15.3 Escrever property test para inventário de corpo
     - **Property 23: NPC Death Inventory Access**
     - **Validates: Requirements 11.5**
-  - [ ] 15.4 Implementar IA de NPC hostil
+  - [x] 15.4 Implementar IA de NPC hostil
     - Detectar player em range
     - Iniciar combate automaticamente
     - _Requirements: 11.3_
-  - [ ] 15.5 Implementar NPC mercador
+  - [x] 15.5 Implementar NPC mercador
     - Abrir interface de comércio
     - Gerenciar estoque do mercador
     - _Requirements: 11.4_
 
-- [ ] 16. Implementar Sistema de Animações
-  - [ ] 16.1 Criar AnimationController para criaturas
+- [x] 16. Implementar Sistema de Animações
+  - [x] 16.1 Criar AnimationController para criaturas
     - Gerenciar estados: idle, walk, attack, death
     - Carregar spritesheets por direção
     - _Requirements: 12.1, 12.2, 12.3, 12.4_
-  - [ ] 16.2 Implementar transição de direção
+  - [x] 16.2 Implementar transição de direção
     - Detectar mudança de direção
     - Trocar spritesheet suavemente
     - _Requirements: 12.5_
-  - [ ] 16.3 Integrar animações com Player e NPCs
+  - [x] 16.3 Integrar animações com Player e NPCs
     - Player usa AnimationController
     - NPCs usam AnimationController
     - _Requirements: 12.1-12.5_
 
-- [ ] 17. Checkpoint - Verificar NPCs e Animações
+- [x] 17. Checkpoint - Verificar NPCs e Animações
   - Ensure all tests pass, ask the user if questions arise.
 
 ---
 
 ## FASE 5: INTERFACE DO USUÁRIO
 
-- [ ] 18. Expandir HUD Principal
-  - [ ] 18.1 Implementar barra de HP dinâmica
+- [x] 18. Expandir HUD Principal
+  - [x] 18.1 Implementar barra de HP dinâmica
     - Atualizar em tempo real
     - Mostrar valor numérico
     - _Requirements: 13.1_
-  - [ ] 18.2 Implementar barra de AP
+  - [x] 18.2 Implementar barra de AP
     - Mostrar AP atual/máximo
     - Destacar em combate
     - _Requirements: 13.1, 13.2_
-  - [ ] 18.3 Implementar slot de arma
+  - [x] 18.3 Implementar slot de arma
     - Mostrar arma equipada
     - Permitir troca rápida
     - _Requirements: 13.1_
-  - [ ] 18.4 Implementar tooltips
+  - [x] 18.4 Implementar tooltips
     - Mostrar info ao passar mouse
     - _Requirements: 13.3_
 
-- [ ] 19. Implementar Menus
-  - [ ] 19.1 Criar tela de personagem
+- [x] 19. Implementar Menus
+  - [x] 19.1 Criar tela de personagem
     - Exibir stats SPECIAL
     - Exibir skills e perks
     - _Requirements: 14.1_
-  - [ ] 19.2 Criar tela de inventário completa
+  - [x] 19.2 Criar tela de inventário completa
     - Grid de itens
     - Slots de equipamento
     - Info de peso
     - _Requirements: 14.2_
-  - [ ] 19.3 Criar tela de opções
+  - [x] 19.3 Criar tela de opções
     - Volume de áudio
     - Dificuldade
     - Controles
     - _Requirements: 14.3_
-  - [ ] 19.4 Implementar pausa ao abrir menu
+  - [x] 19.4 Implementar pausa ao abrir menu
     - Pausar jogo quando menu abre
     - Não pausar em combate
     - _Requirements: 14.5_
-  - [ ] 19.5 Escrever property test para estado de pausa
+  - [x] 19.5 Escrever property test para estado de pausa
     - **Property 24: Menu Pause State**
     - **Validates: Requirements 14.5**
 
-- [ ] 20. Checkpoint - Verificar Interface
+- [x] 20. Checkpoint - Verificar Interface
   - Ensure all tests pass, ask the user if questions arise.
 
 ---
 
 ## FASE 6: PERSISTÊNCIA E SAVE/LOAD
 
-- [ ] 21. Expandir Sistema de Save/Load
-  - [ ] 21.1 Implementar serialização completa
+- [x] 21. Expandir Sistema de Save/Load
+  - [x] 21.1 Implementar serialização completa
     - Serializar player (posição, stats, inventário)
     - Serializar estado do mapa (objetos modificados)
     - Serializar variáveis globais
     - _Requirements: 15.1_
-  - [ ] 21.2 Implementar deserialização
+  - [x] 21.2 Implementar deserialização
     - Restaurar player
     - Restaurar mapa
     - Restaurar variáveis
     - _Requirements: 15.2_
-  - [ ] 21.3 Escrever property test para round-trip de save
+  - [x] 21.3 Escrever property test para round-trip de save
     - **Property 25: Save/Load Round-Trip**
     - **Validates: Requirements 15.1, 15.2**
-  - [ ] 21.4 Implementar metadados de save
+  - [x] 21.4 Implementar metadados de save
     - Capturar screenshot
     - Registrar timestamp e localização
     - _Requirements: 15.3_
-  - [ ] 21.5 Escrever property test para metadados
+  - [x] 21.5 Escrever property test para metadados
     - **Property 26: Save Metadata Completeness**
     - **Validates: Requirements 15.3**
-  - [ ] 21.6 Implementar checksum e validação
+  - [x] 21.6 Implementar checksum e validação
     - Calcular checksum do save
     - Validar ao carregar
     - _Requirements: 15.4_
-  - [ ] 21.7 Escrever property test para detecção de corrupção
+  - [x] 21.7 Escrever property test para detecção de corrupção
     - **Property 27: Save Corruption Detection**
     - **Validates: Requirements 15.4**
-  - [ ] 21.8 Implementar quicksave/quickload
+  - [x] 21.8 Implementar quicksave/quickload
     - F6 para quicksave
     - F9 para quickload
     - _Requirements: 15.5, 15.6_
 
-- [ ] 22. Checkpoint - Verificar Save/Load
+- [x] 22. Checkpoint - Verificar Save/Load
   - Ensure all tests pass, ask the user if questions arise.
 
 ---
 
 ## FASE 7: ÁUDIO
 
-- [ ] 23. Implementar Sistema de Áudio
-  - [ ] 23.1 Criar AudioManager
+- [x] 23. Implementar Sistema de Áudio
+  - [x] 23.1 Criar AudioManager
     - Gerenciar música ambiente
     - Gerenciar efeitos sonoros
     - _Requirements: 16.1, 16.2_
-  - [ ] 23.2 Implementar transição de música
+  - [x] 23.2 Implementar transição de música
     - Crossfade entre tracks
     - Mudar música por área
     - _Requirements: 16.1_
-  - [ ] 23.3 Implementar efeitos sonoros
+  - [x] 23.3 Implementar efeitos sonoros
     - Tocar sons de ações (ataque, passo, etc.)
     - Posicionamento 2D básico
     - _Requirements: 16.2_
-  - [ ] 23.4 Implementar controle de volume
+  - [x] 23.4 Implementar controle de volume
     - Volumes separados (master, music, sfx, voice)
     - Aplicar configurações imediatamente
     - _Requirements: 16.4_
-  - [ ] 23.5 Escrever property test para aplicação de volume
+  - [x] 23.5 Escrever property test para aplicação de volume
     - **Property 28: Audio Volume Application**
     - **Validates: Requirements 16.4**
 
-- [ ] 24. Checkpoint Final - Verificar todos os sistemas
+- [x] 24. Checkpoint Final - Verificar todos os sistemas
   - Ensure all tests pass, ask the user if questions arise.
 
 ---
 
 ## FASE 8: INTEGRAÇÃO E CONTEÚDO
 
-- [ ] 25. Criar Primeiro Mapa Jogável
-  - [ ] 25.1 Converter mapa de Arroyo para JSON
+- [x] 25. Criar Primeiro Mapa Jogável
+  - [x] 25.1 Converter mapa de Arroyo para JSON
     - Usar dados extraídos do original
     - Definir tiles, objetos, NPCs
     - _Requirements: 8.1_
-  - [ ] 25.2 Criar NPCs de Arroyo
+  - [x] 25.2 Criar NPCs de Arroyo
     - Definir protótipos dos NPCs
     - Criar diálogos básicos
     - _Requirements: 11.1_
-  - [ ] 25.3 Testar gameplay completo
+  - [x] 25.3 Testar gameplay completo
     - Movimento, combate, diálogo
     - Save/load
     - _Requirements: All_
 
-- [ ] 26. Checkpoint Final - Jogo Funcional
+- [x] 26. Checkpoint Final - Jogo Funcional
   - Verificar que o jogo é jogável do início ao fim em Arroyo
   - Confirmar que todos os sistemas funcionam integrados
   - Testar save/load em diferentes pontos

@@ -84,7 +84,8 @@ def run_all_tests_summary():
     categories = {
         'Rendering': ['verify_roundtrip.py', 'verify_sprite_ordering.py', 'verify_elevation_layers.py'],
         'Camera': ['verify_camera_clamping.py'],
-        'Pathfinding': ['verify_pathfinding.py', 'verify_ap_consumption.py', 'verify_run_speed.py']
+        'Pathfinding': ['verify_pathfinding.py', 'verify_ap_consumption.py', 'verify_run_speed.py'],
+        'Combat': ['verify_combat_turn_order.py', 'verify_hit_chance.py', 'verify_damage_formula.py', 'verify_combat_state.py']
     }
     
     for category, test_files in categories.items():

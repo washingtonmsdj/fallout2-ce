@@ -1,0 +1,4 @@
+# file: C:\Users\Casa\Documents\Novo github\fallout2-ce\tools\extractors\spritesheet_generator.py
+# hypothesis_version: 6.148.6
+
+[1000.0, 'PNG', 'RGBA', 'actual_height', 'actual_width', 'animations', 'critter_id', 'critter_type', 'critters', 'directions', 'e', 'height', 'horizontal', 'ne', 'nw', 'se', 'spritesheets', 'sw', 'total_critters', 'total_sheets', 'total_spritesheets', 'utf-8', 'w', 'width', 'x', 'x_offset', 'y', 'y_offset']

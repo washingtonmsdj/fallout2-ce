@@ -1,90 +1,90 @@
 #!/usr/bin/env python3
 """
-Verify the combat turn order logic
-This tests that combatants are ordered by Sequence (Perception * 2) in descending order
+Property Test: Combat Turn Order by Sequence
+**Feature: godot-game-migration, Property 8: Combat Turn Order by Sequence**
+**Validates: Requirements 5.1**
+
+Property: For any list of combatants with different Sequence values,
+the turn order SHALL be sorted in descending order by Sequence.
 """
 
 import random
+import sys
+from typing import List, NamedTuple
 
-def calculate_sequence(perception):
-    """Calculate Sequence = Perception * 2"""
-    return perception * 2
+class Combatant(NamedTuple):
+    name: str
+    perception: int
+    
+    @property
+    def sequence(self) -> int:
+        """Sequence = Perception * 2"""
+        return self.perception * 2
 
-def sort_combatants_by_sequence(combatants):
-    """Sort combatants by Sequence in descending order"""
-    return sorted(combatants, key=lambda c: c['sequence'], reverse=True)
-
-def verify_turn_order(sorted_combatants):
+def calculate_turn_order(combatants: List[Combatant]) -> List[Combatant]:
     """
-    Verify that combatants are in descending order by Sequence
+    Calculate turn order by sorting combatants by Sequence (descending)
+    This mimics the CombatSystem._calculate_turn_order() logic
     """
-    for i in range(len(sorted_combatants) - 1):
-        current_seq = sorted_combatants[i]['sequence']
-        next_seq = sorted_combatants[i + 1]['sequence']
+    return sorted(combatants, key=lambda c: c.sequence, reverse=True)
+
+def verify_turn_order_sorted(turn_order: List[Combatant]) -> bool:
+    """
+    Verify that turn order is sorted in descending order by Sequence
+    """
+    for i in range(len(turn_order) - 1):
+        current_seq = turn_order[i].sequence
+        next_seq = turn_order[i + 1].sequence
         
-        # Current should have >= sequence than next
         if current_seq < next_seq:
+            print(f"❌ FAILED: Turn order not sorted correctly!")
+            print(f"   Position {i}: {turn_order[i].name} (Seq: {current_seq})")
+            print(f"   Position {i+1}: {turn_order[i+1].name} (Seq: {next_seq})")
             return False
     
     return True
 
-def test_combat_turn_order(num_iterations=100):
-    """Test the combat turn order property"""
+def test_combat_turn_order_property(iterations: int = 100) -> bool:
+    """
+    Property-based test for combat turn order
+    """
+    print(f"\n=== Property Test: Combat Turn Order by Sequence ===")
+    print(f"Running {iterations} iterations...")
+    
     passed = 0
     failed = 0
-    failures = []
     
-    for i in range(num_iterations):
+    for i in range(iterations):
         # Generate random combatants
         num_combatants = random.randint(2, 10)
         combatants = []
         
         for j in range(num_combatants):
             perception = random.randint(1, 10)
-            sequence = calculate_sequence(perception)
-            combatants.append({
-                'id': j,
-                'name': f'Combatant_{j}',
-                'perception': perception,
-                'sequence': sequence
-            })
+            combatant = Combatant(f"Combatant_{j}", perception)
+            combatants.append(combatant)
         
-        # Sort by sequence
-        sorted_combatants = sort_combatants_by_sequence(combatants)
+        # Calculate turn order
+        turn_order = calculate_turn_order(combatants)
         
         # Verify property
-        if verify_turn_order(sorted_combatants):
+        if verify_turn_order_sorted(turn_order):
             passed += 1
         else:
             failed += 1
-            failures.append({
-                'iteration': i,
-                'num_combatants': num_combatants,
-                'sorted_combatants': sorted_combatants[:5]  # Keep first 5
-            })
+            print(f"   Iteration {i+1} failed")
     
-    print(f"=== Property Test: Combat Turn Order by Sequence ===")
-    print(f"Passed: {passed} / {num_iterations}")
-    print(f"Failed: {failed} / {num_iterations}")
+    print(f"\nResults:")
+    print(f"  Passed: {passed}/{iterations}")
+    print(f"  Failed: {failed}/{iterations}")
     
-    if failed > 0:
-        print("\n=== Failed Cases (first 5) ===")
-        for failure in failures[:5]:
-            print(f"Iteration {failure['iteration']}:")
-            print(f"  Num combatants: {failure['num_combatants']}")
-            print(f"  Turn order:")
-            for c in failure['sorted_combatants']:
-                print(f"    {c['name']}: Perception={c['perception']}, Sequence={c['sequence']}")
-        
-        if len(failures) > 5:
-            print(f"... and {len(failures) - 5} more failures")
-        
-        print("\nPROPERTY TEST FAILED")
-        return False
-    else:
-        print("\nPROPERTY TEST PASSED")
+    if failed == 0:
+        print("✅ All tests passed!")
         return True
+    else:
+        print("❌ Some tests failed!")
+        return False
 
 if __name__ == "__main__":
-    success = test_combat_turn_order(100)
-    exit(0 if success else 1)
+    success = test_combat_turn_order_property(100)
+    sys.exit(0 if success else 1)

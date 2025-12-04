@@ -50,7 +50,20 @@ func _ready():
 	# Conectar sinais do InputManager
 	_connect_input_signals()
 	
+	# Conectar ao AudioManager
+	_connect_audio_manager()
+	
 	# Aguardar cena estar pronta
+
+func _connect_audio_manager():
+	"""Conecta GameManager ao AudioManager para volumes"""
+	var audio_manager = get_node_or_null("/root/AudioManager")
+	if audio_manager:
+		audio_manager.set_master_volume(master_volume)
+		audio_manager.set_music_volume(music_volume)
+		audio_manager.set_sfx_volume(sfx_volume)
+		audio_manager.set_voice_volume(speech_volume)
+		print("GameManager: AudioManager conectado")
 
 func _connect_input_signals():
 	"""Conecta sinais do InputManager para controle do jogo"""
@@ -288,12 +301,63 @@ func open_inventory():
 		previous_state = current_state
 		current_state = GameState.INVENTORY
 		game_state_changed.emit(current_state)
+		_pause_for_menu()
 
 func close_inventory():
 	"""Fecha inventário"""
 	if current_state == GameState.INVENTORY:
 		current_state = previous_state
 		game_state_changed.emit(current_state)
+		_resume_from_menu()
+
+func open_character_screen():
+	"""Abre tela de personagem"""
+	if current_state == GameState.PLAYING:
+		previous_state = current_state
+		current_state = GameState.PAUSED
+		game_state_changed.emit(current_state)
+		_pause_for_menu()
+
+func close_character_screen():
+	"""Fecha tela de personagem"""
+	if current_state == GameState.PAUSED and previous_state == GameState.PLAYING:
+		current_state = previous_state
+		game_state_changed.emit(current_state)
+		_resume_from_menu()
+
+func open_options_screen():
+	"""Abre tela de opções"""
+	if current_state == GameState.PLAYING:
+		previous_state = current_state
+		current_state = GameState.PAUSED
+		game_state_changed.emit(current_state)
+		_pause_for_menu()
+
+func close_options_screen():
+	"""Fecha tela de opções"""
+	if current_state == GameState.PAUSED and previous_state == GameState.PLAYING:
+		current_state = previous_state
+		game_state_changed.emit(current_state)
+		_resume_from_menu()
+
+func _pause_for_menu():
+	"""
+	Pausa jogo quando menu abre
+	Não pausa em combate
+	"""
+	if current_state == GameState.COMBAT:
+		# Não pausar em combate
+		return
+	
+	get_tree().paused = true
+
+func _resume_from_menu():
+	"""Retoma jogo quando menu fecha"""
+	if current_state == GameState.COMBAT:
+		# Não pausar em combate
+		return
+	
+	get_tree().paused = false
 
 func start_dialog(npc: Node):
 	"""Inicia diálogo com NPC"""
@@ -342,6 +406,12 @@ func _input(event):
 			open_inventory()
 		elif current_state == GameState.INVENTORY:
 			close_inventory()
+	
+	if event.is_action_pressed("character"):
+		if current_state == GameState.PLAYING:
+			open_character_screen()
+		elif current_state == GameState.PAUSED:
+			close_character_screen()
 
 # Utilitários
 func is_playing() -> bool:

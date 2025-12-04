@@ -1,0 +1,293 @@
+{
+  "character": "player_female_metal",
+  "animations": {
+    "idle_ne": {
+      "path": "animations\\idle\\idle_ne.png",
+      "frame_width": 27,
+      "frame_height": 61,
+      "num_frames": 18,
+      "fps": 7,
+      "loop": true
+    },
+    "idle_e": {
+      "path": "animations\\idle\\idle_e.png",
+      "frame_width": 19,
+      "frame_height": 62,
+      "num_frames": 18,
+      "fps": 7,
+      "loop": true
+    },
+    "idle_se": {
+      "path": "animations\\idle\\idle_se.png",
+      "frame_width": 27,
+      "frame_height": 62,
+      "num_frames": 18,
+      "fps": 7,
+      "loop": true
+    },
+    "idle_sw": {
+      "path": "animations\\idle\\idle_sw.png",
+      "frame_width": 27,
+      "frame_height": 62,
+      "num_frames": 18,
+      "fps": 7,
+      "loop": true
+    },
+    "idle_w": {
+      "path": "animations\\idle\\idle_w.png",
+      "frame_width": 18,
+      "frame_height": 61,
+      "num_frames": 18,
+      "fps": 7,
+      "loop": true
+    },
+    "idle_nw": {
+      "path": "animations\\idle\\idle_nw.png",
+      "frame_width": 27,
+      "frame_height": 61,
+      "num_frames": 18,
+      "fps": 7,
+      "loop": true
+    },
+    "walk_ne": {
+      "path": "animations\\walk\\walk_ne.png",
+      "frame_width": 26,
+      "frame_height": 65,
+      "num_frames": 8,
+      "fps": 10,
+      "loop": true
+    },
+    "walk_e": {
+      "path": "animations\\walk\\walk_e.png",
+      "frame_width": 39,
+      "frame_height": 62,
+      "num_frames": 8,
+      "fps": 10,
+      "loop": true
+    },
+    "walk_se": {
+      "path": "animations\\walk\\walk_se.png",
+      "frame_width": 25,
+      "frame_height": 65,
+      "num_frames": 8,
+      "fps": 10,
+      "loop": true
+    },
+    "walk_sw": {
+      "path": "animations\\walk\\walk_sw.png",
+      "frame_width": 26,
+      "frame_height": 64,
+      "num_frames": 8,
+      "fps": 10,
+      "loop": true
+    },
+    "walk_w": {
+      "path": "animations\\walk\\walk_w.png",
+      "frame_width": 39,
+      "frame_height": 61,
+      "num_frames": 8,
+      "fps": 10,
+      "loop": true
+    },
+    "walk_nw": {
+      "path": "animations\\walk\\walk_nw.png",
+      "frame_width": 25,
+      "frame_height": 63,
+      "num_frames": 8,
+      "fps": 10,
+      "loop": true
+    },
+    "run_ne": {
+      "path": "animations\\run\\run_ne.png",
+      "frame_width": 36,
+      "frame_height": 70,
+      "num_frames": 10,
+      "fps": 20,
+      "loop": true
+    },
+    "run_e": {
+      "path": "animations\\run\\run_e.png",
+      "frame_width": 61,
+      "frame_height": 60,
+      "num_frames": 10,
+      "fps": 20,
+      "loop": true
+    },
+    "run_se": {
+      "path": "animations\\run\\run_se.png",
+      "frame_width": 36,
+      "frame_height": 65,
+      "num_frames": 10,
+      "fps": 20,
+      "loop": true
+    },
+    "run_sw": {
+      "path": "animations\\run\\run_sw.png",
+      "frame_width": 36,
+      "frame_height": 65,
+      "num_frames": 10,
+      "fps": 20,
+      "loop": true
+    },
+    "run_w": {
+      "path": "animations\\run\\run_w.png",
+      "frame_width": 61,
+      "frame_height": 60,
+      "num_frames": 10,
+      "fps": 20,
+      "loop": true
+    },
+    "run_nw": {
+      "path": "animations\\run\\run_nw.png",
+      "frame_width": 36,
+      "frame_height": 70,
+      "num_frames": 10,
+      "fps": 20,
+      "loop": true
+    },
+    "attack_unarmed_ne": {
+      "path": "animations\\attack_unarmed\\attack_unarmed_ne.png",
+      "frame_width": 26,
+      "frame_height": 61,
+      "num_frames": 9,
+      "fps": 10,
+      "loop": false
+    },
+    "attack_unarmed_e": {
+      "path": "animations\\attack_unarmed\\attack_unarmed_e.png",
+      "frame_width": 32,
+      "frame_height": 61,
+      "num_frames": 9,
+      "fps": 10,
+      "loop": false
+    },
+    "attack_unarmed_se": {
+      "path": "animations\\attack_unarmed\\attack_unarmed_se.png",
+      "frame_width": 30,
+      "frame_height": 62,
+      "num_frames": 9,
+      "fps": 10,
+      "loop": false
+    },
+    "attack_unarmed_sw": {
+      "path": "animations\\attack_unarmed\\attack_unarmed_sw.png",
+      "frame_width": 29,
+      "frame_height": 61,
+      "num_frames": 9,
+      "fps": 10,
+      "loop": false
+    },
+    "attack_unarmed_w": {
+      "path": "animations\\attack_unarmed\\attack_unarmed_w.png",
+      "frame_width": 32,
+      "frame_height": 61,
+      "num_frames": 9,
+      "fps": 10,
+      "loop": false
+    },
+    "attack_unarmed_nw": {
+      "path": "animations\\attack_unarmed\\attack_unarmed_nw.png",
+      "frame_width": 29,
+      "frame_height": 61,
+      "num_frames": 9,
+      "fps": 10,
+      "loop": false
+    },
+    "attack_melee_ne": {
+      "path": "animations\\attack_melee\\attack_melee_ne.png",
+      "frame_width": 31,
+      "frame_height": 61,
+      "num_frames": 9,
+      "fps": 9,
+      "loop": false
+    },
+    "attack_melee_e": {
+      "path": "animations\\attack_melee\\attack_melee_e.png",
+      "frame_width": 41,
+      "frame_height": 61,
+      "num_frames": 9,
+      "fps": 9,
+      "loop": false
+    },
+    "attack_melee_se": {
+      "path": "animations\\attack_melee\\attack_melee_se.png",
+      "frame_width": 25,
+      "frame_height": 62,
+      "num_frames": 9,
+      "fps": 9,
+      "loop": false
+    },
+    "attack_melee_sw": {
+      "path": "animations\\attack_melee\\attack_melee_sw.png",
+      "frame_width": 31,
+      "frame_height": 61,
+      "num_frames": 9,
+      "fps": 9,
+      "loop": false
+    },
+    "attack_melee_w": {
+      "path": "animations\\attack_melee\\attack_melee_w.png",
+      "frame_width": 41,
+      "frame_height": 61,
+      "num_frames": 9,
+      "fps": 9,
+      "loop": false
+    },
+    "attack_melee_nw": {
+      "path": "animations\\attack_melee\\attack_melee_nw.png",
+      "frame_width": 26,
+      "frame_height": 63,
+      "num_frames": 9,
+      "fps": 9,
+      "loop": false
+    },
+    "death_1_ne": {
+      "path": "animations\\death_1\\death_1_ne.png",
+      "frame_width": 73,
+      "frame_height": 68,
+      "num_frames": 12,
+      "fps": 9,
+      "loop": false
+    },
+    "death_1_e": {
+      "path": "animations\\death_1\\death_1_e.png",
+      "frame_width": 76,
+      "frame_height": 62,
+      "num_frames": 12,
+      "fps": 9,
+      "loop": false
+    },
+    "death_1_se": {
+      "path": "animations\\death_1\\death_1_se.png",
+      "frame_width": 66,
+      "frame_height": 62,
+      "num_frames": 12,
+      "fps": 9,
+      "loop": false
+    },
+    "death_1_sw": {
+      "path": "animations\\death_1\\death_1_sw.png",
+      "frame_width": 74,
+      "frame_height": 64,
+      "num_frames": 12,
+      "fps": 9,
+      "loop": false
+    },
+    "death_1_w": {
+      "path": "animations\\death_1\\death_1_w.png",
+      "frame_width": 76,
+      "frame_height": 63,
+      "num_frames": 12,
+      "fps": 9,
+      "loop": false
+    },
+    "death_1_nw": {
+      "path": "animations\\death_1\\death_1_nw.png",
+      "frame_width": 67,
+      "frame_height": 66,
+      "num_frames": 12,
+      "fps": 9,
+      "loop": false
+    }
+  }
+}

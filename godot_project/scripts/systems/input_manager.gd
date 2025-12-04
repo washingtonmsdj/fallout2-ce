@@ -113,7 +113,8 @@ func _screen_to_world(screen_pos: Vector2) -> Vector2:
 		# Ajustar pela câmera
 		var camera_offset = camera.get_screen_center_position()
 		var zoom_factor = camera.zoom.x
-		return (screen_pos - get_viewport().size / 2) / zoom_factor + camera_offset
+		var viewport_size = Vector2(get_viewport().size)  # Converter Vector2i para Vector2
+		return (screen_pos - viewport_size / 2) / zoom_factor + camera_offset
 	else:
 		# Sem câmera, usar posição direta
 		return screen_pos
@@ -123,8 +124,14 @@ func _get_object_at_position(world_pos: Vector2) -> Node:
 	Detecta objeto interagível na posição do mundo
 	Usa raycast ou área de detecção
 	"""
-	# Obter espaço de física 2D
-	var space_state = get_world_2d().direct_space_state
+	# Obter espaço de física 2D através do viewport
+	var viewport = get_viewport()
+	if viewport == null:
+		return null
+	var world_2d = viewport.get_world_2d()
+	if world_2d == null:
+		return null
+	var space_state = world_2d.direct_space_state
 	
 	# Criar query para ponto
 	var query = PhysicsPointQueryParameters2D.new()

@@ -1,5 +1,4 @@
 extends Node
-class_name Pathfinder
 
 ## Sistema de Pathfinding A* para Grade Hexagonal
 ## Baseado no sistema original do Fallout 2
@@ -28,7 +27,7 @@ var map_system: Node = null
 
 # Cache de obstáculos
 var obstacle_cache: Dictionary = {}  # {Vector2i: bool}
-var temporary_obstacles: Array[Vector2i] = []  # NPCs, etc.
+var temporary_obstacles: Array = []  # NPCs, etc.
 
 func _ready():
 	# Obter referências
@@ -40,7 +39,7 @@ func _ready():
 	
 	print("Pathfinder: Inicializado")
 
-func find_path(start: Vector2i, end: Vector2i, elevation: int = 0) -> Array[Vector2i]:
+func find_path(start: Vector2i, end: Vector2i, elevation: int = 0) -> Array:
 	"""
 	Encontra caminho de start até end usando A*
 	Retorna array de posições de tiles (vazio se impossível)
@@ -58,7 +57,7 @@ func find_path(start: Vector2i, end: Vector2i, elevation: int = 0) -> Array[Vect
 		return []
 	
 	# Inicializar listas
-	var open_list: Array[PathNode] = []
+	var open_list: Array = []
 	var closed_set: Dictionary = {}  # {Vector2i: bool}
 	var node_map: Dictionary = {}  # {Vector2i: PathNode}
 	
@@ -115,7 +114,12 @@ func find_path(start: Vector2i, end: Vector2i, elevation: int = 0) -> Array[Vect
 				neighbor_node.calculate_f_cost()
 				
 				# Adicionar à open list se não estiver
-				if not open_list.has(neighbor_node):
+				var already_in_list = false
+				for node in open_list:
+					if node.position == neighbor_node.position:
+						already_in_list = true
+						break
+				if not already_in_list:
 					open_list.append(neighbor_node)
 	
 	# Não encontrou caminho
@@ -130,7 +134,7 @@ func _heuristic(from: Vector2i, to: Vector2i) -> float:
 	var dy = abs(to.y - from.y)
 	return float(max(dx, dy))
 
-func _get_lowest_f_cost_node(nodes: Array[PathNode]) -> PathNode:
+func _get_lowest_f_cost_node(nodes: Array) -> PathNode:
 	"""Encontra o nó com menor f_cost na lista"""
 	var lowest = nodes[0]
 	for node in nodes:
@@ -138,12 +142,12 @@ func _get_lowest_f_cost_node(nodes: Array[PathNode]) -> PathNode:
 			lowest = node
 	return lowest
 
-func _get_neighbors(tile: Vector2i, elevation: int) -> Array[Vector2i]:
+func _get_neighbors(tile: Vector2i, elevation: int) -> Array:
 	"""
 	Retorna vizinhos válidos de um tile
 	Usa as 6 direções hexagonais
 	"""
-	var neighbors: Array[Vector2i] = []
+	var neighbors: Array = []
 	
 	# 6 direções hexagonais (do IsometricRenderer)
 	var hex_offsets = [
@@ -162,9 +166,9 @@ func _get_neighbors(tile: Vector2i, elevation: int) -> Array[Vector2i]:
 	
 	return neighbors
 
-func _reconstruct_path(end_node: PathNode) -> Array[Vector2i]:
+func _reconstruct_path(end_node: PathNode) -> Array:
 	"""Reconstrói o caminho do fim até o início"""
-	var path: Array[Vector2i] = []
+	var path: Array = []
 	var current = end_node
 	
 	while current != null:
@@ -233,11 +237,11 @@ func clear_obstacle_cache():
 	"""Limpa o cache de obstáculos (útil ao mudar de mapa)"""
 	obstacle_cache.clear()
 
-func get_path_length(path: Array[Vector2i]) -> int:
+func get_path_length(path: Array) -> int:
 	"""Retorna o comprimento de um caminho"""
 	return path.size()
 
-func get_path_cost(path: Array[Vector2i]) -> float:
+func get_path_cost(path: Array) -> float:
 	"""
 	Calcula o custo total de um caminho
 	Útil para calcular AP necessário
