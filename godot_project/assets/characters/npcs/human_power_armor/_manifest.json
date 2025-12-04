@@ -1,0 +1,20 @@
+{
+  "name": "human_power_armor",
+  "animations": [
+    "idle"
+  ],
+  "directions": 6,
+  "replacement_guide": {
+    "sprite_size": "80x80 recommended",
+    "format": "PNG with transparency",
+    "naming": "{animation}_frame_{n}.png",
+    "directions": [
+      "ne",
+      "e",
+      "se",
+      "sw",
+      "w",
+      "nw"
+    ]
+  }
+}

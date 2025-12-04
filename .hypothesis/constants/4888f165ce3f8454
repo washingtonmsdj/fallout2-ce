@@ -1,0 +1,4 @@
+# file: C:\Users\Casa\Documents\Novo github\fallout2-ce\tools\extractors\acm_decoder.py
+# hypothesis_version: 6.148.6
+
+['-c:a', '-i', '-version', '-y', '.acm', '.ogg', '.wav', 'FFMPEG_PATH', 'audio', 'ffmpeg', 'libvorbis', 'music', 'sfx', 'sound/music', 'sound/voice', 'voice', 'wb']

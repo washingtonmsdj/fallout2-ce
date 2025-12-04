@@ -1,1 +1,9 @@
 res://scripts/actors/player.gd
+res://scripts/core/game_manager.gd
+res://scripts/core/game_scene.gd
+res://scripts/systems/combat_system.gd
+res://scripts/systems/dialog_system.gd
+res://scripts/systems/inventory_system.gd
+res://scripts/systems/isometric_renderer.gd
+res://scripts/systems/map_system.gd
+res://scripts/systems/save_system.gd

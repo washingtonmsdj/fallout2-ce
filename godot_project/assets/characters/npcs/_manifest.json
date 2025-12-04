@@ -1,0 +1,36 @@
+{
+  "name": "npcs",
+  "animations": [
+    "human_female_advanced_armor",
+    "human_female_combat_armor",
+    "human_female_jumpsuit",
+    "human_female_leather",
+    "human_female_metal_armor",
+    "human_female_tribal",
+    "human_male_advanced_armor",
+    "human_male_brotherhood",
+    "human_male_combat_armor",
+    "human_male_jumpsuit",
+    "human_male_leather",
+    "human_male_metal_armor",
+    "human_male_tribal",
+    "human_male_vault_suit",
+    "human_power_armor",
+    "human_power_armor_enclave",
+    "human_robe"
+  ],
+  "directions": 6,
+  "replacement_guide": {
+    "sprite_size": "80x80 recommended",
+    "format": "PNG with transparency",
+    "naming": "{animation}_frame_{n}.png",
+    "directions": [
+      "ne",
+      "e",
+      "se",
+      "sw",
+      "w",
+      "nw"
+    ]
+  }
+}

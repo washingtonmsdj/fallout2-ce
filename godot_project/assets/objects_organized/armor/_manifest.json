@@ -1,0 +1,15 @@
+{
+  "category": "armor",
+  "objects": [
+    "armor_combat",
+    "armor_leather",
+    "armor_metal",
+    "armor_power_2",
+    "armor_power",
+    "armor_robe"
+  ],
+  "replacement_guide": {
+    "format": "PNG with transparency",
+    "json_format": "Godot resource format"
+  }
+}

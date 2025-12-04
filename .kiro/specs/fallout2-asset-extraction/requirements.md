@@ -43,13 +43,15 @@ Este documento especifica os requisitos para a extração completa de todos os a
 
 ### Requirement 3: Extração de Criaturas e NPCs
 
-**User Story:** Como desenvolvedor, quero extrair todos os sprites de criaturas e NPCs, para que eu possa populá-los no jogo recriado.
+**User Story:** Como desenvolvedor, quero extrair todos os sprites de criaturas e NPCs organizados de forma clara, para que eu possa facilmente substituí-los com meus próprios assets no futuro.
 
 #### Acceptance Criteria
 
-1. WHEN o extrator processa critter.dat THEN o Asset Extractor SHALL extrair todos os sprites de criaturas organizados por tipo (humanos, animais, mutantes, robôs)
-2. WHEN uma criatura tem múltiplas animações (idle, walk, attack, death) THEN o Asset Extractor SHALL exportar cada animação separadamente com nomenclatura padronizada
+1. WHEN o extrator processa critter.dat THEN o Asset Extractor SHALL extrair todos os sprites de criaturas organizados em pastas por categoria (humans/, animals/, mutants/, robots/)
+2. WHEN uma criatura tem múltiplas animações (idle, walk, attack, death) THEN o Asset Extractor SHALL exportar cada animação em subpasta separada com nomenclatura legível (ex: deathclaw/walk/, dog/idle/)
 3. WHEN sprites de criaturas são extraídos THEN o Asset Extractor SHALL manter metadados de offset (x, y) para alinhamento correto
+4. WHEN sprites são organizados THEN o Asset Extractor SHALL usar nomes descritivos em vez de códigos internos (ex: "male_leather_armor" em vez de "hmlthraa")
+5. WHEN um NPC é extraído THEN o Asset Extractor SHALL gerar um arquivo JSON de manifesto por NPC contendo: nome legível, categoria, animações disponíveis, e caminho para substituição
 
 ### Requirement 4: Extração de Tiles de Mapa
 
@@ -121,3 +123,15 @@ Este documento especifica os requisitos para a extração completa de todos os a
 2. WHEN sprites são salvos THEN o Asset Extractor SHALL usar estrutura: `sprites/{categoria}/{subcategoria}/{arquivo}.png`
 3. WHEN áudio é salvo THEN o Asset Extractor SHALL usar estrutura: `audio/{tipo}/{arquivo}.ogg`
 4. WHEN dados são salvos THEN o Asset Extractor SHALL usar estrutura: `data/{tipo}/{arquivo}.json`
+
+### Requirement 11: Facilitar Substituição de Assets
+
+**User Story:** Como desenvolvedor criando meu próprio jogo baseado na engine, quero que os assets sejam organizados de forma que eu possa facilmente substituí-los com meus próprios recursos.
+
+#### Acceptance Criteria
+
+1. WHEN assets são extraídos THEN o Asset Extractor SHALL gerar um arquivo `ASSET_REPLACEMENT_GUIDE.md` documentando a estrutura e como substituir cada tipo de asset
+2. WHEN sprites de NPCs são organizados THEN o Asset Extractor SHALL criar uma pasta por NPC/criatura com nome legível contendo todas as suas animações
+3. WHEN um NPC é extraído THEN o Asset Extractor SHALL gerar um arquivo `_template.json` na pasta do NPC especificando: dimensões esperadas, número de frames por animação, direções necessárias
+4. WHEN tiles são extraídos THEN o Asset Extractor SHALL organizar por ambiente (desert, city, cave, vault, interior) com nomes descritivos
+5. WHEN a extração é concluída THEN o Asset Extractor SHALL gerar um relatório `ASSETS_SUMMARY.md` listando todos os NPCs, tiles e itens extraídos com seus nomes legíveis

@@ -1,0 +1,23 @@
+{
+  "environment": "misc",
+  "types": {
+    "floor": [
+      "arroyo_floor_001",
+      "arroyo_floor_002",
+      "arroyo_floor_003",
+      "arroyo_floor_004",
+      "arroyo_floor_005",
+      "arroyo_floor_006",
+      "arroyo_floor_007",
+      "arroyo_floor_008",
+      "arroyo_floor_009",
+      "arroyo_floor_010"
+    ]
+  },
+  "replacement_guide": {
+    "floor_size": "80x36 pixels (isometric)",
+    "wall_size": "80x80 pixels",
+    "roof_size": "80x36 pixels",
+    "format": "PNG with transparency"
+  }
+}

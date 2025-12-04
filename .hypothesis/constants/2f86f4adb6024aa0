@@ -1,0 +1,4 @@
+# file: C:\Users\Casa\Documents\Novo github\fallout2-ce\tools\extractors\asset_organizer.py
+# hypothesis_version: 6.148.6
+
+['1.0', 'asset_extraction', 'assets', 'audio', 'audio/music', 'audio/sfx', 'audio/voice', 'audio_type', 'by_category', 'by_type', 'data', 'data/maps', 'data/messages', 'data/scripts', 'generated_at', 'manifest.json', 'sprite', 'sprites', 'sprites/critters', 'sprites/tiles', 'sprites/ui', 'statistics', 'total_assets', 'utf-8', 'version', 'w']

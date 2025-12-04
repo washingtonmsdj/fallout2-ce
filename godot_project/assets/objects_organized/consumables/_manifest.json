@@ -1,0 +1,11 @@
+{
+  "category": "consumables",
+  "objects": [
+    "consumable_beer",
+    "creature_radscorpion_limb"
+  ],
+  "replacement_guide": {
+    "format": "PNG with transparency",
+    "json_format": "Godot resource format"
+  }
+}

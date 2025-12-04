@@ -1,0 +1,12 @@
+{
+  "category": "vehicles",
+  "objects": [
+    "vehicle_cart_01",
+    "vehicle_cart_02",
+    "vehicle_vertibird"
+  ],
+  "replacement_guide": {
+    "format": "PNG with transparency",
+    "json_format": "Godot resource format"
+  }
+}

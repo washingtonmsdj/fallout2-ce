@@ -1,0 +1,36 @@
+{
+  "category": "furniture",
+  "objects": [
+    "furniture_bookshelf_1",
+    "furniture_bookshelf_2",
+    "furniture_bookshelf_1",
+    "furniture_bookshelf_2",
+    "furniture_bookshelf_3",
+    "furniture_bookshelf_4",
+    "furniture_bookshelf_5",
+    "furniture_bookshelf_6",
+    "furniture_bookcase_1",
+    "furniture_bookcase_2",
+    "furniture_bookcase_3",
+    "furniture_bookcase_5",
+    "furniture_bookcase_6",
+    "furniture_bookcase_7",
+    "furniture_desk_1",
+    "furniture_desk_2",
+    "furniture_dresser_1",
+    "furniture_dresser_2",
+    "furniture_dresser_3",
+    "furniture_fridge",
+    "furniture_pool_table_1",
+    "furniture_pool_table_2",
+    "furniture_pool_table_3",
+    "furniture_pool_table_4",
+    "furniture_pool_table_5",
+    "furniture_pool_table_6",
+    "furniture_steel_table"
+  ],
+  "replacement_guide": {
+    "format": "PNG with transparency",
+    "json_format": "Godot resource format"
+  }
+}
