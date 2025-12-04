@@ -1,0 +1,18 @@
+[gd_scene load_steps=1 format=3 uid="uid://map_V15_ORIG.MAP"]
+
+
+[node name="V15_ORIG.MAP" type="Node2D"]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Ground" type="Node2D" parent="World"]
+
+
+[node name="Middle" type="Node2D" parent="World"]
+
+
+[node name="Top" type="Node2D" parent="World"]
+
+
+[node name="EntryPoint" type="Marker2D" parent="World"]
+position = Vector2(9600, 399546756)

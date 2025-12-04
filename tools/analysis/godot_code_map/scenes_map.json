@@ -1,0 +1,142 @@
+{
+  "generated_at": "2025-12-04T19:01:24.717701",
+  "total_scenes": 12,
+  "scenes": {
+    "control.tscn": {
+      "path": "control.tscn",
+      "name": "control",
+      "scripts": [],
+      "resources": [],
+      "total_nodes": 1
+    },
+    "scenes\\main.tscn": {
+      "path": "scenes\\main.tscn",
+      "name": "main",
+      "scripts": [],
+      "resources": [
+        "1_menu"
+      ],
+      "total_nodes": 4
+    },
+    "scenes\\characters\\player.tscn": {
+      "path": "scenes\\characters\\player.tscn",
+      "name": "player",
+      "scripts": [
+        "1_script"
+      ],
+      "resources": [
+        "1_script",
+        "2_spriteframes"
+      ],
+      "total_nodes": 4
+    },
+    "scenes\\game\\game_scene.tscn": {
+      "path": "scenes\\game\\game_scene.tscn",
+      "name": "game_scene",
+      "scripts": [
+        "2_script"
+      ],
+      "resources": [
+        "1_player",
+        "6_tile3",
+        "5_tile2",
+        "8_tile5",
+        "2_script",
+        "3_hud",
+        "7_tile4",
+        "4_tile1"
+      ],
+      "total_nodes": 86
+    },
+    "scenes\\ui\\fallout_hud.tscn": {
+      "path": "scenes\\ui\\fallout_hud.tscn",
+      "name": "fallout_hud",
+      "scripts": [
+        "1_script"
+      ],
+      "resources": [
+        "2_iface",
+        "1_script"
+      ],
+      "total_nodes": 6
+    },
+    "scenes\\ui\\main_menu.tscn": {
+      "path": "scenes\\ui\\main_menu.tscn",
+      "name": "main_menu",
+      "scripts": [
+        "1"
+      ],
+      "resources": [
+        "1"
+      ],
+      "total_nodes": 11
+    },
+    "scenes\\ui\\main_menu_original.tscn": {
+      "path": "scenes\\ui\\main_menu_original.tscn",
+      "name": "main_menu_original",
+      "scripts": [
+        "1_script"
+      ],
+      "resources": [
+        "1_script",
+        "2_bg"
+      ],
+      "total_nodes": 9
+    },
+    "tests\\property\\test_camera_bounds_clamping.tscn": {
+      "path": "tests\\property\\test_camera_bounds_clamping.tscn",
+      "name": "test_camera_bounds_clamping",
+      "scripts": [
+        "1_test"
+      ],
+      "resources": [
+        "1_test"
+      ],
+      "total_nodes": 1
+    },
+    "tests\\property\\test_elevation_layer_separation.tscn": {
+      "path": "tests\\property\\test_elevation_layer_separation.tscn",
+      "name": "test_elevation_layer_separation",
+      "scripts": [
+        "1_test"
+      ],
+      "resources": [
+        "1_test"
+      ],
+      "total_nodes": 1
+    },
+    "tests\\property\\test_isometric_coordinate_roundtrip.tscn": {
+      "path": "tests\\property\\test_isometric_coordinate_roundtrip.tscn",
+      "name": "test_isometric_coordinate_roundtrip",
+      "scripts": [
+        "1_test"
+      ],
+      "resources": [
+        "1_test"
+      ],
+      "total_nodes": 1
+    },
+    "tests\\property\\test_pathfinding_validity.tscn": {
+      "path": "tests\\property\\test_pathfinding_validity.tscn",
+      "name": "test_pathfinding_validity",
+      "scripts": [
+        "1_test"
+      ],
+      "resources": [
+        "1_test"
+      ],
+      "total_nodes": 1
+    },
+    "tests\\property\\test_sprite_depth_ordering.tscn": {
+      "path": "tests\\property\\test_sprite_depth_ordering.tscn",
+      "name": "test_sprite_depth_ordering",
+      "scripts": [
+        "1_test"
+      ],
+      "resources": [
+        "1_test"
+      ],
+      "total_nodes": 1
+    }
+  }
+}

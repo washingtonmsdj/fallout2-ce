@@ -1,0 +1,285 @@
+{
+  "generated_at": "2025-12-04T19:01:24.725699",
+  "graph": {
+    "nodes": [
+      {
+        "id": "scripts\\actors\\interactable.gd",
+        "label": "interactable",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 150
+      },
+      {
+        "id": "scripts\\actors\\npc.gd",
+        "label": "npc",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 437
+      },
+      {
+        "id": "scripts\\actors\\player.gd",
+        "label": "player",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 299
+      },
+      {
+        "id": "scripts\\core\\game_manager.gd",
+        "label": "game_manager",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 316
+      },
+      {
+        "id": "scripts\\core\\game_scene.gd",
+        "label": "game_scene",
+        "type": "script",
+        "complexity": "low",
+        "lines": 76
+      },
+      {
+        "id": "scripts\\core\\map_manager.gd",
+        "label": "map_manager",
+        "type": "script",
+        "complexity": "low",
+        "lines": 49
+      },
+      {
+        "id": "scripts\\systems\\animation_controller.gd",
+        "label": "animation_controller",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 134
+      },
+      {
+        "id": "scripts\\systems\\audio_manager.gd",
+        "label": "audio_manager",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 215
+      },
+      {
+        "id": "scripts\\systems\\combat_system.gd",
+        "label": "combat_system",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 244
+      },
+      {
+        "id": "scripts\\systems\\cursor_manager.gd",
+        "label": "cursor_manager",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 111
+      },
+      {
+        "id": "scripts\\systems\\dialog_system.gd",
+        "label": "dialog_system",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 294
+      },
+      {
+        "id": "scripts\\systems\\input_manager.gd",
+        "label": "input_manager",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 164
+      },
+      {
+        "id": "scripts\\systems\\inventory_system.gd",
+        "label": "inventory_system",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 287
+      },
+      {
+        "id": "scripts\\systems\\isometric_camera.gd",
+        "label": "isometric_camera",
+        "type": "script",
+        "complexity": "low",
+        "lines": 96
+      },
+      {
+        "id": "scripts\\systems\\isometric_renderer.gd",
+        "label": "isometric_renderer",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 229
+      },
+      {
+        "id": "scripts\\systems\\map_loader.gd",
+        "label": "map_loader",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 466
+      },
+      {
+        "id": "scripts\\systems\\map_system.gd",
+        "label": "map_system",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 195
+      },
+      {
+        "id": "scripts\\systems\\pathfinder.gd",
+        "label": "pathfinder",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 172
+      },
+      {
+        "id": "scripts\\systems\\prototype_system.gd",
+        "label": "prototype_system",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 182
+      },
+      {
+        "id": "scripts\\systems\\save_system.gd",
+        "label": "save_system",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 312
+      },
+      {
+        "id": "scripts\\systems\\script_interpreter.gd",
+        "label": "script_interpreter",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 413
+      },
+      {
+        "id": "scripts\\ui\\character_screen.gd",
+        "label": "character_screen",
+        "type": "script",
+        "complexity": "low",
+        "lines": 98
+      },
+      {
+        "id": "scripts\\ui\\fallout_hud.gd",
+        "label": "fallout_hud",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 194
+      },
+      {
+        "id": "scripts\\ui\\inventory_screen.gd",
+        "label": "inventory_screen",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 126
+      },
+      {
+        "id": "scripts\\ui\\main_menu.gd",
+        "label": "main_menu",
+        "type": "script",
+        "complexity": "low",
+        "lines": 22
+      },
+      {
+        "id": "scripts\\ui\\main_menu_fallout2.gd",
+        "label": "main_menu_fallout2",
+        "type": "script",
+        "complexity": "low",
+        "lines": 66
+      },
+      {
+        "id": "scripts\\ui\\main_menu_original.gd",
+        "label": "main_menu_original",
+        "type": "script",
+        "complexity": "low",
+        "lines": 29
+      },
+      {
+        "id": "scripts\\ui\\main_menu_original_fallout2.gd",
+        "label": "main_menu_original_fallout2",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 184
+      },
+      {
+        "id": "scripts\\ui\\options_screen.gd",
+        "label": "options_screen",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 115
+      },
+      {
+        "id": "tests\\property\\test_camera_bounds_clamping.gd",
+        "label": "test_camera_bounds_clamping",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 100
+      },
+      {
+        "id": "tests\\property\\test_combat_state_consistency.gd",
+        "label": "test_combat_state_consistency",
+        "type": "script",
+        "complexity": "low",
+        "lines": 71
+      },
+      {
+        "id": "tests\\property\\test_combat_turn_order.gd",
+        "label": "test_combat_turn_order",
+        "type": "script",
+        "complexity": "low",
+        "lines": 52
+      },
+      {
+        "id": "tests\\property\\test_damage_formula.gd",
+        "label": "test_damage_formula",
+        "type": "script",
+        "complexity": "low",
+        "lines": 56
+      },
+      {
+        "id": "tests\\property\\test_elevation_layer_separation.gd",
+        "label": "test_elevation_layer_separation",
+        "type": "script",
+        "complexity": "low",
+        "lines": 87
+      },
+      {
+        "id": "tests\\property\\test_hit_chance_formula.gd",
+        "label": "test_hit_chance_formula",
+        "type": "script",
+        "complexity": "low",
+        "lines": 56
+      },
+      {
+        "id": "tests\\property\\test_isometric_coordinate_roundtrip.gd",
+        "label": "test_isometric_coordinate_roundtrip",
+        "type": "script",
+        "complexity": "low",
+        "lines": 63
+      },
+      {
+        "id": "tests\\property\\test_pathfinding_validity.gd",
+        "label": "test_pathfinding_validity",
+        "type": "script",
+        "complexity": "medium",
+        "lines": 100
+      },
+      {
+        "id": "tests\\property\\test_sprite_depth_ordering.gd",
+        "label": "test_sprite_depth_ordering",
+        "type": "script",
+        "complexity": "low",
+        "lines": 90
+      }
+    ],
+    "edges": [
+      {
+        "source": "scripts\\core\\game_manager.gd",
+        "target": "scenes/characters/player.tscn",
+        "type": "load"
+      },
+      {
+        "source": "scripts\\ui\\main_menu_fallout2.gd",
+        "target": "scenes/game/game_scene.tscn",
+        "type": "load"
+      }
+    ]
+  }
+}

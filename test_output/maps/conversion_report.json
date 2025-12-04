@@ -1,0 +1,9 @@
+{
+  "generated_at": "2025-12-04T19:42:10.563228",
+  "stats": {
+    "total_maps": 170,
+    "converted": 170,
+    "failed": 0
+  },
+  "output_dir": "..\\test_output\\maps"
+}

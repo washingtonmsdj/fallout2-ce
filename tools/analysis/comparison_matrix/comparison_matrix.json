@@ -1,0 +1,544 @@
+{
+  "generated_at": "2025-12-04T19:05:17.017671",
+  "total_features": 29,
+  "by_status": {
+    "not_implemented": 3,
+    "partial": 13,
+    "complete": 13
+  },
+  "by_category": {
+    "content": {
+      "not_implemented": 1,
+      "partial": 1,
+      "complete": 3
+    },
+    "audio": {
+      "not_implemented": 1,
+      "partial": 2,
+      "complete": 0
+    },
+    "world_systems": {
+      "not_implemented": 1,
+      "partial": 3,
+      "complete": 1
+    },
+    "gameplay_systems": {
+      "not_implemented": 0,
+      "partial": 3,
+      "complete": 3
+    },
+    "core_systems": {
+      "not_implemented": 0,
+      "partial": 1,
+      "complete": 4
+    },
+    "ui": {
+      "not_implemented": 0,
+      "partial": 3,
+      "complete": 2
+    }
+  },
+  "completeness_percentage": 67.24137931034483,
+  "features": [
+    {
+      "id": "core_systems.rendering",
+      "name": "Sistema de Renderização",
+      "category": "core_systems",
+      "description": "Renderização isométrica 2D com sprites",
+      "status": "complete",
+      "implementation_details": "Implementado: IsometricRenderer, isometric_renderer.gd",
+      "missing_features": [],
+      "code_references": [
+        "autoload:IsometricRenderer",
+        "script:scripts\\systems\\isometric_renderer.gd"
+      ],
+      "original_requirements": [
+        "IsometricRenderer",
+        "isometric_renderer.gd"
+      ]
+    },
+    {
+      "id": "core_systems.input",
+      "name": "Sistema de Input",
+      "category": "core_systems",
+      "description": "Gerenciamento de entrada (teclado, mouse)",
+      "status": "complete",
+      "implementation_details": "Implementado: InputManager, input_manager.gd",
+      "missing_features": [],
+      "code_references": [
+        "autoload:InputManager",
+        "script:scripts\\systems\\input_manager.gd"
+      ],
+      "original_requirements": [
+        "InputManager",
+        "input_manager.gd"
+      ]
+    },
+    {
+      "id": "core_systems.save_load",
+      "name": "Sistema de Save/Load",
+      "category": "core_systems",
+      "description": "Salvar e carregar estado do jogo",
+      "status": "complete",
+      "implementation_details": "Implementado: SaveSystem, save_system.gd",
+      "missing_features": [],
+      "code_references": [
+        "autoload:SaveSystem",
+        "script:scripts\\systems\\save_system.gd"
+      ],
+      "original_requirements": [
+        "SaveSystem",
+        "save_system.gd"
+      ]
+    },
+    {
+      "id": "core_systems.game_state",
+      "name": "Máquina de Estados do Jogo",
+      "category": "core_systems",
+      "description": "Gerenciamento de estados (MENU, EXPLORATION, COMBAT, etc)",
+      "status": "complete",
+      "implementation_details": "Implementado: GameManager, game_manager.gd",
+      "missing_features": [],
+      "code_references": [
+        "autoload:GameManager",
+        "script:scripts\\core\\game_manager.gd"
+      ],
+      "original_requirements": [
+        "GameManager",
+        "game_manager.gd"
+      ]
+    },
+    {
+      "id": "core_systems.time_system",
+      "name": "Sistema de Tempo",
+      "category": "core_systems",
+      "description": "Ciclo dia/noite, passagem de tempo",
+      "status": "partial",
+      "implementation_details": "Parcial: 1/2 requisitos implementados",
+      "missing_features": [
+        "time_system"
+      ],
+      "code_references": [
+        "autoload:GameManager"
+      ],
+      "original_requirements": [
+        "GameManager",
+        "time_system"
+      ]
+    },
+    {
+      "id": "gameplay_systems.combat",
+      "name": "Sistema de Combate",
+      "category": "gameplay_systems",
+      "description": "Combate por turnos com AP, hit chance, dano",
+      "status": "complete",
+      "implementation_details": "Implementado: CombatSystem, combat_system.gd",
+      "missing_features": [],
+      "code_references": [
+        "autoload:CombatSystem",
+        "script:scripts\\systems\\combat_system.gd"
+      ],
+      "original_requirements": [
+        "CombatSystem",
+        "combat_system.gd"
+      ]
+    },
+    {
+      "id": "gameplay_systems.dialogue",
+      "name": "Sistema de Diálogo",
+      "category": "gameplay_systems",
+      "description": "Árvores de diálogo com condições e consequências",
+      "status": "complete",
+      "implementation_details": "Implementado: DialogSystem, dialog_system.gd",
+      "missing_features": [],
+      "code_references": [
+        "autoload:DialogSystem",
+        "script:scripts\\systems\\dialog_system.gd"
+      ],
+      "original_requirements": [
+        "DialogSystem",
+        "dialog_system.gd"
+      ]
+    },
+    {
+      "id": "gameplay_systems.inventory",
+      "name": "Sistema de Inventário",
+      "category": "gameplay_systems",
+      "description": "Gerenciamento de itens, peso, equipamento",
+      "status": "complete",
+      "implementation_details": "Implementado: InventorySystem, inventory_system.gd",
+      "missing_features": [],
+      "code_references": [
+        "autoload:InventorySystem",
+        "script:scripts\\systems\\inventory_system.gd"
+      ],
+      "original_requirements": [
+        "InventorySystem",
+        "inventory_system.gd"
+      ]
+    },
+    {
+      "id": "gameplay_systems.barter",
+      "name": "Sistema de Barter",
+      "category": "gameplay_systems",
+      "description": "Troca de itens com NPCs baseado em skill Barter",
+      "status": "partial",
+      "implementation_details": "Parcial: 1/2 requisitos implementados",
+      "missing_features": [
+        "barter"
+      ],
+      "code_references": [
+        "autoload:DialogSystem"
+      ],
+      "original_requirements": [
+        "DialogSystem",
+        "barter"
+      ]
+    },
+    {
+      "id": "gameplay_systems.crafting",
+      "name": "Sistema de Crafting",
+      "category": "gameplay_systems",
+      "description": "Criação de itens a partir de receitas",
+      "status": "partial",
+      "implementation_details": "Parcial: 1/2 requisitos implementados",
+      "missing_features": [
+        "crafting"
+      ],
+      "code_references": [
+        "autoload:InventorySystem"
+      ],
+      "original_requirements": [
+        "InventorySystem",
+        "crafting"
+      ]
+    },
+    {
+      "id": "gameplay_systems.script_interpreter",
+      "name": "Interpretador de Scripts",
+      "category": "gameplay_systems",
+      "description": "Execução de scripts SSL/INT do jogo original",
+      "status": "partial",
+      "implementation_details": "Parcial: 1/2 requisitos implementados",
+      "missing_features": [
+        "ScriptInterpreter"
+      ],
+      "code_references": [
+        "script:scripts\\systems\\script_interpreter.gd"
+      ],
+      "original_requirements": [
+        "ScriptInterpreter",
+        "script_interpreter.gd"
+      ]
+    },
+    {
+      "id": "world_systems.map_loading",
+      "name": "Carregamento de Mapas",
+      "category": "world_systems",
+      "description": "Carregar e renderizar mapas do jogo",
+      "status": "partial",
+      "implementation_details": "Parcial: 3/4 requisitos implementados",
+      "missing_features": [
+        "MapManager"
+      ],
+      "code_references": [
+        "autoload:MapSystem",
+        "script:scripts\\systems\\map_system.gd",
+        "script:scripts\\core\\map_manager.gd"
+      ],
+      "original_requirements": [
+        "MapSystem",
+        "map_system.gd",
+        "MapManager",
+        "map_manager.gd"
+      ]
+    },
+    {
+      "id": "world_systems.map_transitions",
+      "name": "Transições entre Mapas",
+      "category": "world_systems",
+      "description": "Mudança de mapa com posicionamento correto",
+      "status": "partial",
+      "implementation_details": "Parcial: 1/2 requisitos implementados",
+      "missing_features": [
+        "map_transitions"
+      ],
+      "code_references": [
+        "autoload:MapSystem"
+      ],
+      "original_requirements": [
+        "MapSystem",
+        "map_transitions"
+      ]
+    },
+    {
+      "id": "world_systems.elevations",
+      "name": "Sistema de Elevações",
+      "category": "world_systems",
+      "description": "3 níveis de elevação com oclusão",
+      "status": "partial",
+      "implementation_details": "Parcial: 1/2 requisitos implementados",
+      "missing_features": [
+        "elevations"
+      ],
+      "code_references": [
+        "autoload:IsometricRenderer"
+      ],
+      "original_requirements": [
+        "IsometricRenderer",
+        "elevations"
+      ]
+    },
+    {
+      "id": "world_systems.pathfinding",
+      "name": "Pathfinding",
+      "category": "world_systems",
+      "description": "Cálculo de caminhos para NPCs e jogador",
+      "status": "complete",
+      "implementation_details": "Implementado: Pathfinder, pathfinder.gd",
+      "missing_features": [],
+      "code_references": [
+        "autoload:Pathfinder",
+        "script:scripts\\systems\\pathfinder.gd"
+      ],
+      "original_requirements": [
+        "Pathfinder",
+        "pathfinder.gd"
+      ]
+    },
+    {
+      "id": "world_systems.world_map",
+      "name": "Mapa Mundial",
+      "category": "world_systems",
+      "description": "Navegação no mapa mundial entre locais",
+      "status": "not_implemented",
+      "implementation_details": "Não implementado",
+      "missing_features": [
+        "world_map"
+      ],
+      "code_references": [],
+      "original_requirements": [
+        "world_map"
+      ]
+    },
+    {
+      "id": "content.maps",
+      "name": "Mapas do Jogo",
+      "category": "content",
+      "description": "Todos os ~160 mapas do jogo original",
+      "status": "partial",
+      "implementation_details": "Parcial: 1/2 requisitos implementados",
+      "missing_features": [
+        "map_parser"
+      ],
+      "code_references": [
+        "script:scripts\\systems\\map_loader.gd"
+      ],
+      "original_requirements": [
+        "map_loader.gd",
+        "map_parser"
+      ]
+    },
+    {
+      "id": "content.npcs",
+      "name": "NPCs",
+      "category": "content",
+      "description": "Todos os ~1000 NPCs com AI e diálogos",
+      "status": "complete",
+      "implementation_details": "Implementado: npc.gd, prototype_system.gd",
+      "missing_features": [],
+      "code_references": [
+        "script:scripts\\actors\\npc.gd",
+        "script:scripts\\systems\\prototype_system.gd"
+      ],
+      "original_requirements": [
+        "npc.gd",
+        "prototype_system.gd"
+      ]
+    },
+    {
+      "id": "content.items",
+      "name": "Itens",
+      "category": "content",
+      "description": "Todos os ~500 itens com stats e efeitos",
+      "status": "complete",
+      "implementation_details": "Implementado: inventory_system.gd, prototype_system.gd",
+      "missing_features": [],
+      "code_references": [
+        "script:scripts\\systems\\inventory_system.gd",
+        "script:scripts\\systems\\prototype_system.gd"
+      ],
+      "original_requirements": [
+        "inventory_system.gd",
+        "prototype_system.gd"
+      ]
+    },
+    {
+      "id": "content.quests",
+      "name": "Quests",
+      "category": "content",
+      "description": "Todas as ~100 quests do jogo",
+      "status": "not_implemented",
+      "implementation_details": "Não implementado",
+      "missing_features": [
+        "quest_system"
+      ],
+      "code_references": [],
+      "original_requirements": [
+        "quest_system"
+      ]
+    },
+    {
+      "id": "content.dialogues",
+      "name": "Diálogos",
+      "category": "content",
+      "description": "Todas as árvores de diálogo",
+      "status": "complete",
+      "implementation_details": "Implementado: dialog_system.gd",
+      "missing_features": [],
+      "code_references": [
+        "script:scripts\\systems\\dialog_system.gd"
+      ],
+      "original_requirements": [
+        "dialog_system.gd"
+      ]
+    },
+    {
+      "id": "audio.music",
+      "name": "Sistema de Música",
+      "category": "audio",
+      "description": "Reprodução de músicas do jogo",
+      "status": "partial",
+      "implementation_details": "Parcial: 1/2 requisitos implementados",
+      "missing_features": [
+        "AudioManager"
+      ],
+      "code_references": [
+        "script:scripts\\systems\\audio_manager.gd"
+      ],
+      "original_requirements": [
+        "AudioManager",
+        "audio_manager.gd"
+      ]
+    },
+    {
+      "id": "audio.sfx",
+      "name": "Efeitos Sonoros",
+      "category": "audio",
+      "description": "Reprodução de sons e efeitos",
+      "status": "partial",
+      "implementation_details": "Parcial: 1/2 requisitos implementados",
+      "missing_features": [
+        "AudioManager"
+      ],
+      "code_references": [
+        "script:scripts\\systems\\audio_manager.gd"
+      ],
+      "original_requirements": [
+        "AudioManager",
+        "audio_manager.gd"
+      ]
+    },
+    {
+      "id": "audio.positional_audio",
+      "name": "Áudio Posicional",
+      "category": "audio",
+      "description": "Áudio baseado em posição 2D",
+      "status": "not_implemented",
+      "implementation_details": "Não implementado",
+      "missing_features": [
+        "AudioManager",
+        "positional"
+      ],
+      "code_references": [],
+      "original_requirements": [
+        "AudioManager",
+        "positional"
+      ]
+    },
+    {
+      "id": "ui.main_menu",
+      "name": "Menu Principal",
+      "category": "ui",
+      "description": "Menu inicial do jogo",
+      "status": "partial",
+      "implementation_details": "Parcial: 1/2 requisitos implementados",
+      "missing_features": [
+        "main_menu.tscn"
+      ],
+      "code_references": [
+        "script:scripts\\ui\\main_menu.gd"
+      ],
+      "original_requirements": [
+        "main_menu.gd",
+        "main_menu.tscn"
+      ]
+    },
+    {
+      "id": "ui.hud",
+      "name": "HUD",
+      "category": "ui",
+      "description": "Interface durante o jogo",
+      "status": "partial",
+      "implementation_details": "Parcial: 1/2 requisitos implementados",
+      "missing_features": [
+        "fallout_hud.tscn"
+      ],
+      "code_references": [
+        "script:scripts\\ui\\fallout_hud.gd"
+      ],
+      "original_requirements": [
+        "fallout_hud.gd",
+        "fallout_hud.tscn"
+      ]
+    },
+    {
+      "id": "ui.inventory_ui",
+      "name": "Interface de Inventário",
+      "category": "ui",
+      "description": "Tela de inventário",
+      "status": "complete",
+      "implementation_details": "Implementado: inventory_screen.gd",
+      "missing_features": [],
+      "code_references": [
+        "script:scripts\\ui\\inventory_screen.gd"
+      ],
+      "original_requirements": [
+        "inventory_screen.gd"
+      ]
+    },
+    {
+      "id": "ui.character_screen",
+      "name": "Tela de Personagem",
+      "category": "ui",
+      "description": "Tela de stats e skills",
+      "status": "complete",
+      "implementation_details": "Implementado: character_screen.gd",
+      "missing_features": [],
+      "code_references": [
+        "script:scripts\\ui\\character_screen.gd"
+      ],
+      "original_requirements": [
+        "character_screen.gd"
+      ]
+    },
+    {
+      "id": "ui.dialogue_ui",
+      "name": "Interface de Diálogo",
+      "category": "ui",
+      "description": "Interface de diálogos",
+      "status": "partial",
+      "implementation_details": "Parcial: 1/2 requisitos implementados",
+      "missing_features": [
+        "dialogue_ui"
+      ],
+      "code_references": [
+        "script:scripts\\systems\\dialog_system.gd"
+      ],
+      "original_requirements": [
+        "dialog_system.gd",
+        "dialogue_ui"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" format=3]
+
+[resource]
+
+pid = -1073741824
+item_type = "unknown_65535"
+weight = 256
+cost = 16777216

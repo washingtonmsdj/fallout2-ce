@@ -75,7 +75,11 @@ class MAPParser:
         
         # Nome do mapa (16 bytes)
         name_bytes = map_data[offset:offset+16]
-        name = name_bytes.decode('latin-1', errors='ignore').rstrip('\x00')
+        # Remover caracteres nulos antes de decodificar
+        name_bytes_clean = name_bytes.split(b'\x00')[0]
+        name = name_bytes_clean.decode('latin-1', errors='ignore').strip()
+        if not name:
+            name = f"map_{version}"
         offset += 16
         
         # Entrada
