@@ -48,6 +48,11 @@ var current_direction: int = 0  # 0-5 para as 6 direcoes isometricas
 var target_position: Vector2 = Vector2.ZERO
 var move_to_target: bool = false
 
+# Pathfinding
+var current_path: Array[Vector2i] = []
+var path_index: int = 0
+var following_path: bool = false
+
 # Animacao de caminhada (bobbing)
 var walk_time: float = 0.0
 var walk_bob_amount: float = 3.0  # Pixels de movimento vertical
@@ -116,6 +121,14 @@ func _physics_process(delta):
 
 func _handle_input():
 	"""Processa input do jogador"""
+	# Verificar encumbrance - bloquear movimento se peso > capacidade
+	var inventory = get_node_or_null("/root/InventorySystem")
+	if inventory and inventory.is_encumbered():
+		# Bloquear movimento se encumbered
+		velocity = Vector2.ZERO
+		is_moving = false
+		return
+	
 	var input_dir = Vector2.ZERO
 	
 	if Input.is_action_pressed("move_up"):
@@ -140,8 +153,29 @@ func _handle_input():
 		is_moving = false
 
 func _handle_movement(_delta):
-	"""Processa movimento para posicao alvo (click)"""
-	if move_to_target:
+	"""Processa movimento para posicao alvo (click) ou seguindo caminho"""
+	# Verificar encumbrance - bloquear movimento se peso > capacidade
+	var inventory = get_node_or_null("/root/InventorySystem")
+	if inventory and inventory.is_encumbered():
+		# Bloquear movimento se encumbered
+		velocity = Vector2.ZERO
+		is_moving = false
+		move_to_target = false
+		following_path = false
+		if not has_meta("encumbrance_warning_shown"):
+			print("Player: Muito pesado para se mover! (Encumbered)")
+			set_meta("encumbrance_warning_shown", true)
+		return
+	
+	# Limpar flag de aviso se não estiver mais encumbered
+	if has_meta("encumbrance_warning_shown"):
+		remove_meta("encumbrance_warning_shown")
+	
+	# Seguir caminho calculado pelo pathfinding
+	if following_path and current_path.size() > 0:
+		_follow_path()
+	# Movimento direto (fallback)
+	elif move_to_target:
 		var dir = (target_position - global_position).normalized()
 		var dist = global_position.distance_to(target_position)
 		
@@ -154,6 +188,51 @@ func _handle_movement(_delta):
 			velocity = dir * speed
 			is_moving = true
 			_update_direction(dir)
+
+func _follow_path():
+	"""Segue o caminho calculado pelo pathfinding"""
+	if path_index >= current_path.size():
+		# Chegou ao fim do caminho
+		_stop_following_path()
+		return
+	
+	# Obter próximo waypoint
+	var renderer = get_node_or_null("/root/IsometricRenderer")
+	if renderer == null:
+		_stop_following_path()
+		return
+	
+	var next_tile = current_path[path_index]
+	var next_world_pos = renderer.tile_to_screen(next_tile, 0)
+	
+	# Mover em direção ao waypoint
+	var dir = (next_world_pos - global_position).normalized()
+	var dist = global_position.distance_to(next_world_pos)
+	
+	if dist < 10:  # Chegou ao waypoint
+		path_index += 1
+		
+		# Consumir AP em combate
+		var combat_system = get_node_or_null("/root/CombatSystem")
+		if combat_system != null and combat_system.is_in_combat():
+			if not use_action_points(1):
+				# Sem AP, parar movimento
+				_stop_following_path()
+				return
+	else:
+		# Continuar movendo
+		var speed = base_speed * (run_speed_multiplier if is_running else 1.0)
+		velocity = dir * speed
+		is_moving = true
+		_update_direction(dir)
+
+func _stop_following_path():
+	"""Para de seguir o caminho"""
+	following_path = false
+	current_path.clear()
+	path_index = 0
+	velocity = Vector2.ZERO
+	is_moving = false
 
 func _update_walk_animation(delta):
 	"""Atualiza animacao de caminhada (bobbing)"""
@@ -215,9 +294,42 @@ func move_to(pos: Vector2):
 	target_position = pos
 	move_to_target = true
 
+func move_to_tile(tile: Vector2i):
+	"""
+	Move o player para um tile específico usando pathfinding
+	Calcula caminho e segue
+	"""
+	var pathfinder = get_node_or_null("/root/Pathfinder")
+	var renderer = get_node_or_null("/root/IsometricRenderer")
+	
+	if pathfinder == null or renderer == null:
+		# Fallback para movimento direto
+		var world_pos = renderer.tile_to_screen(tile, 0) if renderer else Vector2(tile)
+		move_to(world_pos)
+		return
+	
+	# Obter tile atual do player
+	var current_tile = renderer.screen_to_tile(global_position, 0)
+	
+	# Calcular caminho
+	var path = pathfinder.find_path(current_tile, tile, 0)
+	
+	if path.size() > 0:
+		# Seguir caminho
+		current_path = path
+		path_index = 0
+		following_path = true
+		move_to_target = false
+		print("Player: Caminho calculado com ", path.size(), " tiles")
+	else:
+		print("Player: Nenhum caminho encontrado para ", tile)
+
 func stop_movement():
 	"""Para o movimento"""
 	move_to_target = false
+	following_path = false
+	current_path.clear()
+	path_index = 0
 	velocity = Vector2.ZERO
 	is_moving = false
 

@@ -85,15 +85,36 @@ func end_combat():
 	combat_ended.emit()
 
 func _calculate_turn_order():
-	"""Calcula ordem de turno baseado em Sequence (igual ao original)"""
+	"""
+	Calcula ordem de turno baseado em Sequence (igual ao original)
+	Sequence = Perception * 2
+	Combatentes com maior Sequence agem primeiro
+	"""
 	turn_order = combatants.duplicate()
 	
 	# Ordenar por Sequence (maior primeiro)
 	turn_order.sort_custom(func(a, b):
-		var seq_a = a.sequence if a.has_method("get") else 10
-		var seq_b = b.sequence if b.has_method("get") else 10
+		var seq_a = _get_sequence(a)
+		var seq_b = _get_sequence(b)
 		return seq_a > seq_b
 	)
+	
+	print("CombatSystem: Ordem de turno calculada:")
+	for i in range(turn_order.size()):
+		var c = turn_order[i]
+		print("  ", i + 1, ". ", c.name, " (Sequence: ", _get_sequence(c), ")")
+
+func _get_sequence(combatant: Node) -> int:
+	"""
+	Calcula Sequence de um combatente
+	Formula: Perception * 2
+	"""
+	if combatant.has("sequence"):
+		return combatant.sequence
+	elif combatant.has("perception"):
+		return combatant.perception * 2
+	else:
+		return 10  # Valor padrão
 
 # === TURNOS ===
 
@@ -132,18 +153,39 @@ func end_turn():
 	_start_turn(next)
 
 func _check_combat_end() -> bool:
-	"""Verifica se o combate deve terminar"""
-	# Remover mortos
+	"""
+	Verifica se o combate deve terminar
+	Condições:
+	- Todos os inimigos estão mortos (HP <= 0)
+	- Player está morto
+	"""
 	var alive_enemies = 0
 	var player_alive = false
 	
 	for c in combatants:
+		var is_alive = _is_combatant_alive(c)
+		
 		if c == player:
-			player_alive = c.hp > 0 if c.has_method("get") else true
-		elif c.hp > 0 if c.has_method("get") else true:
+			player_alive = is_alive
+		elif is_alive:
 			alive_enemies += 1
 	
-	return not player_alive or alive_enemies == 0
+	# Combate termina se player morreu OU todos inimigos morreram
+	var should_end = not player_alive or alive_enemies == 0
+	
+	if should_end:
+		if not player_alive:
+			print("CombatSystem: Player morreu - Combate terminado")
+		elif alive_enemies == 0:
+			print("CombatSystem: Todos inimigos derrotados - Combate terminado")
+	
+	return should_end
+
+func _is_combatant_alive(combatant: Node) -> bool:
+	"""Verifica se um combatente está vivo"""
+	if combatant.has("hp"):
+		return combatant.hp > 0
+	return true  # Se não tem HP, assume vivo
 
 # === ACOES DE COMBATE ===
 
@@ -201,39 +243,75 @@ func perform_attack(attacker: Node, target: Node, weapon = null):
 	
 	current_state = CombatState.PLAYER_TURN if turn_order[current_combatant_index] == player else CombatState.ENEMY_TURN
 
-func _calculate_hit_chance(attacker: Node, target: Node, _weapon) -> int:
-	"""Calcula chance de acerto (igual ao original)"""
-	# Base: skill de arma (simplificado para 50%)
-	var base_chance = 50
+func _calculate_hit_chance(attacker: Node, target: Node, weapon) -> int:
+	"""
+	Calcula chance de acerto (fórmula fiel ao Fallout 2)
+	Formula: Hit = Skill - (Distance * 4) - Target_AC + (Perception * 2)
+	Clamped entre 5% e 95%
+	"""
+	# Skill de arma (simplificado - em produção viria do personagem)
+	var weapon_skill = 50
+	if attacker.has("weapon_skill"):
+		weapon_skill = attacker.weapon_skill
+	elif weapon and weapon.has("skill_type"):
+		# Poderia buscar skill específica do personagem
+		weapon_skill = 50
 	
-	# Modificadores
-	var attacker_perception = attacker.perception if attacker.has_method("get") else 5
-	var target_ac = target.armor_class if target.has_method("get") else 0
+	# Perception do atacante
+	var attacker_perception = attacker.perception if attacker.has("perception") else 5
 	
-	# Distancia
-	var dist = attacker.global_position.distance_to(target.global_position) / 32  # Em hexes
-	var dist_penalty = int(dist) * 4
+	# Armor Class do alvo
+	var target_ac = target.armor_class if target.has("armor_class") else 0
 	
-	# Calcular final
-	var final_chance = base_chance + (attacker_perception * 2) - target_ac - dist_penalty
-	return clamp(final_chance, 5, 95)
+	# Distância em hexes
+	var distance_pixels = attacker.global_position.distance_to(target.global_position)
+	var distance_hexes = int(distance_pixels / 32.0)  # 32 pixels por hex
+	var distance_penalty = distance_hexes * 4
+	
+	# Fórmula do Fallout 2
+	var hit_chance = weapon_skill - distance_penalty - target_ac + (attacker_perception * 2)
+	
+	# Clampar entre 5% e 95%
+	return clamp(hit_chance, 5, 95)
 
-func _calculate_damage(attacker: Node, target: Node, _weapon) -> int:
-	"""Calcula dano (igual ao original)"""
-	# Dano base da arma (simplificado)
-	var base_damage = 5
+func _calculate_damage(attacker: Node, target: Node, weapon) -> int:
+	"""
+	Calcula dano (fórmula fiel ao Fallout 2)
+	Formula: Damage = Weapon_Damage + Strength_Bonus - (DR * Damage / 100)
+	Mínimo de 1 de dano
+	"""
+	# Dano base da arma
+	var weapon_damage = 5  # Padrão
+	if weapon and weapon.has("damage"):
+		weapon_damage = weapon.damage
+	elif weapon and weapon.has("damage_min") and weapon.has("damage_max"):
+		weapon_damage = randi_range(weapon.damage_min, weapon.damage_max)
 	
-	# Adicionar melee damage se corpo a corpo
-	var melee_bonus = attacker.melee_damage if attacker.has_method("get") else 0
+	# Bônus de força (melee damage)
+	var strength_bonus = 0
+	if attacker.has("melee_damage"):
+		strength_bonus = attacker.melee_damage
+	elif attacker.has("strength"):
+		# Calcular melee damage: max(1, Strength - 5)
+		strength_bonus = max(0, attacker.strength - 5)
 	
-	# Variacao aleatoria
-	var damage = base_damage + melee_bonus + (randi() % 5)
+	# Dano total antes da redução
+	var total_damage = weapon_damage + strength_bonus
 	
-	# Reducao por armadura
-	var dr = target.armor_class if target.has_method("get") else 0
-	damage = max(1, damage - (dr / 5))
+	# Damage Resistance (DR) do alvo
+	var target_dr = 0
+	if target.has("damage_resistance"):
+		target_dr = target.damage_resistance
+	elif target.has("armor_class"):
+		# Simplificação: AC/2 = DR aproximado
+		target_dr = target.armor_class / 2
 	
-	return damage
+	# Aplicar DR: Damage = Damage - (DR * Damage / 100)
+	var dr_reduction = (target_dr * total_damage) / 100
+	var final_damage = total_damage - dr_reduction
+	
+	# Mínimo de 1 de dano
+	return max(1, int(final_damage))
 
 func _on_combatant_death(combatant: Node):
 	"""Chamado quando um combatente morre"""

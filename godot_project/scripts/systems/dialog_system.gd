@@ -131,18 +131,77 @@ func _get_current_node() -> Dictionary:
 	return {}
 
 func _process_text(text: String) -> String:
-	"""Processa texto substituindo variaveis"""
+	"""
+	Processa texto substituindo variaveis
+	Suporta placeholders {var_name} e $VAR_NAME
+	"""
 	if not player:
 		return text
 	
-	# Substituir variaveis comuns
-	text = text.replace("$PLAYER_NAME", "Chosen One")
-	text = text.replace("$NPC_NAME", current_npc.name if current_npc else "NPC")
+	# Substituir variaveis com formato {var_name}
+	var regex = RegEx.new()
+	regex.compile("\\{([^}]+)\\}")
+	var result = regex.search_all(text)
+	
+	for match in result:
+		var var_name = match.get_string(1)
+		var value = _get_variable_value(var_name)
+		text = text.replace("{" + var_name + "}", str(value))
+	
+	# Substituir variaveis com formato $VAR_NAME (legado)
+	text = text.replace("$PLAYER_NAME", _get_variable_value("player_name"))
+	text = text.replace("$NPC_NAME", _get_variable_value("npc_name"))
 	
 	return text
 
+func _get_variable_value(var_name: String) -> String:
+	"""
+	Retorna valor de uma variavel do game state
+	Suporta player stats, inventario, flags, etc
+	"""
+	if not player:
+		return ""
+	
+	# Variaveis do player
+	match var_name:
+		"player_name":
+			return player.get("name") if player.has("name") else "Chosen One"
+		"npc_name":
+			return current_npc.name if current_npc else "NPC"
+		"player_level":
+			return str(player.get("level") if player.has("level") else 1)
+		"player_hp":
+			return str(player.get("hp") if player.has("hp") else 0)
+		"player_max_hp":
+			return str(player.get("max_hp") if player.has("max_hp") else 0)
+		"player_strength":
+			return str(player.get("strength") if player.has("strength") else 0)
+		"player_perception":
+			return str(player.get("perception") if player.has("perception") else 0)
+		"player_endurance":
+			return str(player.get("endurance") if player.has("endurance") else 0)
+		"player_charisma":
+			return str(player.get("charisma") if player.has("charisma") else 0)
+		"player_intelligence":
+			return str(player.get("intelligence") if player.has("intelligence") else 0)
+		"player_agility":
+			return str(player.get("agility") if player.has("agility") else 0)
+		"player_luck":
+			return str(player.get("luck") if player.has("luck") else 0)
+		_:
+			# Tentar obter do player diretamente
+			if player.has(var_name):
+				return str(player.get(var_name))
+			
+			# Tentar obter de flags globais (TODO: implementar)
+			# Por enquanto, retornar vazio
+			return ""
+
 func _execute_option_actions(option: Dictionary):
-	"""Executa acoes de uma opcao"""
+	"""
+	Executa acoes de uma opcao
+	Suporta: dar/remover item, XP, reputacao, iniciar combate, abrir comercio
+	"""
 	var actions = option.get("actions", [])
 	
 	for action in actions:
@@ -155,10 +214,14 @@ func _execute_option_actions(option: Dictionary):
 				_action_take_item(action)
 			"give_xp":
 				_action_give_xp(action)
+			"give_reputation":
+				_action_give_reputation(action)
 			"set_flag":
 				_action_set_flag(action)
 			"start_combat":
 				_action_start_combat()
+			"open_trade":
+				_action_open_trade()
 
 func _action_give_item(action: Dictionary):
 	"""Da item ao player"""
@@ -182,10 +245,23 @@ func _action_give_xp(action: Dictionary):
 		var amount = action.get("amount", 0)
 		player.add_experience(amount)
 
+func _action_give_reputation(action: Dictionary):
+	"""Da reputacao ao player com uma faccao"""
+	var faction = action.get("faction", "")
+	var amount = action.get("amount", 0)
+	
+	# TODO: Implementar sistema de reputacao completo
+	# Por enquanto, apenas log
+	print("DialogSystem: Reputacao +", amount, " com ", faction)
+
 func _action_set_flag(action: Dictionary):
 	"""Define uma flag global"""
-	# TODO: Implementar sistema de flags
-	pass
+	var flag_name = action.get("flag", "")
+	var value = action.get("value", true)
+	
+	# TODO: Implementar sistema de flags global
+	# Por enquanto, apenas log
+	print("DialogSystem: Flag '", flag_name, "' = ", value)
 
 func _action_start_combat():
 	"""Inicia combate com NPC"""
@@ -193,6 +269,12 @@ func _action_start_combat():
 	var combat = get_node_or_null("/root/CombatSystem")
 	if combat and current_npc:
 		combat.start_combat([current_npc])
+
+func _action_open_trade():
+	"""Abre interface de comercio com NPC"""
+	# TODO: Implementar sistema de comercio
+	# Por enquanto, apenas log
+	print("DialogSystem: Abrindo comercio com ", current_npc.name if current_npc else "NPC")
 
 # === UTILIDADES ===
 
@@ -215,27 +297,102 @@ func get_current_options() -> Array:
 	return filtered
 
 func _check_option_conditions(option: Dictionary) -> bool:
-	"""Verifica se opcao esta disponivel"""
-	var conditions = option.get("conditions", [])
+	"""
+	Verifica se opcao esta disponivel baseado em requisitos
+	Checa skill, stat, item, reputacao
+	"""
+	var requirements = option.get("requirements", [])
+	if requirements.is_empty():
+		# Sem requisitos, opcao sempre disponivel
+		return true
 	
-	for cond in conditions:
-		var cond_type = cond.get("type", "")
+	for req in requirements:
+		var req_type = req.get("type", "")
 		
-		match cond_type:
-			"has_item":
-				var inv = get_node_or_null("/root/InventorySystem")
-				if inv and not inv.has_item(cond.get("item_id", "")):
+		match req_type:
+			"skill":
+				# Verificacao de skill (ex: Speech, Lockpick, etc)
+				if not _check_skill_requirement(req):
 					return false
-			"skill_check":
-				# TODO: Implementar verificacao de skill
-				pass
-			"stat_check":
-				if player:
-					var stat = cond.get("stat", "")
-					var min_val = cond.get("min", 0)
-					if player.has_method("get") and player.get(stat) < min_val:
-						return false
+			
+			"stat":
+				# Verificacao de stat SPECIAL
+				if not _check_stat_requirement(req):
+					return false
+			
+			"item":
+				# Verificacao de item no inventario
+				if not _check_item_requirement(req):
+					return false
+			
+			"reputation":
+				# Verificacao de reputacao com faccao
+				if not _check_reputation_requirement(req):
+					return false
+			
+			"flag":
+				# Verificacao de flag global
+				if not _check_flag_requirement(req):
+					return false
 	
+	return true
+
+func _check_skill_requirement(req: Dictionary) -> bool:
+	"""Verifica requisito de skill"""
+	if not player:
+		return false
+	
+	var skill_name = req.get("skill", "")
+	var min_value = req.get("min", 0)
+	
+	# TODO: Implementar sistema de skills completo
+	# Por enquanto, usar stats como fallback
+	if player.has(skill_name):
+		return player.get(skill_name) >= min_value
+	
+	return false
+
+func _check_stat_requirement(req: Dictionary) -> bool:
+	"""Verifica requisito de stat SPECIAL"""
+	if not player:
+		return false
+	
+	var stat_name = req.get("stat", "")
+	var min_value = req.get("min", 0)
+	
+	if player.has(stat_name):
+		return player.get(stat_name) >= min_value
+	
+	return false
+
+func _check_item_requirement(req: Dictionary) -> bool:
+	"""Verifica requisito de item"""
+	var inv = get_node_or_null("/root/InventorySystem")
+	if not inv:
+		return false
+	
+	var item_id = req.get("item_id", "")
+	var quantity = req.get("quantity", 1)
+	
+	return inv.has_item(item_id, quantity)
+
+func _check_reputation_requirement(req: Dictionary) -> bool:
+	"""Verifica requisito de reputacao"""
+	# TODO: Implementar sistema de reputacao completo
+	# Por enquanto, sempre retorna true
+	var faction = req.get("faction", "")
+	var min_reputation = req.get("min", 0)
+	
+	# Placeholder - implementar quando sistema de reputacao existir
+	return true
+
+func _check_flag_requirement(req: Dictionary) -> bool:
+	"""Verifica requisito de flag global"""
+	var flag_name = req.get("flag", "")
+	var required_value = req.get("value", true)
+	
+	# TODO: Implementar sistema de flags global
+	# Por enquanto, sempre retorna true
 	return true
 
 # === CRIACAO DE DIALOGOS (para testes) ===

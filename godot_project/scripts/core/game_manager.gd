@@ -47,7 +47,34 @@ func _ready():
 	print("GameManager: Inicializando Fallout 2 Godot Edition")
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
+	# Conectar sinais do InputManager
+	_connect_input_signals()
+	
 	# Aguardar cena estar pronta
+
+func _connect_input_signals():
+	"""Conecta sinais do InputManager para controle do jogo"""
+	var input_manager = get_node_or_null("/root/InputManager")
+	if input_manager:
+		input_manager.left_click_tile.connect(_on_click_tile)
+		input_manager.left_click_object.connect(_on_click_object)
+		print("GameManager: Sinais do InputManager conectados")
+
+func _on_click_tile(tile_pos: Vector2i, _elevation: int):
+	"""Callback quando jogador clica em um tile"""
+	if current_state != GameState.PLAYING:
+		return
+	
+	if player != null and player.has_method("move_to_tile"):
+		player.move_to_tile(tile_pos)
+
+func _on_click_object(object: Node):
+	"""Callback quando jogador clica em um objeto"""
+	if current_state != GameState.PLAYING:
+		return
+	
+	print("GameManager: Click em objeto - ", object.name)
+	# Aqui pode adicionar lógica de interação
 	await get_tree().process_frame
 	_initialize_game()
 
