@@ -1,0 +1,8 @@
+ // Map vars for NCR area 4 Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+MVAR_V13_Exit_Visible                   :=0;    //(0)

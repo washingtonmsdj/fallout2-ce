@@ -1,0 +1,21 @@
+ // Map vars for Den Business area 2 Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+
+MVAR_Map_Guard_Count                         :=0;     //      (0)
+MVAR_Current_Patrol_Guard                    :=0;     //      (1)
+MVAR_Next_Patrol_Time                        :=0;     //      (2)
+MVAR_Dead_Guard                              :=0;     //      (3)
+MVAR_Church_Guard_Said_Warning               :=0;     //      (4)
+MVAR_Church_Door_Guard_Count                 :=0;     //      (5)
+MVAR_DEN_CHURCH_DOOR_TAMPER                  :=0;     //      (6)
+MVAR_Caesar_Call_Guards                      :=0;     //      (7)
+MVAR_den_billy_tile                          :=0;     //      (8)
+MVAR_told_billy_to_split                     :=0;     //      (9)
+MVAR_said_borrow_from_frankie                :=0;     //      (10)
+MVAR_Frankie_Heard_Borrow                    :=0;     //      (11)
+MVAR_Sheila_Visible                          :=0;     //      (12)

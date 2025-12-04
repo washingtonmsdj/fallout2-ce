@@ -1,0 +1,9 @@
+ // Map vars for Modoc main area Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+
+MVAR_Made_Car                   :=0;    //      (0)

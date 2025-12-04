@@ -1,0 +1,9 @@
+ // Map vars for Vault City Council Area
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+
+MVAR_Bribe                     :=0;            //      (0)

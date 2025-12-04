@@ -1,0 +1,17 @@
+ // Map vars for Arroyo Garden Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+
+MVAR_Picking_Front_Gate                 :=0;      //  (0)
+MVAR_Stealing_From_Darrow               :=0;      //  (1)
+MVAR_Stealing_From_Farrell              :=0;      //  (2)
+MVAR_Guard_Alert                        :=0;      //  (3)
+MVAR_Skeeve_Dead                        :=0;      //  (4)
+MVAR_Vault_Guard_Count                  :=0;      //  (5)
+MVAR_Gate_Guard_Count                   :=0;      //  (6)
+MVAR_Barkus_Dead                        :=0;      //  (7)
+MVAR_Player_As_Slave                    :=0;      //  (8)

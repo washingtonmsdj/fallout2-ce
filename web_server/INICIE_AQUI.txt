@@ -1,0 +1,52 @@
+========================================
+🚀 COMO INICIAR O SERVIDOR
+========================================
+
+MÉTODO 1 - MAIS FÁCIL (Duplo Clique):
+--------------------------------------
+1. Clique duas vezes em: start.bat
+
+
+MÉTODO 2 - Python Direto:
+--------------------------
+1. Abra o terminal aqui
+2. Execute: python iniciar_servidor.py
+
+
+MÉTODO 3 - Servidor Original:
+------------------------------
+1. Execute: python server.py
+
+
+========================================
+✅ DEPOIS DE INICIAR:
+========================================
+
+Abra no navegador:
+http://localhost:8000/fallout_game_web.html
+
+OU
+
+http://localhost:8000/
+
+
+========================================
+❌ SE NÃO FUNCIONAR:
+========================================
+
+1. Verifique se Python está instalado:
+   python --version
+
+2. Verifique se a porta 8000 está livre:
+   netstat -an | findstr ":8000"
+
+3. Tente outra porta:
+   - Edite iniciar_servidor.py
+   - Mude PORT = 8000 para PORT = 8080
+   - Acesse: http://localhost:8080/
+
+
+========================================
+🎮 PRONTO!
+========================================
+

@@ -1,0 +1,10 @@
+ // Map vars for Arroyo Village Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+
+MVAR_Made_Car                           :=0;    // 0
+MVAR_Hostile_Total                      :=0;    // 1

@@ -1,0 +1,10 @@
+ // Map vars for Modoc Inn area Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+
+MVAR_WALL_SAFE                                  :=0;     //      (0)
+MVAR_LOST_AND_FOUND                             :=0;     //      (1)

@@ -1,0 +1,159 @@
+
+========================================
+== GOG.com End-User License Agreement ==
+========================================
+
+Your use of this product/service is subject to the GOG User Agreement. Copy and paste this link to your browser to check it out: http://www.gog.com/support/policies/gog_user_agreement
+
+========================================
+======= Inno Setup License Terms =======
+========================================
+
+Except where otherwise noted, all of the documentation and software included
+in the Inno Setup package is copyrighted by Jordan Russell.
+
+Copyright (C) 1997-2008 Jordan Russell. All rights reserved.
+
+This software is provided "as-is," without any express or implied warranty.
+In no event shall the author be held liable for any damages arising from the
+use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter and redistribute it,
+provided that the following conditions are met:
+
+1. All redistributions of source code files must retain all copyright
+   notices that are currently in place, and this list of conditions without
+   modification.
+
+2. All redistributions in binary form must retain all occurrences of the
+   above copyright notice and web site addresses that are currently in
+   place (for example, in the About boxes).
+
+3. The origin of this software must not be misrepresented; you must not
+   claim that you wrote the original software. If you use this software to
+   distribute a product, an acknowledgment in the product documentation
+   would be appreciated but is not required.
+
+4. Modified versions in source or binary form must be plainly marked as
+   such, and must not be misrepresented as being the original software.
+
+
+Jordan Russell
+jr-2008 AT jrsoftware.org
+http://www.jrsoftware.org/
+
+
+========================================
+===== .Net Framework License terms =====
+========================================
+
+Microsoft .NET Framework Redistributable EULA 
+SUPPLEMENTAL END-USER LICENSE AGREEMENT FOR MICROSOFT SOFTWARE  
+  
+IMPORTANT: READ CAREFULLY—These Microsoft Corporation ("Microsoft") operating system components, including any "online" or electronic documentation ("OS Components") are subject to the terms and conditions of the agreement under which you have licensed the applicable Microsoft operating system product ("OS Product") described below (each an "End User License Agreement" or "EULA") and the terms and conditions of this Supplemental EULA. BY INSTALLING, COPYING OR OTHERWISE USING THE OS COMPONENTS, YOU AGREE TO BE BOUND BY THE TERMS AND CONDITIONS OF THE APPLICABLE OS PRODUCT EULA AND THIS SUPPLEMENTAL EULA. IF YOU DO NOT AGREE TO THESE TERMS AND CONDITIONS, DO NOT INSTALL, COPY OR USE THE OS COMPONENTS. 
+NOTE: IF YOU DO NOT HAVE A VALID EULA FOR ANY "OS PRODUCT" (MICROSOFT WINDOWS 98, WINDOWS ME, WINDOWS NT 4.0 (DESKTOP EDITION), WINDOWS 2000 OPERATING SYSTEM, WINDOWS XP PROFESSIONAL AND/OR WINDOWS XP HOME EDITION), YOU ARE NOT AUTHORIZED TO INSTALL, COPY OR OTHERWISE USE THE OS COMPONENTS AND YOU HAVE NO RIGHTS UNDER THIS SUPPLEMENTAL EULA. 
+Capitalized terms used in this Supplemental EULA and not otherwise defined herein shall have the meanings assigned to them in the applicable OS Product EULA. 
+General. The OS Components are provided to you by Microsoft to update, supplement, or replace existing functionality of the applicable OS Product Microsoft grants you a license to use the OS Components under the terms and conditions of the OS Product EULA for the applicable OS Product (which are hereby incorporated by reference) and the terms and conditions set forth in this Supplemental EULA, provided that you comply with all such terms and conditions. To the extent that any terms in this Supplemental EULA conflict with terms in the applicable OS Product EULA, the terms of this Supplemental EULA control solely with respect to the OS Components. 
+Additional Rights and Limitations.  
+*If you have multiple validly licensed copies of the applicable OS Product(s), you may reproduce, install and use one copy of the OS Components as part of such applicable OS Product(s) on all of your computers running validly licensed copies of the OS Product(s) provided that you use such additional copies of the OS Components in accordance with the terms and conditions above.  
+*You may conduct internal benchmark testing of the .NET Framework component of the OS Components (".NET Component"). You may disclose the results of any benchmark test of the .NET Component, provided that you comply with the following terms: (1) you must disclose all the information necessary for replication of the tests, including complete and accurate details of your benchmark testing methodology, the test scripts/cases, tuning parameters applied, hardware and software platforms tested, the name and version number of any third party testing tool used to conduct the testing, and complete source code for the benchmark suite/harness that is developed by or for you and used to test both the .NET Component and the competing implementation(s); (2) you must disclose the date(s) that you conducted the benchmark tests, along with specific version information for all Microsoft software products tested, including the .NET Component; (3) your benchmark testing was performed using all performance tuning and best practice guidance set forth in the product documentation and/or on Microsoft's support web sites, and uses the latest updates, patches and fixes available for the .NET Component and the relevant Microsoft operating system; (4) it shall be sufficient if you make the disclosures provided for above at a publicly available location such as a website, so long as every public disclosure of the results of your benchmark test expressly identifies the public site containing all required disclosures; and (5) nothing in this provision shall be deemed to waive any other right that you may have to conduct benchmark testing. The foregoing obligations shall not apply to your disclosure of the results of any customized benchmark test of the .NET Component, whereby such disclosure is made under confidentiality in conjunction with a bid request by a prospective customer, such customer's application(s) are specifically tested and the results are only disclosed to such specific customer. 
+Notwithstanding any other agreement you may have with Microsoft, if you disclose such benchmark test results, Microsoft shall have the right to disclose the results of benchmark tests it conducts of your products that compete with the .NET Component, provided it complies with the same conditions above. 
+rights not expressly granted are reserved by Microsoft. 
+IF THE APPLICABLE OS PRODUCT WAS LICENSED TO YOU BY MICROSOFT OR ANY OF ITS WHOLLY OWNED SUBSIDIARIES, THE LIMITED WARRANTY (IF ANY) INCLUDED IN THE APPLICABLE OS PRODUCT EULA APPLIES TO THE OS COMPONENTS PROVIDED THE OS COMPONENTS HAVE BEEN LICENSED BY YOU WITHIN THE TERM OF THE LIMITED WARRANTY IN THE APPLICABLE OS PRODUCT EULA. HOWEVER, THIS SUPPLEMENTAL EULA DOES NOT EXTEND THE TIME PERIOD FOR WHICH THE LIMITED WARRANTY IS PROVIDED. 
+IF THE APPLICABLE OS PRODUCT WAS LICENSED TO YOU BY AN ENTITY OTHER THAN MICROSOFT OR ANY OF ITS WHOLLY OWNED SUBSIDIARIES, MICROSOFT DISCLAIMS ALL WARRANTIES WITH RESPECT TO THE OS COMPONENTS AS FOLLOWS: 
+DISCLAIMER OF WARRANTIES. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, MICROSOFT AND ITS SUPPLIERS PROVIDE TO YOU THE OS COMPONENTS, AND ANY (IF ANY) SUPPORT SERVICES RELATED TO THE OS COMPONENTS ("SUPPORT SERVICES") AS IS AND WITH ALL FAULTS; and Microsoft and its suppliers hereby disclaim with respect to THE os COMPONENTS AND SUPPORT SERVICES all warranties and conditions, whether express, implied or statutory, including, but not limited to, any (if any) warranties or conditions of OR RELATED TO: TITLE, NON-INFRINGEMENT, merchantability, fitness for a particular purpose, lack of viruses, accuracy or completeness of responses, results, lack of negligence or lack of workmanlike effort, QUIET ENJOYMENT, QUIET POSSESSION, AND CORRESPONDENCE TO DESCRIPTION. The entire risk arising out of use or performance of the OS Components AND ANY SUPPORT SERVICES remains with you.
+EXCLUSION OF INCIDENTAL, CONSEQUENTIAL AND CERTAIN OTHER DAMAGES. To the maximum extent permitted by applicable law, in no event shall Microsoft or its suppliers be liable for any special, incidental, indirect, or consequential damages whatsoever (including, but not limited to, damages for: 
+loss of profits, LOSS OF confidential or other information, business interruption, personal injury, loss of privacy, failure to meet any duty (including of good faith or of reasonable care), negligence, and any other pecuniary or other loss whatsoever) arising out of or in any way related to the use of or inability to use the OS Components OR THE SUPPORT SERVICES, OR the provision of or failure to provide Support Services, or otherwise under or in connection with any provision of this Supplemental EULA, even if Microsoft or any supplier has been advised of the possibility of such damages. 
+LIMITATION OF LIABILITY AND REMEDIES. NOTWITHSTANDING ANY DAMAGES THAT YOU MIGHT INCUR FOR ANY REASON WHATSOEVER (INCLUDING, WITHOUT LIMITATION, ALL DAMAGES REFERENCED ABOVE AND ALL DIRECT OR GENERAL DAMAGES), THE ENTIRE LIABILITY OF MICROSOFT AND ANY OF ITS SUPPLIERS UNDER ANY PROVISION OF THIS SUPPLEMENTAL EULA AND YOUR EXCLUSIVE REMEDY FOR ALL OF THE FOREGOING SHALL BE LIMITED TO THE GREATER OF THE AMOUNT ACTUALLY PAID BY YOU FOR THE OS COMPONENTS OR U.S.$5.00. THE FOREGOING LIMITATIONS, EXCLUSIONS AND DISCLAIMERS SHALL APPLY TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, EVEN IF ANY REMEDY FAILS ITS ESSENTIAL PURPOSE.
+Si vous avez acquis votre produit Microsoft au CANADA, le texte suivant vous concerne : 
+SI LE PRODUIT OS APPLICABLE VOUS A ÉTÉ CONCÉDÉ SOUS LICENCE PAR MICROSOFT OU PAR L'UNE QUELCONQUE DE SES FILIALES A 100%, LA GARANTIE LIMITÉE (SI ELLE EXISTE) APPLICABLE EN VERTU DU CONTRAT DE LICENCE UTILISATEUR FINAL (« CLUF ») RELATIF A CE PRODUIT OS S'APPLIQUE AUX COMPOSANTS SYSTEME D'EXPLOITATION DE MICROSOFT Y COMPRIS TOUTE DOCUMENTATION « EN LIGNE » OU SOUS FORME ÉLECTRONIQUE (LES « COMPOSANTS OS »), A CONDITION QUE CEUX-CI VOUS AIENT ÉTÉ CONCÉDÉS SOUS LICENCE PENDANT LA DURÉE DE LA GARANTIE LIMITÉE DU CLUF RELATIF AU PRODUIT OS APPLICABLE. LE PRÉSENT CLUF SUPPLÉMENTAIRE N'A PAS POUR EFFET DE PROROGER LA DURÉE DE CETTE GARANTIE LIMITÉE. 
+SI LE PRODUIT OS VOUS A ÉTÉ CONCÉDÉ SOUS LICENCE PAR UNE ENTITÉ AUTRE QUE MICROSOFT OU QUE L'UNE QUELCONQUE DE SES FILIALES A 100%, MICROSOFT EXCLUT TOUTE GARANTIE RELATIVE AUX COMPOSANTS OS COMME CELA EST STIPULÉ CI-APRES : 
+EXCLUSION DE GARANTIE. DANS TOUTE LA MESURE PERMISE PAR LE DROIT APPLICABLE, MICROSOFT ET SES FOURNISSEURS VOUS FOURNISSENT LES COMPOSANTS OS, AINSI QUE, LE CAS ÉCHÉANT, TOUT SERVICE D'ASSISTANCE RELATIF A CES COMPOSANTS OS (LES "SERVICES D'ASSISTANCE"), « COMME TELS ET AVEC TOUS LEURS DEFAUTS ». EN OUTRE, MICROSOFT ET SES FOURNISSEURS EXCLUENT PAR LES PRÉSENTES TOUTE AUTRE Microsoft .NET Framework Redistributable EULA (.NET Framework Deployment) 10/25/2006
+http://msdn.microsoft.com/libra... 2GARANTIE LÉGALE, EXPRESSE OU IMPLICITE, RELATIVE AUX COMPOSANTS OS ET AUX SERVICES D'ASSISTANCE, NOTAMMENT (LE CAS ÉCHÉANT), TOUTE GARANTIE : DE PROPRIÉTÉ, D'ABSENCE DE CONTREFAÇON, DE QUALITÉ, D'ADAPTATION A UN USAGE PARTICULIER, D'ABSENCE DE VIRUS, DE PRÉCISION, D'EXHAUSTIVITÉ DES RÉPONSES, DES RÉ;SULTATS OBTENUS, D'ABSENCE DE NÉGLIGENCE, OU DE DÉFAUT DE FABRICATION, DE JOUISSANCE PAISIBLE, D'ABSENCE DE TROUBLE DE POSSESSION ET DE CONFORMITÉ A LA DESCRIPTION. VOUS ASSUMEZ L'ENSEMBLE DES RISQUES DÉCOULANT DE L'UTILISATION OU DU FONCTIONNEMENT DES COMPOSANTS OS ET DES SERVICES D'ASSISTANCE. 
+EXCLUSION DE RESPONSABILITÉ POUR LES DOMMAGES ACCESSOIRES, INDIRECTS ET CERTAINS AUTRES TYPES DE DOMMAGES. DANS TOUTE LA MESURE PERMISE PAR LE DROIT APPLICABLE, MICROSOFT OU SES FOURNISSEURS NE POURRONT EN AUCUN CAS ETRE TENUS RESPONSABLES DE TOUT DOMMAGE SPÉCIAL, ACCESSOIRE, INCIDENT OU INDIRECT DE QUELQUE NATURE QUE CE SOIT (Y COMPRIS, MAIS NON DE FACON LIMITATIVE, LES PERTES DE BÉNÉFICES, PERTES D'INFORMATIONS CONFIDENTIELLES OU AUTRES INFORMATIONS, INTERRUPTIONS D'ACTIVITÉ, PRÉJUDICES CORPORELS, ATTEINTES A LA VIE PRIVÉE, MANQUEMENT A TOUTE OBLIGATION (NOTAMMENT L'OBLIGATION DE BONNE FOI ET DE DILIGENCE), NÉGLIGENCE, ET POUR TOUTE PERTE PÉCUNIAIRE OU AUTRE DE QUELQUE NATURE QUE CE SOIT), RÉSULTANT DE, OU RELATIFS A, L'UTILISATION OU L'IMPOSSIBILITÉ D'UTILISER LES COMPOSANTS OS OU LES SERVICES D'ASSISTANCE, OU LA FOURNITURE OU LE DÉFAUT DE FOURNITURE DES SERVICES D'ASSISTANCE, OU AUTREMENT EN VERTU DE, OU RELATIVEMENT A, TOUTE DISPOSITION DE CE CLUF SUPPLÉMENTAIRE, MEME SI LA SOCIÉTÉ MICROSOFT OU UN QUELCONQUE FOURNISSEUR A ÉTÉ PRÉVENU DE L'ÉVENTUALITÉ DE TELS DOMMAGES. 
+LIMITATION DE RESPONSABILITÉ ET RECOURS. NONOBSTANT TOUT DOMMAGE QUE VOUS POURRIEZ SUBIR POUR QUELQUE MOTIF QUE CE SOIT (NOTAMMENT TOUS LES DOMMAGES ÉNUMÉ;RÉS CI-DESSUS ET TOUS LES DOMMAGES DIRECTS OU GÉNÉRAUX), L'ENTIERE RESPONSABILITÉ DE MICROSOFT ET DE L'UN QUELCONQUE DE SES FOURNISSEURS AU TITRE DE TOUTE STIPULATION DE CE CLUF SUPPLÉMENTAIRE ET VOTRE SEUL RECOURS EN CE QUI CONCERNE TOUS LES DOMMAGES PRÉCITÉS NE SAURAIENT EXCÉDER LE MONTANT QUE VOUS AVEZ EFFECTIVEMENT PAYÉ POUR LES COMPOSANTS OS OU 5 DOLLARS US (US$ 5,00), SELON LE PLUS ÉLEVÉ DES DEUX MONTANTS. LES PRÉSENTES LIMITATIONS ET EXCLUSIONS DEMEURERONT APPLICABLES DANS TOUTE LA MESURE PERMISE PAR LE DROIT APPLICABLE QUAND BIEN MEME UN QUELCONQUE REMEDE A UN QUELCONQUE MANQUEMENT NE PRODUIRAIT PAS D'EFFET. 
+La présente Convention est ré;gie par les lois de la province d'Ontario, Canada. Chacune des parties a la présente reconnaît irrévocablement la compétence des tribunaux de la province d'Ontario et consent a instituer tout litige qui pourrait découler de la présente aupres des tribunaux situés dans le district judiciaire de York, province d'Ontario. 
+Au cas ou vous auriez des questions concernant cette licence ou que vous dé;siriez vous mettre en rapport avec Microsoft pour quelque raison que ce soit, veuillez contacter la succursale Microsoft desservant votre pays, ou écrire a : Microsoft Sales Information Center, One Microsoft Way, Redmond, Washington 98052-6399. 
+
+========================================
+=== MICROSOFT SOFTWARE LICENSE TERMS ===
+========================================
+
+MICROSOFT SOFTWARE LICENSE TERMS
+MICROSOFT DIRECTX SOFTWARE DEVELOPMENT KIT (SDK)
+These license terms are an agreement between Microsoft Corporation (or based on where you live, one of its affiliates) and you.  Please read them.  They apply to the software named above, which includes the media on which you received it, if any.  The terms also apply to any Microsoft
+•	updates,
+•	supplements,
+•	Internet-based services, and 
+•	support services
+for this software, unless other terms accompany those items.  If so, those terms apply.
+BY USING THE SOFTWARE, YOU ACCEPT THESE TERMS.  IF YOU DO NOT ACCEPT THEM, DO NOT USE THE SOFTWARE.
+If you comply with these license terms, you have the rights below.
+1.	INSTALLATION AND USE RIGHTS.  
+a.	Installation and Use.  You may install and use any number of copies of the software on your devices.
+b.	Included Microsoft Programs.  The software contains other Microsoft programs.  The license terms with those programs apply to your use of them.
+2.	ADDITIONAL LICENSING REQUIREMENTS AND/OR USE RIGHTS.
+a.	Media Elements and Templates.  You may copy and use images, clip art, animations, sounds, music, shapes, video clips and templates provided with the software and identified for such use in documents and projects that you create.  You may distribute those documents and projects non-commercially.  If you wish to use these media elements or templates for any other purpose, go to www.microsoft.com/permission to learn whether that use is allowed.
+b.	Distributable Code.  The software contains code that you are permitted to distribute in programs you develop if you comply with the terms below.
+i.	Right to Use and Distribute.  The code and text files listed below are “Distributable Code.”
+•	DIRECTX REDIST.TXT Files.  You may copy and distribute the object code form of code listed in DIRECTX REDIST.TXT files.
+•	Sample Code.  You may modify, copy, and distribute the source and object code form of code marked as “sample”, as well as those marked as follows:
+\Utilities\bin\x86\dxerr
+\Utilities\bin\x64\dxerr
+\Utilities\bin\x86\dxtex
+\Utilities\bin\x64\dxtex
+\Utilities\bin\x86\DxViewer
+\Utilities\bin\x64\DxViewer
+\Utilities\bin\x86\GDFTrace
+\Utilities\bin\x64\GDFTrace
+\Utilities\bin\x86\MeshConvert
+\Utilities\bin\x64\MeshConvert
+\Utilities\Source\Sas
+\Utilities\Source\Effects11
+•	Third Party Distribution.  You may permit distributors of your programs to copy and distribute the Distributable Code as part of those programs.
+ii.	Distribution Requirements.  For any Distributable Code you distribute, you must
+•	add significant primary functionality to it in your programs;
+•	require distributors and external end users to agree to terms that protect it at least as much as this agreement; 
+•	display your valid copyright notice on your programs; and
+•	indemnify, defend, and hold harmless Microsoft from any claims, including attorneys’ fees, related to the distribution or use of your programs.
+iii.	Distribution Restrictions.  You may not
+•	alter any copyright, trademark or patent notice in the Distributable Code; 
+•	use Microsoft’s trademarks in your programs’ names or in a way that suggests your programs come from or are endorsed by Microsoft; 
+•	distribute Distributable Code to run on a platform other than the Windows, Xbox and Windows Mobile platforms;
+•	include Distributable Code in malicious, deceptive or unlawful programs; or
+•	modify or distribute the source code of any Distributable Code so that any part of it becomes subject to an Excluded License.  An Excluded License is one that requires, as a condition of use, modification or distribution, that
+•	the code be disclosed or distributed in source code form; or 
+•	others have the right to modify it.
+3.	SCOPE OF LICENSE.  The software is licensed, not sold. This agreement only gives you some rights to use the software.  Microsoft reserves all other rights.  Unless applicable law gives you more rights despite this limitation, you may use the software only as expressly permitted in this agreement.  In doing so, you must comply with any technical limitations in the software that only allow you to use it in certain ways.    You may not
+•	disclose the results of any benchmark tests of the software to any third party without Microsoft’s prior written approval;
+•	work around any technical limitations in the software;
+•	reverse engineer, decompile or disassemble the software, except and only to the extent that applicable law expressly permits, despite this limitation;
+•	make more copies of the software than specified in this agreement or allowed by applicable law, despite this limitation;
+•	publish the software for others to copy;
+•	rent, lease or lend the software; or
+•	use the software for commercial software hosting services.
+4.	BACKUP COPY.  You may make one backup copy of the software.  You may use it only to reinstall the software.
+5.	DOCUMENTATION.  Any person that has valid access to your computer or internal network may copy and use the documentation for your internal, reference purposes.
+6.	EXPORT RESTRICTIONS.  The software is subject to United States export laws and regulations.  You must comply with all domestic and international export laws and regulations that apply to the software.  These laws include restrictions on destinations, end users and end use.  For additional information, see www.microsoft.com/exporting.
+7.	SUPPORT SERVICES. Because this software is “as is,” we may not provide support services for it.
+8.	ENTIRE AGREEMENT.  This agreement, and the terms for supplements, updates, Internet-based services and support services that you use, are the entire agreement for the software and support services.
+9.	APPLICABLE LAW.
+a.	United States.  If you acquired the software in the United States, Washington state law governs the interpretation of this agreement and applies to claims for breach of it, regardless of conflict of laws principles.  The laws of the state where you live govern all other claims, including claims under state consumer protection laws, unfair competition laws, and in tort.
+b.	Outside the United States.  If you acquired the software in any other country, the laws of that country apply.
+10.	LEGAL EFFECT.  This agreement describes certain legal rights.  You may have other rights under the laws of your country.  You may also have rights with respect to the party from whom you acquired the software.  This agreement does not change your rights under the laws of your country if the laws of your country do not permit it to do so.
+11.	DISCLAIMER OF WARRANTY.   THE SOFTWARE IS LICENSED “AS-IS.”  YOU BEAR THE RISK OF USING IT.  MICROSOFT GIVES NO EXPRESS WARRANTIES, GUARANTEES OR CONDITIONS.  YOU MAY HAVE ADDITIONAL CONSUMER RIGHTS UNDER YOUR LOCAL LAWS WHICH THIS AGREEMENT CANNOT CHANGE.  TO THE EXTENT PERMITTED UNDER YOUR LOCAL LAWS, MICROSOFT EXCLUDES THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
+12.	LIMITATION ON AND EXCLUSION OF REMEDIES AND DAMAGES.  YOU CAN RECOVER FROM MICROSOFT AND ITS SUPPLIERS ONLY DIRECT DAMAGES UP TO U.S. $5.00.  YOU CANNOT RECOVER ANY OTHER DAMAGES, INCLUDING CONSEQUENTIAL, LOST PROFITS, SPECIAL, INDIRECT OR INCIDENTAL DAMAGES.
+This limitation applies to
+•	anything related to the software, services, content (including code) on third party Internet sites, or third party programs; and
+•	claims for breach of contract, breach of warranty, guarantee or condition, strict liability, negligence, or other tort to the extent permitted by applicable law.
+It also applies even if Microsoft knew or should have known about the possibility of the damages.  The above limitation or exclusion may not apply to you because your country may not allow the exclusion or limitation of incidental, consequential or other damages.
+Please note: As this software is distributed in Quebec, Canada, some of the clauses in this agreement are provided below in French.
+Remarque : Ce logiciel étant distribué au Québec, Canada, certaines des clauses dans ce contrat sont fournies ci-dessous en français.
+EXONÉRATION DE GARANTIE. Le logiciel visé par une licence est offert « tel quel ». Toute utilisation de ce logiciel est à votre seule risque et péril. Microsoft n’accorde aucune autre garantie expresse. Vous pouvez bénéficier de droits additionnels en vertu du droit local sur la protection des consommateurs, que ce contrat ne peut modifier. La ou elles sont permises par le droit locale, les garanties implicites de qualité marchande, d’adéquation à un usage particulier et d’absence de contrefaçon sont exclues.
+LIMITATION DES DOMMAGES-INTÉRÊTS ET EXCLUSION DE RESPONSABILITÉ POUR LES DOMMAGES.  Vous pouvez obtenir de Microsoft et de ses fournisseurs une indemnisation en cas de dommages directs uniquement à hauteur de 5,00 $ US. Vous ne pouvez prétendre à aucune indemnisation pour les autres dommages, y compris les dommages spéciaux, indirects ou accessoires et pertes de bénéfices.
+Cette limitation concerne :
+•	tout  ce qui est relié au logiciel, aux services ou au contenu (y compris le code) figurant sur des sites Internet tiers ou dans des programmes tiers ; et
+•	les réclamations au titre de violation de contrat ou de garantie, ou au titre de responsabilité stricte, de négligence ou d’une autre faute dans la limite autorisée par la loi en vigueur.
+Elle s’applique également, même si Microsoft connaissait ou devrait connaître l’éventualité d’un tel dommage.  Si votre pays n’autorise pas l’exclusion ou la limitation de responsabilité pour les dommages indirects, accessoires ou de quelque nature que ce soit, il se peut que la limitation ou l’exclusion ci-dessus ne s’appliquera pas à votre égard.
+EFFET JURIDIQUE.  Le présent contrat décrit certains droits juridiques. Vous pourriez avoir d’autres droits prévus par les lois de votre pays.  Le présent contrat ne modifie pas les droits que vous confèrent les lois de votre pays si celles-ci ne le permettent pas.

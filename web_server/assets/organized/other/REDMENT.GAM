@@ -1,0 +1,19 @@
+ // Map vars for Redding Downtown
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+
+MVAR_Molerat_Count              :=0;            // (0)
+MVAR_Deathclaw_Egg_Count        :=0;            // (1)
+MVAR_Deathclaw_Count            :=0;            // (2)
+MVAR_Rat_Fighter1               :=0;            // (3)
+MVAR_Rat_Fighter2               :=0;            // (4)
+MVAR_Bar_Brawl                  :=0;            // (5)
+MVAR_Attecked_Cashier           :=0;            // (6)
+MVAR_Using_Locked_Door          :=0;            // (7)
+MVAR_Ferndown                   :=0;            // (8)
+MVAR_Nording                    :=0;            // (9)
+MVAR_Velani                     :=0;            // (10)

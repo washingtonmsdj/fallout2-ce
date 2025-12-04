@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de Sprites - Fallout 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            padding: 20px;
+        }
+        
+        .header {
+            background: #161b22;
+            border-bottom: 2px solid #30363d;
+            padding: 20px 40px;
+            margin: -20px -20px 30px -20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header h1 {
+            color: #58a6ff;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .header .subtitle {
+            color: #8b949e;
+            font-size: 14px;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .controls {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 10px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #c9d1d9;
+            font-size: 14px;
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #c9d1d9;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover {
+            border-color: #58a6ff;
+            color: #58a6ff;
+        }
+        
+        .filter-btn.active {
+            background: #58a6ff;
+            border-color: #58a6ff;
+            color: white;
+        }
+        
+        .sprite-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .sprite-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .sprite-card:hover {
+            border-color: #58a6ff;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(88, 166, 255, 0.3);
+        }
+        
+        .sprite-preview {
+            width: 100%;
+            height: 200px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .sprite-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+        
+        .sprite-animation {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sprite-animation img {
+            position: absolute;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated;
+            opacity: 0;
+            transition: opacity 0.1s;
+        }
+        
+        .sprite-animation img.active {
+            opacity: 1;
+        }
+        
+        .animation-controls {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px;
+            border-radius: 4px;
+        }
+        
+        .anim-btn {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        
+        .anim-btn:hover {
+            border-color: #58a6ff;
+            color: #58a6ff;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+            padding: 20px;
+        }
+        
+        .pagination-btn {
+            padding: 10px 20px;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #c9d1d9;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .pagination-btn:hover:not(:disabled) {
+            border-color: #58a6ff;
+            color: #58a6ff;
+        }
+        
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pagination-info {
+            color: #8b949e;
+            font-size: 14px;
+        }
+        
+        .modal-animation {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 20px;
+            background: #0d1117;
+            border: 2px solid #58a6ff;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .modal-animation img {
+            width: 100%;
+            height: auto;
+            image-rendering: pixelated;
+            opacity: 0;
+            transition: opacity 0.1s;
+        }
+        
+        .modal-animation img.active {
+            opacity: 1;
+        }
+        
+        .direction-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .direction-btn {
+            padding: 8px 16px;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #c9d1d9;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .direction-btn:hover {
+            border-color: #58a6ff;
+            color: #58a6ff;
+        }
+        
+        .direction-btn.active {
+            background: #58a6ff;
+            border-color: #58a6ff;
+            color: white;
+        }
+        
+        .sprite-preview .no-image {
+            color: #8b949e;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .sprite-info {
+            padding: 15px;
+        }
+        
+        .sprite-name {
+            color: #58a6ff;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .sprite-details {
+            color: #8b949e;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        
+        .frames-preview {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .frame-thumb {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #30363d;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .frame-thumb:hover {
+            border-color: #58a6ff;
+            transform: scale(1.1);
+        }
+        
+        .frame-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow: auto;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            color: #58a6ff;
+            font-size: 24px;
+        }
+        
+        .close-btn {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .close-btn:hover {
+            border-color: #58a6ff;
+            color: #58a6ff;
+        }
+        
+        .modal-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .modal-image {
+            text-align: center;
+        }
+        
+        .modal-image img {
+            max-width: 100%;
+            max-height: 200px;
+            image-rendering: pixelated;
+            border: 1px solid #30363d;
+            border-radius: 4px;
+        }
+        
+        .modal-image-label {
+            color: #8b949e;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #8b949e;
+        }
+        
+        .error {
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid #f85149;
+            color: #f85149;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .info-banner {
+            background: rgba(88, 166, 255, 0.1);
+            border: 1px solid #58a6ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎨 Galeria de Sprites - Fallout 2</h1>
+        <div class="subtitle">Visualização Completa de Personagens e Sprites</div>
+    </div>
+    
+    <div class="container">
+        <div class="info-banner">
+            <strong>ℹ️ Informação:</strong> Esta galeria mostra sprites que foram extraídos e convertidos para PNG.
+            Para ver todos os sprites (incluindo NPCs), você precisa extrair os arquivos dos .DAT primeiro.
+        </div>
+        
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Buscar sprite...">
+            </div>
+            <div class="filter-group">
+                <button class="filter-btn active" onclick="filterSprites('all')">Todos</button>
+                <button class="filter-btn" onclick="filterSprites('critter')">NPCs</button>
+                <button class="filter-btn" onclick="filterSprites('item')">Itens</button>
+                <button class="filter-btn" onclick="filterSprites('tile')">Tiles</button>
+            </div>
+        </div>
+        
+        <div id="galleryContainer" class="loading">Carregando sprites...</div>
+        <div id="pagination" class="pagination" style="display: none;"></div>
+    </div>
+    
+    <!-- Modal para visualização detalhada -->
+    <div id="spriteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Sprite</h2>
+                <button class="close-btn" onclick="closeModal()">✕ Fechar</button>
+            </div>
+            <div id="modalImages" class="modal-images"></div>
+        </div>
+    </div>
+    
+    <script>
+        let allSprites = [];
+        let filteredSprites = [];
+        
+        async function loadSprites() {
+            try {
+                // Tentar carregar índice de imagens de critters
+                let response = await fetch('/assets/extracted/images/critters/critters_index.json');
+                if (!response.ok) {
+                    // Tentar índice geral
+                    response = await fetch('/assets/extracted/images/sprites_index.json');
+                    if (!response.ok) {
+                        throw new Error('Índice não encontrado');
+                    }
+                }
+                
+                const sprites = await response.json();
+                
+                if (Array.isArray(sprites) && sprites.length > 0) {
+                    allSprites = sprites;
+                    filteredSprites = sprites;
+                    renderGallery();
+                } else {
+                    throw new Error('Nenhum sprite no índice');
+                }
+            } catch (error) {
+                // Mostrar status e informações
+                document.getElementById('galleryContainer').innerHTML = `
+                    <div class="error">
+                        <strong>⚠️ Nenhuma imagem PNG convertida ainda!</strong>
+                        <p style="margin-top: 15px;">
+                            <strong>✅ Boa notícia:</strong> Os arquivos .FRM foram extraídos com sucesso!
+                        </p>
+                        <ul style="margin-left: 20px; margin-top: 10px; line-height: 2;">
+                            <li><strong>12224 arquivos .FRM</strong> extraídos dos .DAT</li>
+                            <li><strong>4149 sprites de NPCs</strong> prontos para conversão</li>
+                            <li><strong>0 imagens PNG</strong> convertidas até agora</li>
+                        </ul>
+                        <div style="margin-top: 20px; padding: 20px; background: rgba(88, 166, 255, 0.1); border: 1px solid var(--accent); border-radius: 6px;">
+                            <h3 style="color: var(--accent); margin-bottom: 10px;">🔧 Como Converter:</h3>
+                            <ol style="margin-left: 20px; line-height: 2;">
+                                <li>Use <strong>FRMEdit</strong> ou <strong>Fallout Mod Manager</strong></li>
+                                <li>Abra arquivos de: <code>assets/extracted/critter/art/critters/</code></li>
+                                <li>Exporte como PNG para: <code>assets/extracted/images/critters/</code></li>
+                            </ol>
+                            <p style="margin-top: 15px;">
+                                <a href="/status_imagens.html" class="btn btn-primary">Ver Status Completo</a>
+                                <a href="/extracao_resumo.html" class="btn btn-secondary">Ver Resumo da Extração</a>
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        // Variáveis de paginação
+        let currentPage = 1;
+        const itemsPerPage = 20;
+        
+        function renderGallery() {
+            const container = document.getElementById('galleryContainer');
+            
+            if (filteredSprites.length === 0) {
+                container.innerHTML = '<div class="error">Nenhum sprite encontrado com os filtros selecionados.</div>';
+                const pagination = document.getElementById('pagination');
+                if (pagination) pagination.style.display = 'none';
+                return;
+            }
+            
+            // Calcular paginação
+            const totalPages = Math.ceil(filteredSprites.length / itemsPerPage);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageSprites = filteredSprites.slice(startIndex, endIndex);
+            
+            let html = '<div class="sprite-grid">';
+            
+            for (const sprite of pageSprites) {
+                // Agrupar frames por direção
+                const framesByDirection = {};
+                if (sprite.frames && sprite.frames.length > 0) {
+                    sprite.frames.forEach(frame => {
+                        const dir = frame.direction_name || 'NE';
+                        if (!framesByDirection[dir]) {
+                            framesByDirection[dir] = [];
+                        }
+                        framesByDirection[dir].push(frame);
+                    });
+                }
+                
+                // Pegar primeira direção com frames para animação
+                const firstDirection = Object.keys(framesByDirection)[0];
+                const animationFrames = firstDirection ? framesByDirection[firstDirection] : [];
+                
+                html += `
+                    <div class="sprite-card" onclick="openModal('${sprite.name}')">
+                        <div class="sprite-preview" id="preview-${sprite.name}">
+                            ${animationFrames.length > 0 ? `
+                                <div class="sprite-animation" id="anim-${sprite.name}">
+                                    ${animationFrames.map((frame, idx) => 
+                                        `<img src="${frame.path}" alt="${sprite.name}" data-index="${idx}" ${idx === 0 ? 'class="active"' : ''}>`
+                                    ).join('')}
+                                </div>
+                                <div class="animation-controls" onclick="event.stopPropagation();">
+                                    <button class="anim-btn" data-sprite="${sprite.name}" data-frames='${JSON.stringify(animationFrames.map(f => f.path))}' onclick="event.stopPropagation(); const frames = JSON.parse(this.dataset.frames); toggleAnimation(this.dataset.sprite, frames)">▶</button>
+                                </div>
+                            ` : `
+                                <div class="no-image">Sem preview<br><small>Extrair do .DAT</small></div>
+                            `}
+                        </div>
+                        <div class="sprite-info">
+                            <div class="sprite-name">${sprite.name}</div>
+                            <div class="sprite-details">
+                                Frames: ${sprite.total_frames || 0}<br>
+                                Direções: ${Object.keys(framesByDirection).length}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            html += '</div>';
+            container.innerHTML = html;
+            
+            // Renderizar paginação
+            renderPagination(totalPages);
+        }
+        
+        function renderPagination(totalPages) {
+            const pagination = document.getElementById('pagination');
+            if (!pagination) {
+                const container = document.getElementById('galleryContainer');
+                const paginationDiv = document.createElement('div');
+                paginationDiv.id = 'pagination';
+                paginationDiv.className = 'pagination';
+                container.parentNode.insertBefore(paginationDiv, container.nextSibling);
+            }
+            
+            const paginationEl = document.getElementById('pagination');
+            paginationEl.style.display = 'flex';
+            
+            paginationEl.innerHTML = `
+                <button class="pagination-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                    ← Anterior
+                </button>
+                <div class="pagination-info">
+                    Página ${currentPage} de ${totalPages} (${filteredSprites.length} sprites)
+                </div>
+                <button class="pagination-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                    Próxima →
+                </button>
+            `;
+        }
+        
+        function changePage(page) {
+            const totalPages = Math.ceil(filteredSprites.length / itemsPerPage);
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderGallery();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Animações
+        const animations = {};
+        
+        function toggleAnimation(spriteName, frames) {
+            const animId = `anim-${spriteName}`;
+            const animContainer = document.getElementById(animId);
+            if (!animContainer) return;
+            
+            if (animations[spriteName]) {
+                // Parar animação
+                clearInterval(animations[spriteName]);
+                delete animations[spriteName];
+                const btn = animContainer.querySelector('.anim-btn');
+                if (btn) btn.textContent = '▶';
+            } else {
+                // Iniciar animação
+                let currentFrame = 0;
+                const imgs = animContainer.querySelectorAll('img');
+                
+                animations[spriteName] = setInterval(() => {
+                    imgs.forEach(img => img.classList.remove('active'));
+                    if (imgs[currentFrame]) {
+                        imgs[currentFrame].classList.add('active');
+                    }
+                    currentFrame = (currentFrame + 1) % frames.length;
+                }, 100); // 10 FPS
+                
+                const btn = animContainer.querySelector('.anim-btn');
+                if (btn) btn.textContent = '⏸';
+            }
+        }
+        
+        function filterSprites(type) {
+            // Atualizar botões
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filtrar
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            filteredSprites = allSprites.filter(sprite => {
+                const matchesType = type === 'all' || 
+                    sprite.name.toLowerCase().includes(type) ||
+                    (type === 'critter' && (sprite.name.includes('hm') || sprite.name.includes('hf')));
+                
+                const matchesSearch = searchTerm === '' || 
+                    sprite.name.toLowerCase().includes(searchTerm);
+                
+                return matchesType && matchesSearch;
+            });
+            
+            // Resetar para primeira página
+            currentPage = 1;
+            renderGallery();
+        }
+        
+        let modalAnimation = null;
+        let currentModalDirection = null;
+        
+        function openModal(spriteName) {
+            const sprite = allSprites.find(s => s.name === spriteName);
+            if (!sprite) return;
+            
+            document.getElementById('modalTitle').textContent = spriteName;
+            
+            // Agrupar frames por direção
+            const framesByDirection = {};
+            if (sprite.frames && sprite.frames.length > 0) {
+                sprite.frames.forEach(frame => {
+                    const dir = frame.direction_name || 'NE';
+                    if (!framesByDirection[dir]) {
+                        framesByDirection[dir] = [];
+                    }
+                    framesByDirection[dir].push(frame);
+                });
+            }
+            
+            const directions = Object.keys(framesByDirection);
+            currentModalDirection = directions[0] || null;
+            
+            let html = '';
+            
+            if (directions.length > 0) {
+                // Seletor de direção
+                html += '<div class="direction-selector">';
+                directions.forEach(dir => {
+                    const framesJson = JSON.stringify(framesByDirection[dir].map(f => f.path));
+                    html += `<button class="direction-btn ${dir === currentModalDirection ? 'active' : ''}" 
+                             data-sprite="${spriteName}" data-direction="${dir}" data-frames='${framesJson}'
+                             onclick="changeModalDirection(this.dataset.sprite, this.dataset.direction, JSON.parse(this.dataset.frames))">
+                             ${dir}
+                             </button>`;
+                });
+                html += '</div>';
+                
+                // Animação
+                if (currentModalDirection && framesByDirection[currentModalDirection].length > 0) {
+                    const frames = framesByDirection[currentModalDirection];
+                    html += `
+                        <div class="modal-animation" id="modal-anim-${spriteName}">
+                            ${frames.map((frame, idx) => 
+                                `<img src="${frame.path}" alt="${frame.direction_name} Frame ${frame.frame}" 
+                                      data-index="${idx}" ${idx === 0 ? 'class="active"' : ''}>`
+                            ).join('')}
+                            <div style="text-align: center; margin-top: 10px;">
+                                <button class="anim-btn" data-sprite="${spriteName}" data-frames='${JSON.stringify(frames.map(f => f.path))}' onclick="toggleModalAnimation(this.dataset.sprite, JSON.parse(this.dataset.frames))">▶ Play</button>
+                                <span style="color: #8b949e; margin-left: 10px;">${frames.length} frames</span>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Grid de todas as imagens
+                html += '<div class="modal-images">';
+                for (const frame of sprite.frames) {
+                    html += `
+                        <div class="modal-image">
+                            <img src="${frame.path}" alt="${frame.direction_name} Frame ${frame.frame}">
+                            <div class="modal-image-label">
+                                ${frame.direction_name} - Frame ${frame.frame}<br>
+                                ${frame.width}×${frame.height}
+                            </div>
+                        </div>
+                    `;
+                }
+                html += '</div>';
+            } else {
+                html = '<div class="error">Nenhum frame disponível para este sprite.</div>';
+            }
+            
+            document.getElementById('modalImages').innerHTML = html;
+            document.getElementById('spriteModal').classList.add('active');
+        }
+        
+        function changeModalDirection(spriteName, direction, frames) {
+            currentModalDirection = direction;
+            
+            // Atualizar botões
+            document.querySelectorAll('.direction-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.trim() === direction) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Atualizar animação
+            const animContainer = document.getElementById(`modal-anim-${spriteName}`);
+            if (animContainer) {
+                animContainer.innerHTML = `
+                    ${frames.map((frame, idx) => 
+                        `<img src="${frame}" alt="Frame ${idx}" 
+                              data-index="${idx}" ${idx === 0 ? 'class="active"' : ''}>`
+                    ).join('')}
+                    <div style="text-align: center; margin-top: 10px;">
+                        <button class="anim-btn" data-sprite="${spriteName}" data-frames='${JSON.stringify(frames)}' onclick="toggleModalAnimation(this.dataset.sprite, JSON.parse(this.dataset.frames))">▶ Play</button>
+                        <span style="color: #8b949e; margin-left: 10px;">${frames.length} frames</span>
+                    </div>
+                `;
+            }
+            
+            // Parar animação anterior se houver
+            if (modalAnimation) {
+                clearInterval(modalAnimation);
+                modalAnimation = null;
+            }
+        }
+        
+        function toggleModalAnimation(spriteName, frames) {
+            const animContainer = document.getElementById(`modal-anim-${spriteName}`);
+            if (!animContainer) return;
+            
+            const btn = animContainer.querySelector('.anim-btn');
+            
+            if (modalAnimation) {
+                // Parar animação
+                clearInterval(modalAnimation);
+                modalAnimation = null;
+                btn.textContent = '▶ Play';
+            } else {
+                // Iniciar animação
+                let currentFrame = 0;
+                const imgs = animContainer.querySelectorAll('img');
+                
+                modalAnimation = setInterval(() => {
+                    imgs.forEach(img => img.classList.remove('active'));
+                    if (imgs[currentFrame]) {
+                        imgs[currentFrame].classList.add('active');
+                    }
+                    currentFrame = (currentFrame + 1) % frames.length;
+                }, 100); // 10 FPS
+                
+                btn.textContent = '⏸ Pause';
+            }
+        }
+        
+        function closeModal() {
+            // Parar todas as animações
+            if (modalAnimation) {
+                clearInterval(modalAnimation);
+                modalAnimation = null;
+            }
+            Object.keys(animations).forEach(key => {
+                clearInterval(animations[key]);
+                delete animations[key];
+            });
+            
+            document.getElementById('spriteModal').classList.remove('active');
+        }
+        
+        function openFrame(path) {
+            window.open(path, '_blank');
+        }
+        
+        // Busca em tempo real
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSprites();
+            
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', () => {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const activeFilterBtn = document.querySelector('.filter-btn.active');
+                    const activeFilter = activeFilterBtn ? activeFilterBtn.textContent.trim() : 'Todos';
+                    
+                    filteredSprites = allSprites.filter(sprite => {
+                        const matchesType = activeFilter === 'Todos' || 
+                            sprite.name.toLowerCase().includes(activeFilter.toLowerCase()) ||
+                            (activeFilter === 'NPCs' && (sprite.name.includes('hm') || sprite.name.includes('hf')));
+                        
+                        const matchesSearch = searchTerm === '' || 
+                            sprite.name.toLowerCase().includes(searchTerm);
+                        
+                        return matchesType && matchesSearch;
+                    });
+                    
+                    currentPage = 1;
+                    renderGallery();
+                });
+            }
+        });
+        
+        // Fechar modal ao clicar fora
+        document.getElementById('spriteModal').addEventListener('click', (e) => {
+            if (e.target.id === 'spriteModal') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
+

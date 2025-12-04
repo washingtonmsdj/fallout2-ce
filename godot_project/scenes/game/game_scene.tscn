@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://game_scene_f2"]
+
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/core/game_scene.gd" id="2_script"]
+[ext_resource type="PackedScene" path="res://scenes/ui/fallout_hud.tscn" id="3_hud"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/edg001.png" id="4_tile"]
+
+[sub_resource type="RectangleShape2D" id="npc_shape"]
+size = Vector2(20, 20)
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("2_script")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Ground" type="Node2D" parent="World"]
+
+[node name="Tile1" type="Sprite2D" parent="World/Ground"]
+position = Vector2(100, 100)
+texture = ExtResource("4_tile")
+
+[node name="Tile2" type="Sprite2D" parent="World/Ground"]
+position = Vector2(180, 100)
+texture = ExtResource("4_tile")
+
+[node name="Tile3" type="Sprite2D" parent="World/Ground"]
+position = Vector2(260, 100)
+texture = ExtResource("4_tile")
+
+[node name="Tile4" type="Sprite2D" parent="World/Ground"]
+position = Vector2(100, 150)
+texture = ExtResource("4_tile")
+
+[node name="Tile5" type="Sprite2D" parent="World/Ground"]
+position = Vector2(180, 150)
+texture = ExtResource("4_tile")
+
+[node name="Tile6" type="Sprite2D" parent="World/Ground"]
+position = Vector2(260, 150)
+texture = ExtResource("4_tile")
+
+[node name="Tile7" type="Sprite2D" parent="World/Ground"]
+position = Vector2(100, 200)
+texture = ExtResource("4_tile")
+
+[node name="Tile8" type="Sprite2D" parent="World/Ground"]
+position = Vector2(180, 200)
+texture = ExtResource("4_tile")
+
+[node name="Tile9" type="Sprite2D" parent="World/Ground"]
+position = Vector2(260, 200)
+texture = ExtResource("4_tile")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(180, 150)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="FalloutHUD" parent="HUD" instance=ExtResource("3_hud")]

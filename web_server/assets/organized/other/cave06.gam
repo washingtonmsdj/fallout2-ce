@@ -1,0 +1,8 @@
+ // Map vars for Cave06 area Entrance Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+MVAR_Made_Car                             :=0;  // (0)

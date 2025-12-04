@@ -1,0 +1,9 @@
+ // Map vars for Modoc brahmin seed area Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+
+MVAR_Did_Fake_Dog_Kill          :=0;     //      (0)

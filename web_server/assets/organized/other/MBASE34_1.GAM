@@ -1,0 +1,13 @@
+ // Map vars for Military Base Entrance area Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+
+MVAR_MELCHIOR_PET_NUM_1         :=0;            // (0)
+MVAR_MELCHIOR_PET_NUM_2         :=0;            // (1)
+MVAR_MELCHIOR_PET_NUM_3         :=0;            // (2)
+MVAR_MELCHIOR_PET_NUM_4         :=0;            // (3)
+MVAR_PORTAL_TILE_NUM            :=0;            // (4)

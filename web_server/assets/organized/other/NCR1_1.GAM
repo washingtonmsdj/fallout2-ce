@@ -1,0 +1,11 @@
+ // Map vars for NCR area 1 Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+MVAR_Beat_On_Oswald                   :=0;//      (0)
+MVAR_Hoss_State                       :=0;//      (1)
+MVAR_Emitter_Wes_Control              :=0;//      (2)
+MVAR_Made_Payoff                      :=0;//      (3)

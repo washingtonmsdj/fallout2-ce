@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fallout 2 Asset Viewer - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--border);
+            padding: 20px 40px;
+            margin: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content h1 {
+            color: var(--accent);
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .header .subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px 40px;
+        }
+        
+        .section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: var(--accent);
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>🎮 Fallout 2 Asset Viewer</h1>
+            <div class="subtitle">Dashboard Completo para Análise de Sprites, NPCs e Assets</div>
+        </div>
+        <div class="header-actions">
+            <a href="/dashboard.html" class="btn btn-primary">📊 Dashboard</a>
+            <a href="/sprite_gallery.html" class="btn btn-secondary">🖼️ Galeria</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Cards de Navegação -->
+        <div class="nav-cards">
+            <a href="/extracao_resumo.html" class="nav-card">
+                <div class="nav-icon">✅</div>
+                <div class="nav-title">Resumo da Extração</div>
+                <div class="nav-desc">12224 arquivos .FRM extraídos!</div>
+            </a>
+            
+            <a href="/status_imagens.html" class="nav-card">
+                <div class="nav-icon">📊</div>
+                <div class="nav-title">Status das Imagens</div>
+                <div class="nav-desc">Verifique conversão PNG</div>
+            </a>
+            
+            <a href="/dashboard.html" class="nav-card">
+                <div class="nav-icon">📊</div>
+                <div class="nav-title">Dashboard</div>
+                <div class="nav-desc">Estatísticas e visão geral dos assets</div>
+            </a>
+            
+            <a href="/fallout_game_web.html" class="nav-card" style="background: linear-gradient(135deg, #00d4aa20, #00d4aa10); border-color: #00d4aa;">
+                <div class="nav-icon">🎮</div>
+                <div class="nav-title">JOGAR FALLOUT 2</div>
+                <div class="nav-desc">Jogo completo no navegador - Mapas, Missões, Tudo!</div>
+            </a>
+            
+            <a href="/fallout_web_editor.html" class="nav-card" style="background: linear-gradient(135deg, #ff6b6b20, #ff6b6b10); border-color: #ff6b6b;">
+                <div class="nav-icon">🎨</div>
+                <div class="nav-title">Editor Web Interativo</div>
+                <div class="nav-desc">Visualize e edite sprites com PixiJS - Liberdade total!</div>
+            </a>
+            
+            <a href="/game_analyzer.html" class="nav-card" style="background: linear-gradient(135deg, #58a6ff20, #58a6ff10); border-color: #58a6ff;">
+                <div class="nav-icon">🎮</div>
+                <div class="nav-title">Analisador Interativo</div>
+                <div class="nav-desc">Explore todos os dados do jogo no navegador</div>
+            </a>
+            
+            <a href="/sprite_gallery.html" class="nav-card">
+                <div class="nav-icon">🖼️</div>
+                <div class="nav-title">Galeria de Imagens</div>
+                <div class="nav-desc">Veja as imagens dos sprites convertidos</div>
+            </a>
+            
+            <a href="/map_viewer.html" class="nav-card">
+                <div class="nav-icon">🗺️</div>
+                <div class="nav-title">Visualizador de Mapas</div>
+                <div class="nav-desc">Explore mapas e suas informações</div>
+            </a>
+            
+            <a href="/asset_viewer.html" class="nav-card">
+                <div class="nav-icon">📁</div>
+                <div class="nav-title">Navegador de Assets</div>
+                <div class="nav-desc">Navegue por todos os arquivos extraídos</div>
+            </a>
+            
+            <a href="/frm_viewer.html" class="nav-card">
+                <div class="nav-icon">🎨</div>
+                <div class="nav-title">Visualizador de Sprites</div>
+                <div class="nav-desc">Visualize sprites .FRM extraídos</div>
+            </a>
+            
+            <a href="/api/stats" class="nav-card" target="_blank">
+                <div class="nav-icon">🔌</div>
+                <div class="nav-title">API</div>
+                <div class="nav-desc">Endpoints da API REST</div>
+            </a>
+            
+            <a href="/analysis/visualizador_sprites.html" class="nav-card">
+                <div class="nav-icon">📚</div>
+                <div class="nav-title">Documentação</div>
+                <div class="nav-desc">Guia completo de formatos</div>
+            </a>
+        </div>
+        
+        <!-- Status Rápido -->
+        <div class="section">
+            <h2 class="section-title">⚡ Status Rápido</h2>
+            <div id="quickStats" class="loading">Carregando...</div>
+        </div>
+        
+        <!-- Informações Importantes -->
+        <div class="section">
+            <h2 class="section-title">📍 Localização dos Assets</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">📦</div>
+                    <div class="info-title">master.dat</div>
+                    <div class="info-desc">333 MB - Maioria dos sprites</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">👤</div>
+                    <div class="info-title">critter.dat</div>
+                    <div class="info-desc">166 MB - Sprites de NPCs</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🔧</div>
+                    <div class="info-title">patch000.dat</div>
+                    <div class="info-desc">2.3 MB - Patches</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Avisos -->
+        <div class="section warning-section">
+            <h2 class="section-title">⚠️ Importante</h2>
+            <div class="warning-box">
+                <p><strong>Os sprites estão dentro dos arquivos .DAT!</strong></p>
+                <p style="margin-top: 10px;">
+                    Para visualizar os sprites dos NPCs, você precisa:
+                </p>
+                <ol style="margin-top: 10px; margin-left: 20px;">
+                    <li>Extrair os arquivos dos .DAT usando ferramentas como <code>dat2</code> ou <code>Fallout Mod Manager</code></li>
+                    <li>Ou implementar um extrator baseado no código em <code>src/xfile.cc</code></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        async function loadQuickStats() {
+            try {
+                const response = await fetch('/api/stats');
+                const data = await response.json();
+                
+                let html = '<div class="stats-grid">';
+                html += `
+                    <div class="stat-card">
+                        <div class="stat-label">Arquivos .DAT</div>
+                        <div class="stat-value">${Object.keys(data.dat_files).length}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Tamanho Total</div>
+                        <div class="stat-value">${(data.total_size / (1024 * 1024)).toFixed(2)} <span class="unit">MB</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Sprites Extraídos</div>
+                        <div class="stat-value">${data.extracted_count || 0}</div>
+                    </div>
+                `;
+                html += '</div>';
+                
+                document.getElementById('quickStats').innerHTML = html;
+            } catch (error) {
+                document.getElementById('quickStats').innerHTML = 
+                    '<div class="error">Erro ao carregar estatísticas</div>';
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', loadQuickStats);
+    </script>
+</body>
+</html>
+

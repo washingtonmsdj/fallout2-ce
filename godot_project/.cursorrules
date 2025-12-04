@@ -1,0 +1,43 @@
+# 🎯 REGRAS E PREFERÊNCIAS DO PROJETO GODOT
+
+## QUALIDADE AAA
+- Código limpo e profissional
+- Sem gambiarras ou soluções temporárias
+- Arquitetura bem estruturada
+- Padrões de código consistentes
+- Documentação adequada
+
+## MELHORIAS CONTÍNUAS
+- Não apenas migrar, mas melhorar
+- Aproveitar recursos modernos do Godot
+- Otimizações onde apropriado
+- Interface melhorada
+- Performance superior ao original
+
+## PADRÕES DE CÓDIGO GDScript
+- Nomenclatura clara e descritiva (snake_case para variáveis)
+- Comentários quando necessário
+- Funções pequenas e focadas
+- Separação de responsabilidades
+- Reutilização de código
+- Use @export para propriedades configuráveis
+- Use signals para comunicação entre nodes
+
+## ESTRUTURA
+- Organize scripts em pastas por sistema
+- Mantenha cenas modulares
+- Use autoloads para singletons (GameManager)
+- Separe lógica de apresentação
+
+## OTIMIZAÇÃO
+- Use object pooling quando apropriado
+- Evite chamadas desnecessárias em _process
+- Use nodes eficientemente
+- Otimize importações de texturas
+
+## TESTES
+- Teste cada sistema individualmente
+- Valide conversões de assets
+- Verifique performance
+- Garante compatibilidade multiplataforma
+

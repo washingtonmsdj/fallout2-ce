@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador de Mapas - Fallout 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            padding: 20px;
+        }
+        
+        .header {
+            background: #161b22;
+            border-bottom: 2px solid #30363d;
+            padding: 20px 40px;
+            margin: -20px -20px 30px -20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header h1 {
+            color: #58a6ff;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+        }
+        
+        .sidebar {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .sidebar h2 {
+            color: #58a6ff;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .map-list {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .map-item {
+            padding: 10px;
+            border-bottom: 1px solid #30363d;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .map-item:hover {
+            background: #21262d;
+        }
+        
+        .map-item.active {
+            background: #58a6ff;
+            color: white;
+        }
+        
+        .map-item .name {
+            font-weight: 600;
+        }
+        
+        .map-item .version {
+            font-size: 11px;
+            color: #8b949e;
+            margin-top: 5px;
+        }
+        
+        .viewer {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .viewer h2 {
+            color: #58a6ff;
+            margin-bottom: 20px;
+        }
+        
+        .map-info {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .map-info h3 {
+            color: #58a6ff;
+            margin-bottom: 10px;
+        }
+        
+        .map-info .info-row {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 10px;
+            padding: 5px 0;
+            border-bottom: 1px solid #21262d;
+        }
+        
+        .map-info .label {
+            color: #8b949e;
+            font-size: 14px;
+        }
+        
+        .map-info .value {
+            color: #c9d1d9;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .map-preview {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .map-preview .placeholder {
+            color: #8b949e;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #8b949e;
+        }
+        
+        .error {
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid #f85149;
+            color: #f85149;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #c9d1d9;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            border-color: #58a6ff;
+            color: #58a6ff;
+        }
+        
+        .btn-primary {
+            background: #58a6ff;
+            border-color: #58a6ff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🗺️ Visualizador de Mapas - Fallout 2</h1>
+        <div style="color: #8b949e; font-size: 14px;">
+            Explore e analise os mapas do jogo no navegador
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h2>📋 Mapas Disponíveis</h2>
+            <div class="map-list" id="mapList">
+                <div class="loading">Carregando mapas...</div>
+            </div>
+        </div>
+        
+        <div class="viewer">
+            <h2>📊 Informações do Mapa</h2>
+            <div id="mapViewer">
+                <div class="loading">
+                    <p>Selecione um mapa da lista ao lado</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let mapsIndex = [];
+        let currentMap = null;
+        
+        async function loadMapsIndex() {
+            try {
+                const response = await fetch('/assets/web/maps/index.json');
+                if (!response.ok) {
+                    throw new Error('Índice não encontrado');
+                }
+                
+                const data = await response.json();
+                mapsIndex = data.maps || [];
+                
+                renderMapList();
+            } catch (error) {
+                document.getElementById('mapList').innerHTML = `
+                    <div class="error">
+                        <p>⚠️ Nenhum mapa convertido ainda.</p>
+                        <p style="margin-top: 10px; font-size: 12px;">
+                            Execute primeiro:<br>
+                            <code style="background: #21262d; padding: 5px; border-radius: 4px;">
+                                python web_server/convert_map_to_web.py
+                            </code>
+                        </p>
+                    </div>
+                `;
+            }
+        }
+        
+        function renderMapList() {
+            const mapList = document.getElementById('mapList');
+            
+            if (mapsIndex.length === 0) {
+                mapList.innerHTML = '<div class="error">Nenhum mapa disponível</div>';
+                return;
+            }
+            
+            let html = '';
+            mapsIndex.forEach((map, index) => {
+                html += `
+                    <div class="map-item ${index === 0 ? 'active' : ''}" 
+                         onclick="loadMap('${map.file}', ${index})">
+                        <div class="name">${map.name || map.file}</div>
+                        <div class="version">Versão: ${map.version}</div>
+                    </div>
+                `;
+            });
+            
+            mapList.innerHTML = html;
+            
+            // Carregar primeiro mapa
+            if (mapsIndex.length > 0) {
+                loadMap(mapsIndex[0].file, 0);
+            }
+        }
+        
+        async function loadMap(fileName, index) {
+            // Atualizar seleção
+            document.querySelectorAll('.map-item').forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+            
+            try {
+                const response = await fetch(`/assets/web/maps/${fileName}`);
+                if (!response.ok) {
+                    throw new Error('Mapa não encontrado');
+                }
+                
+                const mapData = await response.json();
+                currentMap = mapData;
+                
+                renderMapInfo(mapData);
+            } catch (error) {
+                document.getElementById('mapViewer').innerHTML = `
+                    <div class="error">
+                        <p>❌ Erro ao carregar mapa: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function renderMapInfo(mapData) {
+            const header = mapData.header || {};
+            
+            const html = `
+                <div class="map-info">
+                    <h3>📋 Informações do Mapa</h3>
+                    <div class="info-row">
+                        <div class="label">Nome:</div>
+                        <div class="value">${header.name || 'N/A'}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="label">Versão:</div>
+                        <div class="value">${header.version || 'N/A'}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="label">Variáveis Globais:</div>
+                        <div class="value">${header.global_vars_count || 0}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="label">Variáveis Locais:</div>
+                        <div class="value">${header.local_vars_count || 0}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="label">Elevação de Entrada:</div>
+                        <div class="value">${header.entering_elevation || 0}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="label">Tile de Entrada:</div>
+                        <div class="value">${header.entering_tile || 0}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="label">Rotação de Entrada:</div>
+                        <div class="value">${header.entering_rotation || 0}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="label">Script Index:</div>
+                        <div class="value">${header.script_index || 0}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="label">Flags:</div>
+                        <div class="value">0x${(header.flags || 0).toString(16).toUpperCase()}</div>
+                    </div>
+                </div>
+                
+                <div class="map-preview">
+                    <div class="placeholder">
+                        <p>🗺️ Visualização do mapa</p>
+                        <p style="margin-top: 10px; font-size: 14px; color: #8b949e;">
+                            A renderização visual completa dos tiles requer<br>
+                            implementação adicional do formato .MAP
+                        </p>
+                        <p style="margin-top: 20px;">
+                            <a href="/sprite_gallery.html" class="btn btn-primary">Ver Sprites</a>
+                            <a href="/asset_viewer.html" class="btn">Ver Assets</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: rgba(88, 166, 255, 0.1); border: 1px solid #58a6ff; border-radius: 6px;">
+                    <h3 style="color: #58a6ff; margin-bottom: 10px;">💡 Sobre a Visualização</h3>
+                    <p style="font-size: 14px; line-height: 1.6;">
+                        Este visualizador mostra as <strong>informações básicas</strong> dos mapas (.MAP).
+                        Para renderizar os tiles visualmente, seria necessário implementar o formato completo
+                        do Fallout 2, que inclui:
+                    </p>
+                    <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8; font-size: 14px;">
+                        <li>Sistema de tiles isométricos</li>
+                        <li>Múltiplas elevações</li>
+                        <li>Objetos e criaturas</li>
+                        <li>Scripts do mapa</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 14px;">
+                        <strong>Dica:</strong> Use o código-fonte em <code>src/map.cc</code> e <code>src/tile.cc</code>
+                        como referência para implementar a renderização completa.
+                    </p>
+                </div>
+            `;
+            
+            document.getElementById('mapViewer').innerHTML = html;
+        }
+        
+        // Carregar ao iniciar
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMapsIndex();
+        });
+    </script>
+</body>
+</html>
+

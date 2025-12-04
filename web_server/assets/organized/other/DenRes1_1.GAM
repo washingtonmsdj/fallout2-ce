@@ -1,0 +1,20 @@
+ // Map vars for Den Residential Area Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+
+MVAR_Map_Guard_Count                         :=0;     //      (0)
+MVAR_Current_Patrol_Guard                    :=0;     //      (1)
+MVAR_Next_Patrol_Time                        :=0;     //      (2)
+MVAR_Dead_Guard                              :=0;     //      (3)
+MVAR_Thug_Count                              :=0;     //      (4)
+MVAR_Joey_PID                                :=0;     //      (5)
+MVAR_Total_Thugs                             :=0;     //      (6)
+MVAR_Thug_Message_Said                       :=0;     //      (7)
+MVAR_Joey_Home_Tile                          :=0;     //      (8)
+MVAR_Res_Home_2                              :=0;     //      (9)
+MVAR_Res_Home_3                              :=0;     //      (10)
+MVAR_Res_Home_4                              :=0;     //      (11)

@@ -1,0 +1,12 @@
+ // Map vars for Arroyo Village Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+
+MVAR_Found_Easter_Egg           :=0;    //      (0)
+MVAR_Egg_Counter                :=0;    //      (1)
+MVAR_Electric_Floor             :=0;    //      (2)
+MVAR_Lockpick_Penalty           :=-100  //      (3)

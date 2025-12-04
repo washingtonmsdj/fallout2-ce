@@ -1,0 +1,30 @@
+[gd_scene load_steps=9 format=3 uid="uid://player_scene_f2"]
+
+[ext_resource type="Script" path="res://scripts/actors/player.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_ne.png" id="2_ne"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_e.png" id="3_e"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_se.png" id="4_se"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_sw.png" id="5_sw"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_w.png" id="6_w"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_nw.png" id="7_nw"]
+
+[sub_resource type="RectangleShape2D" id="collision_shape"]
+size = Vector2(20, 20)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 1
+collision_mask = 3
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_se")
+offset = Vector2(0, -30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("collision_shape")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = true
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0

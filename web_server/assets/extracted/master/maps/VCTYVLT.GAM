@@ -1,0 +1,13 @@
+ // Map vars for Vault Vity Vault
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+
+MVAR_Said_4                     :=0;            //      (0)
+MVAR_Said_8                     :=0;            //      (1)
+MVAR_Gave_XP                    :=0;            //      (2)
+MVAR_Martin_Sees_Lockpick       :=0;            //      (3)
+MVAR_Martin_In_Area             :=0;            //      (4)

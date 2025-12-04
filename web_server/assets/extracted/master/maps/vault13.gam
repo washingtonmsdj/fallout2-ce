@@ -1,0 +1,14 @@
+ // Map vars for Vault 13 Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+MVAR_Talked_About_Goris                    :=0; // (0)
+MVAR_Player_Has_Geck                       :=0; // (1)
+MVAR_Gruthar_DStatus                       :=0; // (2)
+MVAR_Computer_Status                       :=0; // (3)
+MVAR_Dude_See                              :=0; // (4)
+MVAR_Vault13_Enemy                         :=0; // (5)
+MVAR_Gave_V13_Xp                           :=0; // (6)

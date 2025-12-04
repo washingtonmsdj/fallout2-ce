@@ -1,0 +1,8 @@
+ // Map vars for Vault 15 Secret Entrace
+
+ // Comments
+
+//MAP_MAP_VARS:
+MAP_GLOBAL_VARS:
+//MAP                                        NUMBER
+MVAR_Khans_Check                     :=0;    //(0)

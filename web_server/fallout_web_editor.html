@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fallout 2 - Editor Web Interativo</title>
+    <script src="https://pixijs.download/release/pixi.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            overflow: hidden;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            height: 100vh;
+        }
+        
+        .sidebar {
+            background: #161b22;
+            border-right: 1px solid #30363d;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .sidebar h2 {
+            color: #58a6ff;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .viewer {
+            background: #0d1117;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #gameCanvas {
+            border: 2px solid #30363d;
+            background: #000;
+        }
+        
+        .controls {
+            background: #161b22;
+            border-left: 1px solid #30363d;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #c9d1d9;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            border-color: #58a6ff;
+            color: #58a6ff;
+        }
+        
+        .btn-primary {
+            background: #58a6ff;
+            border-color: #58a6ff;
+            color: white;
+        }
+        
+        .sprite-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .sprite-item {
+            padding: 8px;
+            border-bottom: 1px solid #30363d;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .sprite-item:hover {
+            background: #21262d;
+        }
+        
+        .sprite-item.active {
+            background: #58a6ff;
+            color: white;
+        }
+        
+        .info-panel {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .info-panel h3 {
+            color: #58a6ff;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 12px;
+        }
+        
+        .slider-group {
+            margin: 15px 0;
+        }
+        
+        .slider-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #8b949e;
+        }
+        
+        .slider {
+            width: 100%;
+        }
+        
+        .header {
+            background: #161b22;
+            border-bottom: 1px solid #30363d;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            color: #58a6ff;
+            font-size: 20px;
+        }
+        
+        .status {
+            font-size: 12px;
+            color: #8b949e;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎮 Fallout 2 - Editor Web Interativo</h1>
+        <div class="status" id="status">Carregando...</div>
+    </div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h2>📁 Sprites Disponíveis</h2>
+            <div class="sprite-list" id="spriteList">
+                <div style="padding: 20px; text-align: center; color: #8b949e;">
+                    Carregando sprites...
+                </div>
+            </div>
+        </div>
+        
+        <div class="viewer">
+            <canvas id="gameCanvas"></canvas>
+        </div>
+        
+        <div class="controls">
+            <h2>⚙️ Controles</h2>
+            
+            <div class="info-panel">
+                <h3>Sprite Atual</h3>
+                <div class="info-row">
+                    <span>Nome:</span>
+                    <span id="spriteName">-</span>
+                </div>
+                <div class="info-row">
+                    <span>Largura:</span>
+                    <span id="spriteWidth">-</span>
+                </div>
+                <div class="info-row">
+                    <span>Altura:</span>
+                    <span id="spriteHeight">-</span>
+                </div>
+                <div class="info-row">
+                    <span>Frames:</span>
+                    <span id="spriteFrames">-</span>
+                </div>
+            </div>
+            
+            <div class="slider-group">
+                <label>Escala: <span id="scaleValue">1.0x</span></label>
+                <input type="range" class="slider" id="scaleSlider" min="0.5" max="5" step="0.1" value="1">
+            </div>
+            
+            <div class="slider-group">
+                <label>Rotacao: <span id="rotationValue">0°</span></label>
+                <input type="range" class="slider" id="rotationSlider" min="0" max="360" step="1" value="0">
+            </div>
+            
+            <div class="slider-group">
+                <label>Frame: <span id="frameValue">0</span></label>
+                <input type="range" class="slider" id="frameSlider" min="0" max="0" step="1" value="0">
+            </div>
+            
+            <button class="btn btn-primary" onclick="toggleAnimation()">
+                <span id="animBtn">▶ Animar</span>
+            </button>
+            
+            <button class="btn" onclick="exportSprite()">💾 Exportar Sprite</button>
+            <button class="btn" onclick="editSprite()">✏️ Editar Sprite</button>
+            
+            <div class="info-panel" style="margin-top: 20px;">
+                <h3>🎮 Controles do Editor</h3>
+                <div style="font-size: 11px; line-height: 1.8;">
+                    <div>🖱️ Arrastar: Mover sprite</div>
+                    <div>🔍 Scroll: Zoom</div>
+                    <div>⌨️ Espaço: Pausar animação</div>
+                    <div>⌨️ R: Resetar posição</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ============================================
+        // CONFIGURAÇÃO PIXIJS
+        // ============================================
+        
+        let app;
+        let currentSprite = null;
+        let spriteContainer = null;
+        let sprites = [];
+        let currentFrame = 0;
+        let animationId = null;
+        let isAnimating = false;
+        let scale = 1.0;
+        let rotation = 0;
+        let offsetX = 0;
+        let offsetY = 0;
+        let isDragging = false;
+        let dragStart = { x: 0, y: 0 };
+        
+        // Inicializar PixiJS
+        function initPixi() {
+            app = new PIXI.Application({
+                width: 800,
+                height: 600,
+                backgroundColor: 0x000000,
+                antialias: false,
+                resolution: window.devicePixelRatio || 1,
+                autoDensity: true
+            });
+            
+            document.getElementById('gameCanvas').appendChild(app.view);
+            
+            spriteContainer = new PIXI.Container();
+            app.stage.addChild(spriteContainer);
+            
+            // Centralizar
+            spriteContainer.x = app.screen.width / 2;
+            spriteContainer.y = app.screen.height / 2;
+            
+            // Eventos
+            setupEvents();
+            
+            updateStatus('PixiJS inicializado');
+        }
+        
+        // ============================================
+        // CARREGAR SPRITES
+        // ============================================
+        
+        async function loadSprites() {
+            try {
+                updateStatus('Carregando sprites...');
+                
+                // Tentar carregar índice de sprites
+                const response = await fetch('/assets/extracted/images/critters/critters_index.json');
+                if (!response.ok) {
+                    throw new Error('Índice não encontrado');
+                }
+                
+                const data = await response.json();
+                sprites = Array.isArray(data) ? data : (data.sprites || []);
+                
+                renderSpriteList();
+                updateStatus(`${sprites.length} sprites carregados`);
+                
+                // Carregar primeiro sprite
+                if (sprites.length > 0) {
+                    loadSprite(sprites[0], 0);
+                }
+            } catch (error) {
+                console.error('Erro ao carregar sprites:', error);
+                document.getElementById('spriteList').innerHTML = `
+                    <div style="padding: 20px; color: #f85149;">
+                        <p>⚠️ Erro ao carregar sprites</p>
+                        <p style="font-size: 11px; margin-top: 10px;">
+                            Execute primeiro:<br>
+                            <code style="background: #21262d; padding: 5px; border-radius: 4px;">
+                                python extract_all_dat.py
+                            </code>
+                        </p>
+                    </div>
+                `;
+                updateStatus('Erro ao carregar sprites');
+            }
+        }
+        
+        // ============================================
+        // RENDERIZAR LISTA DE SPRITES
+        // ============================================
+        
+        function renderSpriteList() {
+            const list = document.getElementById('spriteList');
+            let html = '';
+            
+            sprites.forEach((sprite, index) => {
+                html += `
+                    <div class="sprite-item" onclick="loadSprite(sprites[${index}], ${index})" id="sprite-${index}">
+                        <div style="font-weight: 600;">${sprite.name || 'Sprite ' + index}</div>
+                        <div style="font-size: 11px; color: #8b949e; margin-top: 3px;">
+                            ${sprite.total_frames || 0} frames
+                        </div>
+                    </div>
+                `;
+            });
+            
+            list.innerHTML = html;
+        }
+        
+        // ============================================
+        // CARREGAR SPRITE
+        // ============================================
+        
+        async function loadSprite(sprite, index) {
+            // Atualizar seleção
+            document.querySelectorAll('.sprite-item').forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+            
+            currentSprite = sprite;
+            spriteContainer.removeChildren();
+            
+            // Atualizar info
+            document.getElementById('spriteName').textContent = sprite.name || '-';
+            document.getElementById('spriteFrames').textContent = sprite.total_frames || 0;
+            
+            // Carregar frames
+            if (sprite.frames && sprite.frames.length > 0) {
+                const frameSlider = document.getElementById('frameSlider');
+                frameSlider.max = sprite.frames.length - 1;
+                frameSlider.value = 0;
+                currentFrame = 0;
+                
+                // Carregar primeiro frame
+                await loadFrame(sprite.frames[0]);
+            } else {
+                updateStatus('Sprite sem frames disponíveis');
+            }
+        }
+        
+        // ============================================
+        // CARREGAR FRAME
+        // ============================================
+        
+        async function loadFrame(frame) {
+            try {
+                const texture = await PIXI.Texture.fromURL(frame.path);
+                const sprite = new PIXI.Sprite(texture);
+                
+                // Configurações
+                sprite.anchor.set(0.5);
+                sprite.scale.set(scale);
+                sprite.rotation = rotation * Math.PI / 180;
+                sprite.x = offsetX;
+                sprite.y = offsetY;
+                
+                // Pixel perfect
+                sprite.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+                
+                spriteContainer.addChild(sprite);
+                
+                // Atualizar info
+                document.getElementById('spriteWidth').textContent = texture.width;
+                document.getElementById('spriteHeight').textContent = texture.height;
+                
+                updateStatus(`Frame ${currentFrame + 1} carregado`);
+            } catch (error) {
+                console.error('Erro ao carregar frame:', error);
+                updateStatus('Erro ao carregar frame');
+            }
+        }
+        
+        // ============================================
+        // ANIMAÇÃO
+        // ============================================
+        
+        function toggleAnimation() {
+            if (!currentSprite || !currentSprite.frames) return;
+            
+            isAnimating = !isAnimating;
+            const btn = document.getElementById('animBtn');
+            
+            if (isAnimating) {
+                btn.textContent = '⏸ Pausar';
+                startAnimation();
+            } else {
+                btn.textContent = '▶ Animar';
+                stopAnimation();
+            }
+        }
+        
+        function startAnimation() {
+            if (animationId) return;
+            
+            let frameIndex = currentFrame;
+            const frames = currentSprite.frames;
+            
+            animationId = setInterval(() => {
+                frameIndex = (frameIndex + 1) % frames.length;
+                currentFrame = frameIndex;
+                document.getElementById('frameSlider').value = frameIndex;
+                loadFrame(frames[frameIndex]);
+            }, 100); // 10 FPS
+        }
+        
+        function stopAnimation() {
+            if (animationId) {
+                clearInterval(animationId);
+                animationId = null;
+            }
+        }
+        
+        // ============================================
+        // CONTROLES
+        // ============================================
+        
+        function setupEvents() {
+            // Slider de escala
+            document.getElementById('scaleSlider').addEventListener('input', (e) => {
+                scale = parseFloat(e.target.value);
+                document.getElementById('scaleValue').textContent = scale.toFixed(1) + 'x';
+                updateSpriteTransform();
+            });
+            
+            // Slider de rotação
+            document.getElementById('rotationSlider').addEventListener('input', (e) => {
+                rotation = parseInt(e.target.value);
+                document.getElementById('rotationValue').textContent = rotation + '°';
+                updateSpriteTransform();
+            });
+            
+            // Slider de frame
+            document.getElementById('frameSlider').addEventListener('input', (e) => {
+                currentFrame = parseInt(e.target.value);
+                document.getElementById('frameValue').textContent = currentFrame;
+                if (currentSprite && currentSprite.frames) {
+                    loadFrame(currentSprite.frames[currentFrame]);
+                }
+            });
+            
+            // Mouse drag
+            app.view.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                dragStart.x = e.clientX - offsetX;
+                dragStart.y = e.clientY - offsetY;
+            });
+            
+            app.view.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    offsetX = e.clientX - dragStart.x;
+                    offsetY = e.clientY - dragStart.y;
+                    updateSpriteTransform();
+                }
+            });
+            
+            app.view.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+            
+            // Zoom com scroll
+            app.view.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                scale = Math.max(0.1, Math.min(10, scale * delta));
+                document.getElementById('scaleSlider').value = scale;
+                document.getElementById('scaleValue').textContent = scale.toFixed(1) + 'x';
+                updateSpriteTransform();
+            });
+            
+            // Teclado
+            document.addEventListener('keydown', (e) => {
+                if (e.key === ' ') {
+                    e.preventDefault();
+                    toggleAnimation();
+                } else if (e.key === 'r' || e.key === 'R') {
+                    resetPosition();
+                }
+            });
+        }
+        
+        function updateSpriteTransform() {
+            if (spriteContainer.children.length > 0) {
+                const sprite = spriteContainer.children[0];
+                sprite.scale.set(scale);
+                sprite.rotation = rotation * Math.PI / 180;
+                sprite.x = offsetX;
+                sprite.y = offsetY;
+            }
+        }
+        
+        function resetPosition() {
+            offsetX = 0;
+            offsetY = 0;
+            scale = 1.0;
+            rotation = 0;
+            document.getElementById('scaleSlider').value = 1.0;
+            document.getElementById('rotationSlider').value = 0;
+            document.getElementById('scaleValue').textContent = '1.0x';
+            document.getElementById('rotationValue').textContent = '0°';
+            updateSpriteTransform();
+        }
+        
+        // ============================================
+        // EXPORTAR/EDITAR
+        // ============================================
+        
+        function exportSprite() {
+            if (!currentSprite) return;
+            
+            // Criar canvas para exportar
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            if (spriteContainer.children.length > 0) {
+                const sprite = spriteContainer.children[0];
+                canvas.width = sprite.texture.width;
+                canvas.height = sprite.texture.height;
+                
+                // Desenhar sprite
+                const img = new Image();
+                img.onload = () => {
+                    ctx.drawImage(img, 0, 0);
+                    
+                    // Download
+                    canvas.toBlob((blob) => {
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `${currentSprite.name || 'sprite'}_frame_${currentFrame}.png`;
+                        a.click();
+                        URL.revokeObjectURL(url);
+                    });
+                };
+                img.src = sprite.texture.baseTexture.resource.source.src;
+            }
+        }
+        
+        function editSprite() {
+            alert('Editor de sprite em desenvolvimento!\n\nFuncionalidades planejadas:\n- Editar pixels\n- Adicionar/remover frames\n- Ajustar paleta de cores\n- Exportar modificações');
+        }
+        
+        function updateStatus(message) {
+            document.getElementById('status').textContent = message;
+        }
+        
+        // ============================================
+        // INICIALIZAR
+        // ============================================
+        
+        window.addEventListener('load', () => {
+            initPixi();
+            loadSprites();
+        });
+    </script>
+</body>
+</html>
+

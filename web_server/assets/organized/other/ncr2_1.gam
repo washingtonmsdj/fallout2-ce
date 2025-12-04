@@ -1,0 +1,19 @@
+ // Map vars for NCR area 1 Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+MVAR_Tandi_reward                     := 0;//  (0)
+MVAR_Tandi_pay                        := 0;//  (1)
+MVAR_Tandi_Smooth_Talker              := 0;//  (2)
+MVAR_Vault_reward                     := 0;//  (3)
+MVAR_Carlson_Team_Attack              := 0;//  (4)
+MVAR_Player_has_pass                  := 0;//  (5)
+MVAR_Tandi_Talked                     := 0;//  (6)
+MVAR_Player_Said_Bishop               := 0;//  (7)
+MVAR_Fergus_Knows                     := 0;//  (8)
+MVAR_GunDor_Open                      := 0;//  (9)
+MVAR_FergDor_Open                     := 0;//  (10)
+MVAR_Carlson_Gate                     := 0;//  (11)

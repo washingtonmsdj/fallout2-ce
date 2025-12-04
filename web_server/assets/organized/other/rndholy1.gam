@@ -1,0 +1,9 @@
+ // Map vars for Arthur Special Encounter map 1
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+MVAR_Arthur_Leave                    :=0;//      (0)
+MVAR_Made_Car                        :=0;//      (1)

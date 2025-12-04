@@ -1,0 +1,16 @@
+ // Map vars for Arroyo Garden Map
+
+ // Comments
+
+//MAP_GLOBAL_VARS:
+MAP_GLOBAL_VARS:
+//GLOBAL                                        NUMBER
+
+MVAR_Last_Respawn_Map           :=0;            //      (0)
+MVAR_Current_Gecko_Easy         :=0;            //      (1)
+MVAR_Current_Gecko_Hard         :=0;            //      (2)
+MVAR_Current_Xander_Root        :=0;            //      (3)
+MVAR_Current_Broc_Flower        :=0;            //      (4)
+MVAR_Last_Spot                  :=0;            //      (5)
+MVAR_Kill_Runaway               :=0;            //      (6)
+MVAR_Dog_Already_Dead           :=0;            //      (7)
