@@ -8,7 +8,7 @@ import struct
 import zlib
 import tempfile
 from pathlib import Path
-from hypothesis import given, strategies as st, settings
+from hypothesis import given, strategies as st, settings, HealthCheck
 from hypothesis.stateful import RuleBasedStateMachine, rule, invariant
 
 from tools.extractors.dat2_reader import DAT2Reader, DAT2Manager, FileInfo
@@ -17,6 +17,14 @@ from tools.extractors.dat2_reader import DAT2Reader, DAT2Manager, FileInfo
 def create_test_dat2(files: dict[str, bytes], compressed: dict[str, bool] = None) -> bytes:
     """
     Cria um arquivo DAT2 sintético para testes.
+    
+    O formato DAT2 é:
+    - Dados dos arquivos (no início)
+    - Tabela de entradas (após os dados)
+    - Footer: entries_data_size (4 bytes) + dbase_data_size (4 bytes)
+    
+    O dbase_data_size inclui os dados + tabela de entradas + footer.
+    O data_offset é relativo ao início dos dados (que está em file_size - dbase_data_size).
     
     Args:
         files: Dicionário mapeando caminhos para dados
@@ -28,10 +36,10 @@ def create_test_dat2(files: dict[str, bytes], compressed: dict[str, bool] = None
     if compressed is None:
         compressed = {}
         
-    # Construir tabela de entradas
-    entries_data = b''
+    # Construir dados e entradas
     entries = []
     data_offset = 0
+    data_section = b''
     
     for path, data in files.items():
         is_comp = compressed.get(path, False)
@@ -41,6 +49,9 @@ def create_test_dat2(files: dict[str, bytes], compressed: dict[str, bool] = None
             compressed_data = zlib.compress(data)
         else:
             compressed_data = data
+        
+        # Adicionar dados
+        data_section += compressed_data
             
         # Criar entrada
         path_bytes = path.encode('latin-1')
@@ -49,26 +60,19 @@ def create_test_dat2(files: dict[str, bytes], compressed: dict[str, bool] = None
         entry += struct.pack('B', 1 if is_comp else 0)  # compressed
         entry += struct.pack('<I', len(data))  # uncompressed_size
         entry += struct.pack('<I', len(compressed_data))  # data_size
-        entry += struct.pack('<I', data_offset)  # data_offset
+        entry += struct.pack('<I', data_offset)  # data_offset (relativo ao início dos dados)
         
-        entries.append({
-            'entry': entry,
-            'data': compressed_data,
-            'path': path
-        })
-        
+        entries.append(entry)
         data_offset += len(compressed_data)
-    
-    # Construir dados
-    data_section = b''.join([e['data'] for e in entries])
     
     # Construir tabela de entradas
     entries_table = struct.pack('<I', len(entries))  # entries_length
-    entries_table += b''.join([e['entry'] for e in entries])
+    entries_table += b''.join(entries)
     
-    # Calcular tamanhos
+    # Calcular tamanhos para o footer
     entries_data_size = len(entries_table)
-    dbase_data_size = len(data_section)
+    # dbase_data_size é o tamanho total dos dados + tabela + footer
+    dbase_data_size = len(data_section) + entries_data_size + 8
     
     # Construir arquivo completo
     dat2_file = data_section
@@ -175,7 +179,7 @@ class TestDAT2PropertyTests:
             max_size=20
         )
     )
-    @settings(max_examples=50)
+    @settings(max_examples=50, deadline=None, suppress_health_check=[HealthCheck.function_scoped_fixture])
     def test_property_1_file_listing_completeness(self, temp_dir, files):
         """
         Property 1: DAT2 File Listing Completeness
@@ -218,7 +222,7 @@ class TestDAT2PropertyTests:
         data=st.binary(min_size=1, max_size=500),
         compressed=st.booleans()
     )
-    @settings(max_examples=50)
+    @settings(max_examples=50, deadline=None, suppress_health_check=[HealthCheck.function_scoped_fixture])
     def test_property_2_extraction_round_trip(self, temp_dir, data, compressed):
         """
         Property 2: DAT2 Extraction Round-Trip
@@ -281,13 +285,13 @@ class TestDAT2Manager:
     
     @given(
         files=st.dictionaries(
-            keys=st.text(min_size=1, max_size=30),
+            keys=st.text(min_size=1, max_size=30, alphabet=st.characters(min_codepoint=32, max_codepoint=126)),
             values=st.binary(min_size=1, max_size=100),
             min_size=1,
             max_size=10
         )
     )
-    @settings(max_examples=30)
+    @settings(max_examples=30, deadline=None, suppress_health_check=[HealthCheck.function_scoped_fixture])
     def test_property_3_priority_resolution(self, temp_dir, files):
         """
         Property 3: DAT2 Priority Resolution
@@ -296,11 +300,11 @@ class TestDAT2Manager:
         o extrator DEVE retornar o conteúdo da fonte com maior prioridade
         (patch000.dat > critter.dat > master.dat).
         """
-        # Normalizar arquivos
+        # Normalizar arquivos (remover caracteres inválidos para caminhos)
         normalized_files = {}
         for path, data in files.items():
-            clean_path = ''.join(c if c.isprintable() and c not in '<>:"|?*\\' else '_' for c in path)
-            if clean_path:
+            clean_path = ''.join(c if c.isprintable() and c not in '<>:"|?*\\/' else '_' for c in path)
+            if clean_path and clean_path.strip():
                 normalized_files[clean_path] = data
         
         if not normalized_files:

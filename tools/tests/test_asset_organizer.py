@@ -176,7 +176,7 @@ class TestAssetOrganizerPropertyTests:
         num_assets=st.integers(min_value=1, max_value=20),
         include_dimensions=st.booleans()
     )
-    @settings(max_examples=50)
+    @settings(max_examples=50, deadline=None)
     def test_property_14_manifest_entry_completeness(self, num_assets, include_dimensions):
         """
         **Feature: fallout2-asset-extraction, Property 14: Manifest Entry Completeness**

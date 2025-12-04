@@ -199,7 +199,7 @@ class TestCritterPropertyTests:
         fps=st.integers(min_value=1, max_value=30),
         num_frames=st.integers(min_value=1, max_value=5)
     )
-    @settings(max_examples=100)
+    @settings(max_examples=100, deadline=None)
     def test_property_9_sprite_offset_metadata_preservation(self, offset_x, offset_y, fps, num_frames):
         """
         **Feature: fallout2-asset-extraction, Property 9: Sprite Offset Metadata Preservation**

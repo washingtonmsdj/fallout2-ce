@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://game_scene_f2"]
+[gd_scene load_steps=10 format=3 uid="uid://game_scene_f2"]
 
 [ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="1_player"]
 [ext_resource type="Script" path="res://scripts/core/game_scene.gd" id="2_script"]
 [ext_resource type="PackedScene" path="res://scenes/ui/fallout_hud.tscn" id="3_hud"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/edg001.png" id="4_tile"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/arfl001.png" id="4_tile1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/arfl002.png" id="5_tile2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/arfl003.png" id="6_tile3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/arrf001.png" id="7_tile4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/arrf002.png" id="8_tile5"]
 
 [sub_resource type="RectangleShape2D" id="npc_shape"]
 size = Vector2(20, 20)
@@ -15,44 +19,329 @@ script = ExtResource("2_script")
 
 [node name="Ground" type="Node2D" parent="World"]
 
-[node name="Tile1" type="Sprite2D" parent="World/Ground"]
-position = Vector2(100, 100)
-texture = ExtResource("4_tile")
 
-[node name="Tile2" type="Sprite2D" parent="World/Ground"]
-position = Vector2(180, 100)
-texture = ExtResource("4_tile")
+[node name="Row0_Col0" type="Sprite2D" parent="World/Ground"]
+position = Vector2(0, 0)
+texture = ExtResource("4_tile1")
 
-[node name="Tile3" type="Sprite2D" parent="World/Ground"]
-position = Vector2(260, 100)
-texture = ExtResource("4_tile")
+[node name="Row0_Col1" type="Sprite2D" parent="World/Ground"]
+position = Vector2(80, 0)
+texture = ExtResource("5_tile2")
 
-[node name="Tile4" type="Sprite2D" parent="World/Ground"]
-position = Vector2(100, 150)
-texture = ExtResource("4_tile")
+[node name="Row0_Col2" type="Sprite2D" parent="World/Ground"]
+position = Vector2(160, 0)
+texture = ExtResource("4_tile1")
 
-[node name="Tile5" type="Sprite2D" parent="World/Ground"]
-position = Vector2(180, 150)
-texture = ExtResource("4_tile")
+[node name="Row0_Col3" type="Sprite2D" parent="World/Ground"]
+position = Vector2(240, 0)
+texture = ExtResource("6_tile3")
 
-[node name="Tile6" type="Sprite2D" parent="World/Ground"]
-position = Vector2(260, 150)
-texture = ExtResource("4_tile")
+[node name="Row0_Col4" type="Sprite2D" parent="World/Ground"]
+position = Vector2(320, 0)
+texture = ExtResource("4_tile1")
 
-[node name="Tile7" type="Sprite2D" parent="World/Ground"]
-position = Vector2(100, 200)
-texture = ExtResource("4_tile")
+[node name="Row0_Col5" type="Sprite2D" parent="World/Ground"]
+position = Vector2(400, 0)
+texture = ExtResource("5_tile2")
 
-[node name="Tile8" type="Sprite2D" parent="World/Ground"]
-position = Vector2(180, 200)
-texture = ExtResource("4_tile")
+[node name="Row0_Col6" type="Sprite2D" parent="World/Ground"]
+position = Vector2(480, 0)
+texture = ExtResource("4_tile1")
 
-[node name="Tile9" type="Sprite2D" parent="World/Ground"]
-position = Vector2(260, 200)
-texture = ExtResource("4_tile")
+[node name="Row0_Col7" type="Sprite2D" parent="World/Ground"]
+position = Vector2(560, 0)
+texture = ExtResource("6_tile3")
+
+[node name="Row1_Col0" type="Sprite2D" parent="World/Ground"]
+position = Vector2(0, 36)
+texture = ExtResource("7_tile4")
+
+[node name="Row1_Col1" type="Sprite2D" parent="World/Ground"]
+position = Vector2(80, 36)
+texture = ExtResource("4_tile1")
+
+[node name="Row1_Col2" type="Sprite2D" parent="World/Ground"]
+position = Vector2(160, 36)
+texture = ExtResource("8_tile5")
+
+[node name="Row1_Col3" type="Sprite2D" parent="World/Ground"]
+position = Vector2(240, 36)
+texture = ExtResource("4_tile1")
+
+[node name="Row1_Col4" type="Sprite2D" parent="World/Ground"]
+position = Vector2(320, 36)
+texture = ExtResource("7_tile4")
+
+[node name="Row1_Col5" type="Sprite2D" parent="World/Ground"]
+position = Vector2(400, 36)
+texture = ExtResource("4_tile1")
+
+[node name="Row1_Col6" type="Sprite2D" parent="World/Ground"]
+position = Vector2(480, 36)
+texture = ExtResource("8_tile5")
+
+[node name="Row1_Col7" type="Sprite2D" parent="World/Ground"]
+position = Vector2(560, 36)
+texture = ExtResource("4_tile1")
+
+[node name="Row2_Col0" type="Sprite2D" parent="World/Ground"]
+position = Vector2(0, 72)
+texture = ExtResource("4_tile1")
+
+[node name="Row2_Col1" type="Sprite2D" parent="World/Ground"]
+position = Vector2(80, 72)
+texture = ExtResource("6_tile3")
+
+[node name="Row2_Col2" type="Sprite2D" parent="World/Ground"]
+position = Vector2(160, 72)
+texture = ExtResource("4_tile1")
+
+[node name="Row2_Col3" type="Sprite2D" parent="World/Ground"]
+position = Vector2(240, 72)
+texture = ExtResource("5_tile2")
+
+[node name="Row2_Col4" type="Sprite2D" parent="World/Ground"]
+position = Vector2(320, 72)
+texture = ExtResource("4_tile1")
+
+[node name="Row2_Col5" type="Sprite2D" parent="World/Ground"]
+position = Vector2(400, 72)
+texture = ExtResource("6_tile3")
+
+[node name="Row2_Col6" type="Sprite2D" parent="World/Ground"]
+position = Vector2(480, 72)
+texture = ExtResource("4_tile1")
+
+[node name="Row2_Col7" type="Sprite2D" parent="World/Ground"]
+position = Vector2(560, 72)
+texture = ExtResource("5_tile2")
+
+[node name="Row3_Col0" type="Sprite2D" parent="World/Ground"]
+position = Vector2(0, 108)
+texture = ExtResource("8_tile5")
+
+[node name="Row3_Col1" type="Sprite2D" parent="World/Ground"]
+position = Vector2(80, 108)
+texture = ExtResource("4_tile1")
+
+[node name="Row3_Col2" type="Sprite2D" parent="World/Ground"]
+position = Vector2(160, 108)
+texture = ExtResource("7_tile4")
+
+[node name="Row3_Col3" type="Sprite2D" parent="World/Ground"]
+position = Vector2(240, 108)
+texture = ExtResource("4_tile1")
+
+[node name="Row3_Col4" type="Sprite2D" parent="World/Ground"]
+position = Vector2(320, 108)
+texture = ExtResource("8_tile5")
+
+[node name="Row3_Col5" type="Sprite2D" parent="World/Ground"]
+position = Vector2(400, 108)
+texture = ExtResource("4_tile1")
+
+[node name="Row3_Col6" type="Sprite2D" parent="World/Ground"]
+position = Vector2(480, 108)
+texture = ExtResource("7_tile4")
+
+[node name="Row3_Col7" type="Sprite2D" parent="World/Ground"]
+position = Vector2(560, 108)
+texture = ExtResource("4_tile1")
+
+[node name="Row4_Col0" type="Sprite2D" parent="World/Ground"]
+position = Vector2(0, 144)
+texture = ExtResource("4_tile1")
+
+[node name="Row4_Col1" type="Sprite2D" parent="World/Ground"]
+position = Vector2(80, 144)
+texture = ExtResource("5_tile2")
+
+[node name="Row4_Col2" type="Sprite2D" parent="World/Ground"]
+position = Vector2(160, 144)
+texture = ExtResource("4_tile1")
+
+[node name="Row4_Col3" type="Sprite2D" parent="World/Ground"]
+position = Vector2(240, 144)
+texture = ExtResource("6_tile3")
+
+[node name="Row4_Col4" type="Sprite2D" parent="World/Ground"]
+position = Vector2(320, 144)
+texture = ExtResource("4_tile1")
+
+[node name="Row4_Col5" type="Sprite2D" parent="World/Ground"]
+position = Vector2(400, 144)
+texture = ExtResource("5_tile2")
+
+[node name="Row4_Col6" type="Sprite2D" parent="World/Ground"]
+position = Vector2(480, 144)
+texture = ExtResource("4_tile1")
+
+[node name="Row4_Col7" type="Sprite2D" parent="World/Ground"]
+position = Vector2(560, 144)
+texture = ExtResource("6_tile3")
+
+[node name="Row5_Col0" type="Sprite2D" parent="World/Ground"]
+position = Vector2(0, 180)
+texture = ExtResource("7_tile4")
+
+[node name="Row5_Col1" type="Sprite2D" parent="World/Ground"]
+position = Vector2(80, 180)
+texture = ExtResource("4_tile1")
+
+[node name="Row5_Col2" type="Sprite2D" parent="World/Ground"]
+position = Vector2(160, 180)
+texture = ExtResource("8_tile5")
+
+[node name="Row5_Col3" type="Sprite2D" parent="World/Ground"]
+position = Vector2(240, 180)
+texture = ExtResource("4_tile1")
+
+[node name="Row5_Col4" type="Sprite2D" parent="World/Ground"]
+position = Vector2(320, 180)
+texture = ExtResource("7_tile4")
+
+[node name="Row5_Col5" type="Sprite2D" parent="World/Ground"]
+position = Vector2(400, 180)
+texture = ExtResource("4_tile1")
+
+[node name="Row5_Col6" type="Sprite2D" parent="World/Ground"]
+position = Vector2(480, 180)
+texture = ExtResource("8_tile5")
+
+[node name="Row5_Col7" type="Sprite2D" parent="World/Ground"]
+position = Vector2(560, 180)
+texture = ExtResource("4_tile1")
+
+[node name="Row6_Col0" type="Sprite2D" parent="World/Ground"]
+position = Vector2(0, 216)
+texture = ExtResource("4_tile1")
+
+[node name="Row6_Col1" type="Sprite2D" parent="World/Ground"]
+position = Vector2(80, 216)
+texture = ExtResource("6_tile3")
+
+[node name="Row6_Col2" type="Sprite2D" parent="World/Ground"]
+position = Vector2(160, 216)
+texture = ExtResource("4_tile1")
+
+[node name="Row6_Col3" type="Sprite2D" parent="World/Ground"]
+position = Vector2(240, 216)
+texture = ExtResource("5_tile2")
+
+[node name="Row6_Col4" type="Sprite2D" parent="World/Ground"]
+position = Vector2(320, 216)
+texture = ExtResource("4_tile1")
+
+[node name="Row6_Col5" type="Sprite2D" parent="World/Ground"]
+position = Vector2(400, 216)
+texture = ExtResource("6_tile3")
+
+[node name="Row6_Col6" type="Sprite2D" parent="World/Ground"]
+position = Vector2(480, 216)
+texture = ExtResource("4_tile1")
+
+[node name="Row6_Col7" type="Sprite2D" parent="World/Ground"]
+position = Vector2(560, 216)
+texture = ExtResource("5_tile2")
+
+[node name="Row7_Col0" type="Sprite2D" parent="World/Ground"]
+position = Vector2(0, 252)
+texture = ExtResource("8_tile5")
+
+[node name="Row7_Col1" type="Sprite2D" parent="World/Ground"]
+position = Vector2(80, 252)
+texture = ExtResource("4_tile1")
+
+[node name="Row7_Col2" type="Sprite2D" parent="World/Ground"]
+position = Vector2(160, 252)
+texture = ExtResource("7_tile4")
+
+[node name="Row7_Col3" type="Sprite2D" parent="World/Ground"]
+position = Vector2(240, 252)
+texture = ExtResource("4_tile1")
+
+[node name="Row7_Col4" type="Sprite2D" parent="World/Ground"]
+position = Vector2(320, 252)
+texture = ExtResource("8_tile5")
+
+[node name="Row7_Col5" type="Sprite2D" parent="World/Ground"]
+position = Vector2(400, 252)
+texture = ExtResource("4_tile1")
+
+[node name="Row7_Col6" type="Sprite2D" parent="World/Ground"]
+position = Vector2(480, 252)
+texture = ExtResource("7_tile4")
+
+[node name="Row7_Col7" type="Sprite2D" parent="World/Ground"]
+position = Vector2(560, 252)
+texture = ExtResource("4_tile1")
+
+[node name="Row8_Col0" type="Sprite2D" parent="World/Ground"]
+position = Vector2(0, 288)
+texture = ExtResource("4_tile1")
+
+[node name="Row8_Col1" type="Sprite2D" parent="World/Ground"]
+position = Vector2(80, 288)
+texture = ExtResource("5_tile2")
+
+[node name="Row8_Col2" type="Sprite2D" parent="World/Ground"]
+position = Vector2(160, 288)
+texture = ExtResource("4_tile1")
+
+[node name="Row8_Col3" type="Sprite2D" parent="World/Ground"]
+position = Vector2(240, 288)
+texture = ExtResource("6_tile3")
+
+[node name="Row8_Col4" type="Sprite2D" parent="World/Ground"]
+position = Vector2(320, 288)
+texture = ExtResource("4_tile1")
+
+[node name="Row8_Col5" type="Sprite2D" parent="World/Ground"]
+position = Vector2(400, 288)
+texture = ExtResource("5_tile2")
+
+[node name="Row8_Col6" type="Sprite2D" parent="World/Ground"]
+position = Vector2(480, 288)
+texture = ExtResource("4_tile1")
+
+[node name="Row8_Col7" type="Sprite2D" parent="World/Ground"]
+position = Vector2(560, 288)
+texture = ExtResource("6_tile3")
+
+[node name="Row9_Col0" type="Sprite2D" parent="World/Ground"]
+position = Vector2(0, 324)
+texture = ExtResource("7_tile4")
+
+[node name="Row9_Col1" type="Sprite2D" parent="World/Ground"]
+position = Vector2(80, 324)
+texture = ExtResource("4_tile1")
+
+[node name="Row9_Col2" type="Sprite2D" parent="World/Ground"]
+position = Vector2(160, 324)
+texture = ExtResource("8_tile5")
+
+[node name="Row9_Col3" type="Sprite2D" parent="World/Ground"]
+position = Vector2(240, 324)
+texture = ExtResource("4_tile1")
+
+[node name="Row9_Col4" type="Sprite2D" parent="World/Ground"]
+position = Vector2(320, 324)
+texture = ExtResource("7_tile4")
+
+[node name="Row9_Col5" type="Sprite2D" parent="World/Ground"]
+position = Vector2(400, 324)
+texture = ExtResource("4_tile1")
+
+[node name="Row9_Col6" type="Sprite2D" parent="World/Ground"]
+position = Vector2(480, 324)
+texture = ExtResource("8_tile5")
+
+[node name="Row9_Col7" type="Sprite2D" parent="World/Ground"]
+position = Vector2(560, 324)
+texture = ExtResource("4_tile1")
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
-position = Vector2(180, 150)
+position = Vector2(280, 180)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 5

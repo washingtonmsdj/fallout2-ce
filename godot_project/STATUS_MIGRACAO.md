@@ -200,9 +200,59 @@ godot_project/
 
 - **Sistemas Core**: 100%
 - **Interface Básica**: 80%
-- **Conversão de Assets**: 10%
+- **Conversão de Assets**: 60% (sprites básicos extraídos)
 - **Conteúdo do Jogo**: 5%
-- **Total Estimado**: ~35%
+- **Total Estimado**: ~45%
+
+## ✅ ASSETS VERIFICADOS
+
+### Sprites Disponíveis
+- [x] `mainmenu.png` - Background do menu principal
+- [x] `iface.png` - Interface HUD
+- [x] `player_*.png` - 6 direções do player (ne, e, se, sw, w, nw)
+- [x] Tiles de Arroyo (`arfl*.png`, `arrf*.png`)
+- [x] Critters diversos (`hm*.png`, `hf*.png`, `ma*.png`)
+- [x] UI elements (botões, cursores, etc.)
+
+### Estrutura de Assets
+```
+godot_project/assets/sprites/
+├── player/     ✅ 6 sprites direcionais
+├── tiles/      ✅ ~150+ tiles
+├── critters/   ✅ ~50+ critters
+├── ui/         ✅ ~500+ elementos de UI
+└── items/      ⏳ Em progresso
+```
+
+## 🎮 COMO TESTAR
+
+### Requisitos
+- Godot Engine 4.2+ instalado
+- Cópia legal do Fallout 2 (para assets adicionais)
+
+### Passos para Testar
+1. Abra o Godot Engine
+2. Importe o projeto: `godot_project/project.godot`
+3. Pressione F5 para executar
+4. No menu principal:
+   - Pressione **N** ou clique em "NEW GAME" para iniciar
+   - Use **WASD** ou setas para mover o player
+   - Clique com o mouse para mover para uma posição
+   - Pressione **ESC** para pausar
+   - Pressione **I** para inventário
+
+### Controles
+| Tecla | Ação |
+|-------|------|
+| WASD / Setas | Movimento |
+| Shift | Correr |
+| E | Interagir |
+| I | Inventário |
+| C | Personagem |
+| P | PipBoy |
+| ESC | Pausar |
+| F6 | Quicksave |
+| F9 | Quickload |
 
 ---
 

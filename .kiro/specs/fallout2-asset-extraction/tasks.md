@@ -194,7 +194,9 @@
     - Incluir: original_path, output_path, asset_type, dimensions
     - _Requirements: 9.1, 9.2_
 
-  - [ ] 14.4 Escrever property test para completude do manifesto
+  - [x] 14.4 Escrever property test para completude do manifesto
+
+
     - **Property 14: Manifest Entry Completeness**
     - **Validates: Requirements 9.2**
   - [x] 14.5 Implementar logging de erros
@@ -217,8 +219,13 @@
 - [x] 16. Checkpoint Final - Verificar todos os testes
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 17. Executar Extração Completa
-  - [ ] 17.1 Executar extração de todos os assets do Fallout 2
+- [x] 17. Executar Extração Completa
+
+
+  - [x] 17.1 Executar extração de todos os assets do Fallout 2
+
+
+
     - Rodar pipeline completo com arquivos reais
     - Verificar manifesto gerado
     - Validar estrutura de saída em godot_project/assets/
@@ -239,7 +246,10 @@
     - Criar ASSETS_SUMMARY.md com lista de todos os assets
     - _Requirements: 11.1, 11.5_
 
-- [ ] 19. Checkpoint Final - Validar Estrutura para Jogo AAA
+
+
+
+- [x] 19. Checkpoint Final - Validar Estrutura para Jogo AAA
   - Verificar que todos os assets estão organizados com nomes legíveis
   - Confirmar que guias de substituição foram gerados
   - Testar que o jogo ainda funciona com a nova estrutura

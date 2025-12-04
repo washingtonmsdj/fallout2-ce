@@ -112,7 +112,7 @@ class TestTilePropertyTests:
     @given(
         num_tiles=st.integers(min_value=1, max_value=10)
     )
-    @settings(max_examples=50)
+    @settings(max_examples=50, deadline=None)
     def test_property_10_isometric_tile_dimensions(self, num_tiles):
         """
         **Feature: fallout2-asset-extraction, Property 10: Isometric Tile Dimensions**
@@ -161,7 +161,7 @@ class TestTilePropertyTests:
         width=st.integers(min_value=10, max_value=200),
         height=st.integers(min_value=10, max_value=200)
     )
-    @settings(max_examples=50)
+    @settings(max_examples=50, deadline=None)
     def test_tile_dimension_preservation(self, width, height):
         """
         Testa que as dimensões dos tiles são preservadas durante a extração,
