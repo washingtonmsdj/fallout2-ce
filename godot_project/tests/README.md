@@ -37,7 +37,8 @@ python godot_project/tests/verify_elevation_layers.py
 ## Property Tests
 
 ### Property 1: Isometric Coordinate Conversion Round-Trip
-**Validates: Requirements 1.1, 1.5**
+**Feature**: godot-game-migration  
+**Validates**: Requirements 1.1, 1.5
 
 For any tile position (x, y) and elevation e, converting to screen coordinates and back to tile coordinates SHALL produce the original tile position.
 
@@ -46,7 +47,8 @@ For any tile position (x, y) and elevation e, converting to screen coordinates a
 - **Status**: ✅ PASSED (100/100 iterations)
 
 ### Property 2: Sprite Depth Ordering Consistency
-**Validates: Requirements 1.2**
+**Feature**: godot-game-migration  
+**Validates**: Requirements 1.2
 
 For any set of sprites with different positions, the sort order SHALL be deterministic and consistent with the rule: sprites with higher y + elevation * offset appear in front.
 
@@ -55,13 +57,24 @@ For any set of sprites with different positions, the sort order SHALL be determi
 - **Status**: ✅ PASSED (100/100 iterations)
 
 ### Property 3: Elevation Layer Separation
-**Validates: Requirements 1.4**
+**Feature**: godot-game-migration  
+**Validates**: Requirements 1.4
 
 For any map with N distinct elevations, the renderer SHALL create exactly N separate rendering layers.
 
 - **Test File**: `test_elevation_layer_separation.gd`
 - **Verification**: `verify_elevation_layers.py`
 - **Status**: ✅ PASSED (100/100 iterations)
+
+### Property 1 (Complete Migration): Save/Load Round-Trip
+**Feature**: complete-migration-master  
+**Validates**: Requirements 3.4
+
+For any valid game state, saving and then loading SHALL produce an equivalent game state (all critical data preserved).
+
+- **Test File**: `test_save_load_roundtrip.gd`
+- **Verification**: `verify_save_load_roundtrip.py`
+- **Status**: ⏳ PENDING (requires Godot to run)
 
 ## Test Configuration
 

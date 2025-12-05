@@ -2,6 +2,21 @@ extends Node
 
 ## Sistema de Save/Load do Fallout 2
 ## Baseado no codigo original (src/loadsave.cc)
+##
+## Funcionalidades:
+## - Save/Load completo de estado do jogo
+## - 10 slots de save + quicksave
+## - Validação de dados com checksum
+## - Detecção de saves corrompidos
+## - Rastreamento de todos os mapas visitados
+## - Serialização de player, inventário, mapas e variáveis globais
+## - Metadados (timestamp, localização, level)
+##
+## Uso:
+##   SaveSystem.save_game(1)  # Salvar no slot 1
+##   SaveSystem.load_game(1)  # Carregar do slot 1
+##   SaveSystem.quicksave()   # F6
+##   SaveSystem.quickload()   # F9
 
 signal save_completed(slot: int, success: bool)
 signal load_completed(slot: int, success: bool)
@@ -14,6 +29,9 @@ const QUICKSAVE_SLOT = 0
 
 # Dados do save
 var current_save_data: Dictionary = {}
+
+# Rastreamento de mapas visitados
+var visited_maps: Dictionary = {}  # map_name -> map_state
 
 func _ready():
 	# Criar diretorio de saves se nao existir
@@ -118,7 +136,7 @@ func _collect_save_data() -> Dictionary:
 			"max_weight": inv.max_weight
 		}
 	
-	# Serializar estado do mapa (objetos modificados)
+	# Serializar estado do mapa atual
 	var map_system = get_node_or_null("/root/MapSystem")
 	if map_system:
 		data["map"] = {
@@ -126,6 +144,17 @@ func _collect_save_data() -> Dictionary:
 			"elevation": map_system.current_elevation,
 			"map_data": map_system.current_map_data.duplicate(true)
 		}
+		
+		# Salvar estado do mapa atual no histórico de mapas visitados
+		if not map_system.current_map_name.is_empty():
+			visited_maps[map_system.current_map_name] = {
+				"elevation": map_system.current_elevation,
+				"map_data": map_system.current_map_data.duplicate(true),
+				"last_visited": Time.get_unix_time_from_system()
+			}
+	
+	# Serializar todos os mapas visitados
+	data["visited_maps"] = visited_maps.duplicate(true)
 	
 	# Serializar variáveis globais
 	var script_system = get_node_or_null("/root/ScriptInterpreter")
@@ -170,8 +199,19 @@ func load_game(slot: int) -> bool:
 	
 	var save_data = json.data
 	
+	# Validar estrutura dos dados
+	if not _validate_save_data(save_data):
+		push_error("SaveSystem: Dados do save são inválidos")
+		load_completed.emit(slot, false)
+		return false
+	
 	# Aplicar dados
-	_apply_save_data(save_data)
+	var success = _apply_save_data(save_data)
+	
+	if not success:
+		push_error("SaveSystem: Falha ao aplicar dados do save")
+		load_completed.emit(slot, false)
+		return false
 	
 	print("SaveSystem: Jogo carregado com sucesso!")
 	load_completed.emit(slot, true)
@@ -181,15 +221,16 @@ func quickload() -> bool:
 	"""Quickload (F9)"""
 	return load_game(QUICKSAVE_SLOT)
 
-func _apply_save_data(data: Dictionary):
+func _apply_save_data(data: Dictionary) -> bool:
 	"""
 	Aplica dados do save ao jogo
 	Restaurar player, mapa e variáveis
+	Retorna true se aplicação foi bem-sucedida
 	"""
 	# Validar checksum antes de aplicar
 	if not _validate_checksum(data):
 		push_error("SaveSystem: Checksum inválido! Save pode estar corrompido.")
-		return
+		return false
 	
 	# Aplicar dados do jogo
 	if data.has("game"):
@@ -247,7 +288,11 @@ func _apply_save_data(data: Dictionary):
 			inv.max_weight = inv_data.get("max_weight", 150)
 			inv.update_weight()
 	
-	# Restaurar estado do mapa
+	# Restaurar todos os mapas visitados
+	if data.has("visited_maps"):
+		visited_maps = data["visited_maps"].duplicate(true)
+	
+	# Restaurar estado do mapa atual
 	if data.has("map"):
 		var map_system = get_node_or_null("/root/MapSystem")
 		if map_system:
@@ -264,6 +309,8 @@ func _apply_save_data(data: Dictionary):
 			var globals_data = data["globals"]
 			for var_name in globals_data:
 				script_system.set_global_var(var_name, globals_data[var_name])
+	
+	return true
 
 # === GERENCIAMENTO DE SLOTS ===
 
@@ -347,6 +394,50 @@ func _get_player() -> Node:
 		return gm.player
 	return null
 
+# === RASTREAMENTO DE MAPAS VISITADOS ===
+
+func track_map_visit(map_name: String):
+	"""
+	Registra visita a um mapa
+	Chamado pelo MapSystem quando um mapa é carregado
+	"""
+	if map_name.is_empty():
+		return
+	
+	var map_system = get_node_or_null("/root/MapSystem")
+	if not map_system:
+		return
+	
+	visited_maps[map_name] = {
+		"elevation": map_system.current_elevation,
+		"map_data": map_system.current_map_data.duplicate(true),
+		"last_visited": Time.get_unix_time_from_system()
+	}
+
+func get_visited_map_state(map_name: String) -> Dictionary:
+	"""
+	Retorna estado salvo de um mapa visitado
+	Retorna dicionário vazio se mapa não foi visitado
+	"""
+	return visited_maps.get(map_name, {})
+
+func has_visited_map(map_name: String) -> bool:
+	"""Verifica se um mapa já foi visitado"""
+	return visited_maps.has(map_name)
+
+func clear_visited_maps():
+	"""Limpa histórico de mapas visitados (para novo jogo)"""
+	visited_maps.clear()
+
+func new_game():
+	"""
+	Inicializa dados para um novo jogo
+	Limpa histórico de mapas visitados
+	"""
+	visited_maps.clear()
+	current_save_data.clear()
+	print("SaveSystem: Novo jogo iniciado, dados limpos")
+
 # === METADADOS ===
 
 func _create_metadata(slot: int) -> Dictionary:
@@ -406,7 +497,57 @@ func _validate_checksum(data: Dictionary) -> bool:
 	var saved_checksum = data.get("checksum", "")
 	var calculated_checksum = _calculate_checksum(data)
 	
-	return saved_checksum == calculated_checksum
+	var is_valid = saved_checksum == calculated_checksum
+	
+	if not is_valid:
+		push_error("SaveSystem: Checksum inválido!")
+		push_error("  Esperado: " + saved_checksum)
+		push_error("  Calculado: " + calculated_checksum)
+		push_error("  O save pode estar corrompido ou foi modificado manualmente.")
+	
+	return is_valid
+
+func _validate_save_data(data: Dictionary) -> bool:
+	"""
+	Valida estrutura e conteúdo dos dados de save
+	Retorna true se dados são válidos
+	"""
+	# Verificar campos obrigatórios
+	if not data.has("meta"):
+		push_error("SaveSystem: Save sem metadados")
+		return false
+	
+	if not data.has("player"):
+		push_error("SaveSystem: Save sem dados do player")
+		return false
+	
+	if not data.has("game"):
+		push_error("SaveSystem: Save sem dados do jogo")
+		return false
+	
+	# Validar versão
+	var meta = data.get("meta", {})
+	var version = meta.get("version", "")
+	if version.is_empty():
+		push_warning("SaveSystem: Save sem informação de versão")
+	
+	# Validar dados do player
+	var player_data = data.get("player", {})
+	if not player_data.has("hp") or not player_data.has("max_hp"):
+		push_error("SaveSystem: Dados do player incompletos (falta HP)")
+		return false
+	
+	# Validar HP não é negativo
+	if player_data.get("hp", 0) < 0:
+		push_error("SaveSystem: HP do player é negativo")
+		return false
+	
+	# Validar level é positivo
+	if player_data.get("level", 0) <= 0:
+		push_error("SaveSystem: Level do player é inválido")
+		return false
+	
+	return true
 
 # === INPUT ===
 

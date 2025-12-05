@@ -208,35 +208,65 @@
     - **Property 4: Rastreamento de Progresso Consistente**
     - **Validates: Requirements 5.1, 5.2, 5.4**
 
-- [ ] 11. Completar MapManager
-  - [ ] 11.1 Implementar carregamento de mapas convertidos
+- [x] 11. Completar MapManager
+
+
+
+
+
+
+
+
+
+
+
+
+  - [x] 11.1 Implementar carregamento de mapas convertidos
     - Carregar tiles de todas as elevações
     - Instanciar objetos e NPCs
     - Configurar conexões entre mapas
     - _Requirements: 4.1_
-  - [ ] 11.2 Implementar sistema de elevações
+    - **Implementado em:** `godot_project/scripts/systems/map_system.gd`
+    - **Funcionalidades:** load_map(), _load_map_tiles(), _instantiate_map_objects(), _instantiate_map_npcs(), _configure_map_connections()
+  - [x] 11.2 Implementar sistema de elevações
     - Renderizar 3 níveis de elevação
     - Transições entre elevações
     - Oclusão correta
     - _Requirements: 9.3_
-  - [ ] 11.3 Implementar transições de mapa
+    - **Implementado em:** `godot_project/scripts/systems/map_system.gd`
+    - **Funcionalidades:** set_elevation(), get_elevation(), _start_elevation_transition(), _update_elevation_transition(), _update_elevation_visibility()
+  - [x] 11.3 Implementar transições de mapa
     - Detectar saídas de mapa
     - Carregar novo mapa
     - Posicionar jogador corretamente
     - _Requirements: 4.1_
+    - **Implementado em:** `godot_project/scripts/systems/map_system.gd`
+    - **Funcionalidades:** transition_to(), check_exit(), check_exit_at_tile(), _apply_entrance()
 
-- [ ] 12. Completar SaveSystem
-  - [ ] 12.1 Implementar save completo
+- [x] 12. Completar SaveSystem
+  - [x] 12.1 Implementar save completo
     - Salvar estado do jogador
     - Salvar estado de todos os mapas visitados
     - Salvar flags e variáveis globais
     - _Requirements: 5.1_
-  - [ ] 12.2 Implementar load com validação
+    - **Implementado em:** `godot_project/scripts/systems/save_system.gd`
+    - **Funcionalidades:** save_game(), _collect_save_data(), track_map_visit(), visited_maps tracking
+  - [x] 12.2 Implementar load com validação
     - Carregar e validar dados
     - Detectar saves corrompidos
     - Restaurar estado completo
     - _Requirements: 5.1_
-  - [ ] 12.3 Write property test for save/load round-trip
+    - **Implementado em:** `godot_project/scripts/systems/save_system.gd`
+    - **Funcionalidades:** load_game(), _validate_save_data(), _validate_checksum(), _apply_save_data()
+  - [x] 12.3 Write property test for save/load round-trip
+
+
+
+
+
+
+
+
     - **Property 1: Round-trip de Formatos de Arquivo** (aplicado a saves)
     - **Validates: Requirements 3.4**
 

@@ -85,7 +85,9 @@ def run_all_tests_summary():
         'Rendering': ['verify_roundtrip.py', 'verify_sprite_ordering.py', 'verify_elevation_layers.py'],
         'Camera': ['verify_camera_clamping.py'],
         'Pathfinding': ['verify_pathfinding.py', 'verify_ap_consumption.py', 'verify_run_speed.py'],
-        'Combat': ['verify_combat_turn_order.py', 'verify_hit_chance.py', 'verify_damage_formula.py', 'verify_combat_state.py']
+        'Combat': ['verify_combat_turn_order.py', 'verify_hit_chance.py', 'verify_damage_formula.py', 'verify_combat_state.py'],
+        'Save System': ['verify_save_system.py', 'verify_save_load_roundtrip.py'],
+        'Map System': ['verify_map_system_loading.py']
     }
     
     for category, test_files in categories.items():
