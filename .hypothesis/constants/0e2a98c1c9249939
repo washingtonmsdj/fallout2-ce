@@ -1,4 +1,0 @@
-# file: C:\Users\Casa\Documents\Novo github\fallout2-ce\tools\extractors\map_parser.py
-# hypothesis_version: 6.148.6
-
-[b'\x00', 200, '<I', 'darkness', 'elevation', 'entering', 'flags', 'global_count', 'height', 'ignore', 'latin-1', 'local_count', 'name', 'num_levels', 'objects', 'rotation', 'script_index', 'scripts', 'tile', 'tiles', 'utf-8', 'variables', 'version', 'w', 'width']
