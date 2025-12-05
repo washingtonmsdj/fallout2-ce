@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1764902825
+::res://::1764909415
 ANALISE_FLUXO_ORIGINAL_FALLOUT2.md::TextFile::-1::1764897327::0::1::::<><><>0<>0<><>::
 ASSETS_SUMMARY.md::TextFile::-1::1764836697::0::1::::<><><>0<>0<><>::
 ASSET_REPLACEMENT_GUIDE.md::TextFile::-1::1764836697::0::1::::<><><>0<>0<><>::
@@ -7,7 +7,7 @@ AVISO_PROXIMOS_PASSOS.md::TextFile::-1::1764834427::0::1::::<><><>0<>0<><>::
 COMO_FUNCIONAM_OS_ASSETS.md::TextFile::-1::1764891992::0::1::::<><><>0<>0<><>::
 COMO_JOGAR.md::TextFile::-1::1764830366::0::1::::<><><>0<>0<><>::
 COMO_USAR.md::TextFile::-1::1764834427::0::1::::<><><>0<>0<><>::
-control.tscn::PackedScene::6693451553990631801::1764830480::0::1::::<><><>0<>0<><>::
+control.tscn::PackedScene::6693451553990631801::1764902862::0::1::::<><><>0<>0<><>::
 CORRECAO_BUGS_VISUAIS.md::TextFile::-1::1764897701::0::1::::<><><>0<>0<><>::
 CORRECAO_MENU_E_MAPA.md::TextFile::-1::1764897123::0::1::::<><><>0<>0<><>::
 ESTRUTURA_COMPLETA_MIGRACAO.md::TextFile::-1::1764834426::0::1::::<><><>0<>0<><>::
@@ -634,7 +634,7 @@ arbridge.json::JSON::-1::1764898765::0::1::::<><><>0<>0<><>::
 arcaves.json::JSON::-1::1764898766::0::1::::<><><>0<>0<><>::
 ARDEAD.json::JSON::-1::1764898768::0::1::::<><><>0<>0<><>::
 ARGARDEN.json::JSON::-1::1764898774::0::1::::<><><>0<>0<><>::
-artemple.json::JSON::-1::1764902366::0::1::::<><><>0<>0<><>::
+artemple.json::JSON::-1::1764909075::0::1::::<><><>0<>0<><>::
 ARVILL2.json::JSON::-1::1764898792::0::1::::<><><>0<>0<><>::
 arvillag.json::JSON::-1::1764898794::0::1::::<><><>0<>0<><>::
 bhrnddst.json::JSON::-1::1764898795::0::1::::<><><>0<>0<><>::
