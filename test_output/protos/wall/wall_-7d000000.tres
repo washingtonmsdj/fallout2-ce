@@ -1,8 +1,0 @@
-[gd_resource type="Resource" format=3]
-
-[resource]
-
-pid = -2097152000
-fid = 956301312
-type = "wall"
-flags = 0

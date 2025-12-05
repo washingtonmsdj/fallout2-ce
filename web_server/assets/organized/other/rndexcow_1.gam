@@ -1,9 +1,0 @@
- // Map vars for CowBomb Map
-
- // Comments
-
-//MAP_GLOBAL_VARS:
-MAP_GLOBAL_VARS:
-//GLOBAL                                        NUMBER
-MVAR_Current_Cow_Bombs                :=0;//      (0)
-MVAR_Made_Car                         :=0;//      (1)

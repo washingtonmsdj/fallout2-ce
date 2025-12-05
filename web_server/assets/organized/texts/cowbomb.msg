@@ -1,1 +1,0 @@
-{100}{}{You have a funny feeling about this place.  The enchanting smell of cow dung and rotting flesh eminates a few feet from here.}

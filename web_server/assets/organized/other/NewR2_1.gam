@@ -1,8 +1,0 @@
- // Map vars for New Reno 2nd Street
-
- // Comments
-
-//MAP_GLOBAL_VARS:
-MAP_GLOBAL_VARS:
-//GLOBAL                                        NUMBER
-MVAR_STAIR_GUARD                 :=0;    //      (1)

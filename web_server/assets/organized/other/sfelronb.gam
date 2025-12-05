@@ -1,9 +1,0 @@
- // Map vars for Erlon Base Map
-
- // Comments
-
-//MAP_GLOBAL_VARS:
-MAP_GLOBAL_VARS:
-//GLOBAL                                        NUMBER
-MVAR_Talk_Sequence                       :=0    //(0)
-MVAR_Force_Fields_Lower                  :=0    //(1)

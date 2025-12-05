@@ -1,8 +1,0 @@
- // Map vars for Random Pariah
-
- // Comments
-
-//MAP_MAP_VARS:
-MAP_GLOBAL_VARS:
-//MAP                                        NUMBER
-MVAR_Made_Car                                :=0;    //(0)
