@@ -8,16 +8,31 @@ extends Node2D
 @onready var hud: CanvasLayer = $HUD
 
 var is_ready: bool = false
+var iso_renderer: Node = null
 
 func _ready():
 	print("GameScene: Inicializando...")
 	
+	# Obter renderer isométrico
+	iso_renderer = get_node_or_null("/root/IsometricRenderer")
+	if not iso_renderer:
+		push_warning("GameScene: IsometricRenderer não encontrado!")
+	
 	# Aguardar um frame
 	await get_tree().process_frame
+	
+	# Converter tiles para posições isométricas
+	_convert_tiles_to_isometric()
 	
 	# Configurar player
 	if player:
 		player.add_to_group("player")
+		
+		# Converter posição do player para isométrica
+		if iso_renderer:
+			var tile_pos = Vector2i(5, 5)  # Posição central no grid
+			player.position = iso_renderer.tile_to_screen(tile_pos, 0)
+		
 		print("GameScene: Player configurado em ", player.position)
 		
 		# Garantir camera ativa
@@ -31,6 +46,33 @@ func _ready():
 	
 	is_ready = true
 	print("GameScene: Pronto!")
+
+func _convert_tiles_to_isometric():
+	"""Converte tiles de grid cartesiano para isométrico"""
+	if not iso_renderer or not world:
+		return
+	
+	var ground = world.get_node_or_null("Ground")
+	if not ground:
+		return
+	
+	print("GameScene: Convertendo tiles para isométrico...")
+	
+	# Percorrer todos os tiles e converter suas posições
+	for child in ground.get_children():
+		if child is Sprite2D:
+			# Extrair coordenadas do nome (Row0_Col0, etc)
+			var parts = child.name.split("_")
+			if parts.size() >= 2:
+				var row = int(parts[0].replace("Row", ""))
+				var col = int(parts[1].replace("Col", ""))
+				
+				# Converter para posição isométrica
+				var tile_pos = Vector2i(col, row)
+				var screen_pos = iso_renderer.tile_to_screen(tile_pos, 0)
+				child.position = screen_pos
+	
+	print("GameScene: Conversão isométrica concluída")
 
 func _setup_npcs():
 	"""Configura NPCs na cena"""

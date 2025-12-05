@@ -43,7 +43,12 @@ extends Resource
 @export var lighting_level: float = 1.0
 
 
-func _init(p_id: String = "", p_name: String = "", p_width: int = 200, p_height: int = 200) -> void:
+func _init() -> void:
+	pass
+
+
+## Inicializar mapa com valores
+func setup(p_id: String, p_name: String, p_width: int, p_height: int) -> MapData:
 	id = p_id
 	name = p_name
 	width = p_width
@@ -54,15 +59,15 @@ func _init(p_id: String = "", p_name: String = "", p_width: int = 200, p_height:
 	floor_tiles.clear()
 	roof_tiles.clear()
 	
-	for elevation in range(elevation_count):
+	for elev in range(elevation_count):
 		var floor_layer: Array = []
 		var roof_layer: Array = []
 		
-		for y in range(height):
+		for y in range(p_height):
 			var floor_row: Array = []
 			var roof_row: Array = []
 			
-			for x in range(width):
+			for x in range(p_width):
 				floor_row.append(0)
 				roof_row.append(0)
 			
@@ -71,18 +76,23 @@ func _init(p_id: String = "", p_name: String = "", p_width: int = 200, p_height:
 		
 		floor_tiles.append(floor_layer)
 		roof_tiles.append(roof_layer)
+	
+	return self
 
 
 ## Obter tile em posição específica
-func get_tile(pos: Vector2i, elevation: int) -> TileData:
-	if elevation < 0 or elevation >= elevation_count:
+func get_tile(pos: Vector2i, elev: int) -> TileData:
+	if elev < 0 or elev >= elevation_count:
 		return null
 	
 	if pos.x < 0 or pos.x >= width or pos.y < 0 or pos.y >= height:
 		return null
 	
-	var tile_id = floor_tiles[elevation][pos.y][pos.x]
-	return TileData.new(tile_id, elevation)
+	var tid = floor_tiles[elev][pos.y][pos.x]
+	var tile = TileData.new()
+	tile.tile_id = tid
+	tile.elevation = elev
+	return tile
 
 
 ## Definir tile em posição específica

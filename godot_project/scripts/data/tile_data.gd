@@ -13,9 +13,8 @@ var damaged: bool = false
 var locked: bool = false
 
 
-func _init(p_tile_id: int = 0, p_elevation: int = 0) -> void:
-	tile_id = p_tile_id
-	elevation = p_elevation
+func _init() -> void:
+	pass
 
 
 ## Verificar se tile é caminhável

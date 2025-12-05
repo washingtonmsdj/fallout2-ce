@@ -45,6 +45,7 @@ var previous_state: GameState = GameState.MENU
 var current_map: Node2D = null
 var current_map_name: String = ""
 var player: CharacterBody2D = null
+var player_name: String = "Chosen One"  # Nome do personagem
 
 # Sistema de tempo do jogo
 var game_time_ticks: int = 302400  # Tempo inicial (baseado no original)
@@ -162,27 +163,88 @@ func _find_main_menu() -> Control:
 	return null
 
 func start_new_game():
-	"""Inicia um novo jogo - igual ao original"""
-	print("GameManager: Iniciando novo jogo...")
-	
-	# Esconder menu
-	var main_menu = _find_main_menu()
-	if main_menu:
-		main_menu.visible = false
+	"""
+	Inicia um novo jogo - IGUAL AO FALLOUT 2 ORIGINAL
+	No original, não existe tela de criação de personagem!
+	O jogo começa DIRETAMENTE no Temple of Trials (artemple.map)
+	"""
+	print("GameManager: Iniciando novo jogo - Temple of Trials...")
 	
 	# Mudar estado
 	previous_state = current_state
 	current_state = GameState.LOADING
 	game_state_changed.emit(current_state)
 	
+	# Inicializar player com stats padrão do Fallout 2
+	_initialize_default_player_stats()
+	
+	# Carregar Temple of Trials (primeiro mapa)
+	_load_temple_of_trials()
+
+func _initialize_default_player_stats():
+	"""
+	Inicializa player com stats PADRÃO do Fallout 2
+	No original, todos começam com SPECIAL 5 em tudo
+	"""
+	print("GameManager: Inicializando stats padrão do player...")
+	
+	# SPECIAL padrão (todos 5)
+	var default_special = {
+		"strength": 5,
+		"perception": 5,
+		"endurance": 5,
+		"charisma": 5,
+		"intelligence": 5,
+		"agility": 5,
+		"luck": 5
+	}
+	
+	# Derived stats
+	var default_derived = {
+		"hp": 25,
+		"max_hp": 25,
+		"ap": 8,
+		"max_ap": 8,
+		"armor_class": 5,
+		"melee_damage": 1,
+		"carry_weight": 150,
+		"sequence": 10,
+		"healing_rate": 1,
+		"critical_chance": 5
+	}
+	
+	# Armazenar para uso posterior
+	set_meta("default_special", default_special)
+	set_meta("default_derived", default_derived)
+
+func _load_temple_of_trials():
+	"""Carrega o Temple of Trials (primeiro mapa do Fallout 2)"""
+	var temple_path = "res://scenes/maps/temple_of_trials.tscn"
+	
+	if ResourceLoader.exists(temple_path):
+		print("GameManager: Carregando Temple of Trials...")
+		get_tree().change_scene_to_file(temple_path)
+	else:
+		push_warning("GameManager: Temple of Trials não encontrado! Usando mapa temporário...")
+		# Fallback: carregar game_scene temporário
+		_start_game_directly()
+
+func _start_game_directly():
+	"""Inicia o jogo diretamente (fallback temporário)"""
+	print("GameManager: Iniciando jogo com mapa temporário...")
+	
+	# Esconder menu
+	var main_menu = _find_main_menu()
+	if main_menu:
+		main_menu.visible = false
+	
 	# Carregar cena de jogo
 	await _load_game_scene()
 	
-	# Carregar primeiro mapa (Arroyo - Temple of Trials no original)
-	# Por enquanto, carregar mapa de teste
+	# Mudar para modo exploração
 	change_state(GameState.EXPLORATION)
 	
-	print("GameManager: Novo jogo iniciado")
+	print("GameManager: Novo jogo iniciado (temporário)")
 
 func _load_game_scene():
 	"""Carrega a cena principal de jogo"""

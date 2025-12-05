@@ -170,10 +170,12 @@ func _load_map_data(map_name: String) -> MapData:
 
 func _create_default_map_data(map_name: String) -> MapData:
 	"""Cria dados padrao para um mapa"""
-	var map_data = MapData.new(map_name, map_name, 200, 200)
+	var map_data = MapData.new()
+	map_data.setup(map_name, map_name, 200, 200)
 	
 	# Criar saída padrão
-	var exit = MapExit.new("exit_0", "arroyo", Vector2i(100, 100))
+	var exit = MapExit.new()
+	exit.setup("exit_0", "arroyo", Vector2i(100, 100))
 	exit.set_exit_zone(Rect2i(Vector2i(0, 0), Vector2i(200, 200)))
 	map_data.exits.append(exit)
 	
@@ -182,7 +184,8 @@ func _create_default_map_data(map_name: String) -> MapData:
 
 func _create_map_from_json(map_name: String, json_data: Dictionary) -> MapData:
 	"""Cria MapData a partir de dados JSON"""
-	var map_data = MapData.new(
+	var map_data = MapData.new()
+	map_data.setup(
 		map_name,
 		json_data.get("name", map_name),
 		json_data.get("width", 200),
@@ -193,16 +196,17 @@ func _create_map_from_json(map_name: String, json_data: Dictionary) -> MapData:
 	var tiles_data = json_data.get("tiles", [])
 	for tile_info in tiles_data:
 		var pos = Vector2i(tile_info.get("x", 0), tile_info.get("y", 0))
-		var elevation = tile_info.get("elevation", 0)
-		var tile_id = tile_info.get("tile_id", 0)
+		var elev = tile_info.get("elevation", 0)
+		var tid = tile_info.get("tile_id", 0)
 		
-		if map_data.is_valid_position(pos, elevation):
-			map_data.set_tile(pos, elevation, tile_id)
+		if map_data.is_valid_position(pos, elev):
+			map_data.set_tile(pos, elev, tid)
 	
 	# Carregar objetos
 	var objects_data = json_data.get("objects", [])
 	for obj_info in objects_data:
-		var obj = MapObject.new(
+		var obj = MapObject.new()
+		obj.setup(
 			obj_info.get("id", ""),
 			obj_info.get("type", "scenery"),
 			Vector2i(obj_info.get("x", 0), obj_info.get("y", 0)),
@@ -214,7 +218,8 @@ func _create_map_from_json(map_name: String, json_data: Dictionary) -> MapData:
 	# Carregar NPCs
 	var npcs_data = json_data.get("npcs", [])
 	for npc_info in npcs_data:
-		var npc = NPCSpawn.new(
+		var npc = NPCSpawn.new()
+		npc.setup(
 			npc_info.get("npc_id", ""),
 			npc_info.get("proto_id", 0),
 			Vector2i(npc_info.get("x", 0), npc_info.get("y", 0))
@@ -226,7 +231,8 @@ func _create_map_from_json(map_name: String, json_data: Dictionary) -> MapData:
 	# Carregar itens
 	var items_data = json_data.get("items", [])
 	for item_info in items_data:
-		var item = ItemSpawn.new(
+		var item = ItemSpawn.new()
+		item.setup(
 			item_info.get("item_id", ""),
 			item_info.get("proto_id", 0),
 			Vector2i(item_info.get("x", 0), item_info.get("y", 0)),
@@ -238,7 +244,8 @@ func _create_map_from_json(map_name: String, json_data: Dictionary) -> MapData:
 	# Carregar saídas
 	var exits_data = json_data.get("exits", [])
 	for exit_info in exits_data:
-		var exit = MapExit.new(
+		var exit = MapExit.new()
+		exit.setup(
 			exit_info.get("exit_id", ""),
 			exit_info.get("target_map", ""),
 			Vector2i(exit_info.get("target_x", 0), exit_info.get("target_y", 0))
@@ -290,13 +297,13 @@ func _create_default_tiles(map_data: MapData):
 	map_data.floor_tiles.clear()
 	map_data.roof_tiles.clear()
 	
-	for elevation in range(map_data.elevation_count):
-		var floor_layer: Array[Array] = []
-		var roof_layer: Array[Array] = []
+	for elev in range(map_data.elevation_count):
+		var floor_layer: Array = []
+		var roof_layer: Array = []
 		
 		for y in range(map_data.height):
-			var floor_row: Array[int] = []
-			var roof_row: Array[int] = []
+			var floor_row: Array = []
+			var roof_row: Array = []
 			
 			for x in range(map_data.width):
 				floor_row.append(1)  # Tile padrão

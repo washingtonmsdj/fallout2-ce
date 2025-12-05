@@ -23,11 +23,17 @@ var is_locked: bool = false
 var is_open: bool = false
 
 
-func _init(p_id: String = "", p_type: String = "", p_position: Vector2i = Vector2i.ZERO, p_proto_id: int = 0) -> void:
+func _init() -> void:
+	pass
+
+
+## Inicializar objeto com valores
+func setup(p_id: String, p_type: String, p_position: Vector2i, p_proto_id: int) -> MapObject:
 	id = p_id
 	type = p_type
 	position = p_position
 	proto_id = p_proto_id
+	return self
 
 
 ## Obter sprite do objeto

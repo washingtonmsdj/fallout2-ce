@@ -35,28 +35,35 @@ func _on_intro_pressed():
 	print("MainMenu: INTRO pressionado")
 
 func _on_new_game_pressed():
-	print("MainMenu: NEW GAME pressionado - Iniciando...")
-	var gm = get_node_or_null("/root/GameManager")
-	if gm:
-		print("MainMenu: GameManager encontrado, chamando start_new_game()")
-		gm.start_new_game()
-		visible = false
+	print("MainMenu: NEW GAME pressionado - Iniciando Temple of Trials...")
+	
+	# IGUAL AO ORIGINAL: Carregar DIRETAMENTE o primeiro mapa
+	# No Fallout 2, não existe tela de criação de personagem
+	# O jogo começa direto no Temple of Trials (artemple.map)
+	
+	# Tentar carregar o mapa convertido do original
+	var artemple_path = "res://scenes/maps/artemple.tscn"
+	var temple_path = "res://scenes/maps/temple_of_trials.tscn"
+	
+	if ResourceLoader.exists(artemple_path):
+		print("MainMenu: Carregando artemple.tscn (mapa original convertido)...")
+		get_tree().change_scene_to_file(artemple_path)
+	elif ResourceLoader.exists(temple_path):
+		print("MainMenu: Carregando temple_of_trials.tscn (fallback)...")
+		get_tree().change_scene_to_file(temple_path)
 	else:
-		print("MainMenu: ERRO - GameManager nao encontrado!")
-		# Fallback: tentar carregar a cena de jogo diretamente
+		print("MainMenu: Nenhum mapa encontrado, carregando game_scene...")
 		_load_game_scene_directly()
 
 func _load_game_scene_directly():
-	"""Carrega a cena de jogo diretamente como fallback"""
-	print("MainMenu: Tentando carregar cena de jogo diretamente...")
-	var game_scene = load("res://scenes/game/game_scene.tscn")
-	if game_scene:
-		var instance = game_scene.instantiate()
-		get_tree().current_scene.add_child(instance)
-		visible = false
-		print("MainMenu: Cena de jogo carregada com sucesso!")
+	"""Carrega a cena de jogo temporária (até termos o Temple of Trials)"""
+	print("MainMenu: Carregando game_scene.tscn temporário...")
+	var game_scene_path = "res://scenes/game/game_scene.tscn"
+	if ResourceLoader.exists(game_scene_path):
+		get_tree().change_scene_to_file(game_scene_path)
+		print("MainMenu: Cena de jogo carregada!")
 	else:
-		print("MainMenu: ERRO - Nao foi possivel carregar a cena de jogo!")
+		push_error("MainMenu: ERRO - Cena de jogo não encontrada!")
 
 func _on_load_game_pressed():
 	print("MainMenu: LOAD GAME pressionado")

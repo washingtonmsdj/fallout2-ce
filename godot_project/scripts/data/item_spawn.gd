@@ -15,11 +15,17 @@ var is_hidden: bool = false
 var is_trapped: bool = false
 
 
-func _init(p_item_id: String = "", p_proto_id: int = 0, p_position: Vector2i = Vector2i.ZERO, p_quantity: int = 1) -> void:
+func _init() -> void:
+	pass
+
+
+## Inicializar item com valores
+func setup(p_item_id: String, p_proto_id: int, p_position: Vector2i, p_quantity: int) -> ItemSpawn:
 	item_id = p_item_id
 	proto_id = p_proto_id
 	position = p_position
 	quantity = p_quantity
+	return self
 
 
 ## Definir condição do item

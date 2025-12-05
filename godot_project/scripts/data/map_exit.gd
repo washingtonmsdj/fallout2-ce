@@ -16,10 +16,16 @@ var transition_type: String = "fade"  # "fade", "slide", "instant"
 var transition_duration: float = 0.5
 
 
-func _init(p_exit_id: String = "", p_target_map: String = "", p_target_pos: Vector2i = Vector2i.ZERO) -> void:
+func _init() -> void:
+	pass
+
+
+## Inicializar saída com valores
+func setup(p_exit_id: String, p_target_map: String, p_target_pos: Vector2i) -> MapExit:
 	exit_id = p_exit_id
 	target_map = p_target_map
 	target_position = p_target_pos
+	return self
 
 
 ## Verificar se posição está na zona de saída

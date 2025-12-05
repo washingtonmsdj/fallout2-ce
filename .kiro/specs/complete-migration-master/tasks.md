@@ -270,23 +270,41 @@
     - **Property 1: Round-trip de Formatos de Arquivo** (aplicado a saves)
     - **Validates: Requirements 3.4**
 
-- [ ] 13. Checkpoint - Validar core systems
+- [x] 13. Checkpoint - Validar core systems
+
+
+
+
+
+
+
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Fase 5: Completar Gameplay Systems
 
-- [ ] 14. Completar CombatSystem
-  - [ ] 14.1 Implementar fórmulas de combate do original
+- [x] 14. Completar CombatSystem
+
+
+
+
+
+  - [x] 14.1 Implementar fórmulas de combate do original
+
+
     - Hit chance baseado em skills e stats
     - Cálculo de dano com DR/DT
     - Critical hits e misses
     - _Requirements: 17.1_
-  - [ ] 14.2 Implementar sistema de AP
+  - [x] 14.2 Implementar sistema de AP
+
+
     - Custo de ações
     - Regeneração por turno
     - Modificadores de perks
     - _Requirements: 17.1_
-  - [ ] 14.3 Implementar AI de combate
+
+  - [x] 14.3 Implementar AI de combate
+
     - Comportamentos básicos (agressivo, defensivo, fugir)
     - Uso de itens e habilidades
     - Targeting inteligente

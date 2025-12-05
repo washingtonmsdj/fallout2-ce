@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://ARGARDEN_map"]
+
+[ext_resource type="Script" path="res://scripts/maps/base_map.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="2_player"]
+
+[node name="ARGARDEN" type="Node2D"]
+script = ExtResource("1_script")
+map_name = "ARGARDEN.MAP"
+map_file = "ARGARDEN.MAP"
+entering_x = 71
+entering_y = 218
+entering_elevation = 0
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Ground" type="Node2D" parent="World"]
+z_index = -1
+
+[node name="Objects" type="Node2D" parent="World"]
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(512, 384)
+z_index = 100
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 5

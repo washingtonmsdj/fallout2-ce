@@ -20,10 +20,16 @@ var initial_ap: int = 0
 var equipment: Array = []  # IDs de itens
 
 
-func _init(p_npc_id: String = "", p_proto_id: int = 0, p_position: Vector2i = Vector2i.ZERO) -> void:
+func _init() -> void:
+	pass
+
+
+## Inicializar NPC com valores
+func setup(p_npc_id: String, p_proto_id: int, p_position: Vector2i) -> NPCSpawn:
 	npc_id = p_npc_id
 	proto_id = p_proto_id
 	position = p_position
+	return self
 
 
 ## Adicionar ponto de patrulha
