@@ -136,14 +136,13 @@ class TileExtractor:
             width = first_frame.width
             height = first_frame.height
             
-            # Criar diretório de saída
-            type_dir = self.output_dir / tile_type
-            category_dir = type_dir / category
-            category_dir.mkdir(parents=True, exist_ok=True)
-            
+            # Criar diretório de saída (estrutura plana para compatibilidade com MapLoader)
+            tiles_dir = self.output_dir / "tiles"
+            tiles_dir.mkdir(parents=True, exist_ok=True)
+
             # Exportar tile (usar primeiro frame da primeira direção)
             output_filename = f"{tile_name}.png"
-            output_path = category_dir / output_filename
+            output_path = tiles_dir / output_filename
             
             self.decoder.to_png(frm_image, str(output_path), direction=0, frame=0)
             

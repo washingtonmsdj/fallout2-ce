@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8yv7qm3xhqwj"]
-
-[ext_resource type="Script" path="res://tests/property/test_isometric_coordinate_roundtrip.gd" id="1_test"]
-
-[node name="TestIsometricCoordinateRoundtrip" type="Node"]
-script = ExtResource("1_test")

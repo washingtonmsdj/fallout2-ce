@@ -258,3 +258,38 @@ class AssetOrganizer:
         print(f"Manifesto salvo em: {output_path}")
         print(f"Total de assets: {manifest_dict['total_assets']}")
 
+    # --- API genérica usada pelo pipeline ---
+    def add_asset(self, asset_type: str, output_path: str, metadata: Optional[Dict] = None,
+                  dimensions: Optional[Dict[str, int]] = None):
+        """
+        Adiciona um asset ao manifesto de forma genérica.
+
+        Args:
+            asset_type: Tipo do asset (ex: sprite, map, prototype, text, audio, palette, script, misc)
+            output_path: Caminho final do arquivo salvo (absoluto ou relativo ao projeto Godot)
+            metadata: Metadados opcionais (pode incluir 'source')
+            dimensions: Dimensões opcionais (largura/altura) quando aplicável
+        """
+        metadata = metadata or {}
+        try:
+            output_path_obj = Path(output_path)
+            # Normalizar para caminho relativo ao projeto Godot, quando possível
+            try:
+                rel_path = str(output_path_obj.relative_to(self.godot_path))
+            except ValueError:
+                rel_path = str(output_path_obj)
+
+            original_path = metadata.get('source', rel_path)
+
+            entry = ManifestEntry(
+                original_path=original_path,
+                output_path=rel_path,
+                asset_type=asset_type,
+                dimensions=dimensions,
+                metadata=metadata if metadata else None
+            )
+            self.manifest.append(entry)
+        except Exception as e:
+            # Não falhar o fluxo por causa do manifesto
+            self.log_error(str(output_path), "manifest_add_error", str(e))
+

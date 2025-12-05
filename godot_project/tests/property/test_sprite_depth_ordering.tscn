@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2yv8qn4xirxk"]
-
-[ext_resource type="Script" path="res://tests/property/test_sprite_depth_ordering.gd" id="1_test"]
-
-[node name="TestSpriteDepthOrdering" type="Node"]
-script = ExtResource("1_test")
