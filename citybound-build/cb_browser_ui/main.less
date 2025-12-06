@@ -1,0 +1,562 @@
+@font-face {
+    font-family: "Inter UI";
+    src: url("assets/Inter-UI-Regular.woff") format("woff"),
+}
+
+@import "./node_modules/antd/dist/antd.less";
+
+@primary-color: #0048ff;
+@font-family: 'Inter UI', sans-serif;
+@border-radius-base     : 2px;
+@border-radius-sm       : 1px;
+@padding-lg    : 16px; // containers
+@padding-md    : 12px; // small containers and buttons
+@padding-sm    : 8px; // Form controls and items
+@padding-xs    : 4px;  // small items
+@animation-duration-slow: .03s; // Modal
+@animation-duration-base: .02s;
+@animation-duration-fast: .01s; // Tooltip
+
+.ant-btn, .ant-input, .ant-input-number {
+    transition: none;
+}
+
+summary:focus {
+    outline: none;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+body {
+    font-family: 'Inter UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.45;
+    background-color: #c9e0ab;
+    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    overflow: hidden;
+}
+
+#logo {
+    width: 6.9rem;
+    position: absolute;
+    right: 1.25rem;
+    top: -0.1rem;
+    opacity: 0.3;
+}
+
+#version {
+    position: absolute;
+    right: 1.25rem;
+    top: 3rem;
+    opacity: 0.2;
+    font-size: 0.6em;
+}
+
+h1, h2, h3, h4 {
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+em {
+    font-weight: bold;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+h1 {
+    font-size: 1.602em;
+}
+
+h2 {
+    font-size: 1.424em;
+}
+
+h3 {
+    font-size: 1.266em;
+}
+
+h4 {
+    font-size: 1.125em;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+#errors {
+    display: none;
+    position: absolute;
+    width: 40%;
+    height: 70%;
+    right: 1rem;
+    bottom: 4.5rem;
+    background: #b51717;
+    color: #fff;
+    padding: 1em;
+    border-radius: 0.2em;
+    z-index: 9999;
+    overflow-y: auto;
+    font-size: 0.8em;
+
+    h1, h2 {
+        color: #fff;
+    }
+
+    p a {
+        display: inline-block;
+        background-color: #fff;
+        padding: 0.3em 0.5em;
+        border-radius: 0.2em;
+        margin-right: 0.5em;
+
+        &:hover {
+            background-color: @primary-color;
+            color: #fff;
+        }
+    }
+
+    &.errorsHappened {
+        display: block;
+    }
+}
+
+.close-window {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.4em;
+    background-color: transparent;
+    font-size: 2em;
+    color: inherit;
+    z-index: 1000;
+}
+
+#errorsloading.loaded {
+    display: none;
+}
+
+.ui2d {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    padding: 1rem 0.5rem;
+    pointer-events: none;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.ui2d > * {
+    pointer-events: auto;
+}
+
+.ui2dTools {
+    position: absolute;
+    bottom: 0;
+    z-index: 4;
+    padding: 0.5rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #000000dd;
+}
+
+
+.window {
+    position: relative;
+    padding: 1em;
+    margin: 0 0.5em;
+    background-color: #ffffff;
+    border-radius: 2px;
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0.5;
+
+    &:hover {
+        opacity: 1.0;
+    }
+}
+
+.toolbar {
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 3em;
+    grid-column-gap: 2px;
+    grid-row-gap: 2px;
+    grid-template-rows: 2.5em;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-items: center;
+    margin: 0 0.5em;
+
+    button {
+        width: 3rem;
+        height: 3rem;
+        padding: 0.5rem 0;
+        border: none;
+        margin: 0;
+        background-color: transparent;
+
+        .button-icon {
+            height: 100%;
+            background-color: #bbbbbb;
+            border-radius: 2px;
+            border: 1px solid transparent;
+            background-position: center center;
+            background-size: 24px 24px;
+            background-repeat: no-repeat no-repeat;
+            -webkit-backdrop-filter: blur(10px);
+            filter: invert(100%);
+        }
+
+        &:hover .button-icon {
+            border: 1px solid #000000;
+        }
+
+        &.active .button-icon {
+            filter: none;
+            background-color: #ffffff;
+            border: 1px solid transparent;
+        }
+
+        &.disabled .button-icon {
+            filter: invert(30%);
+            opacity: 0.31;
+            border: none;
+            cursor: default;
+        }
+    }
+}
+
+
+
+#planning .button-icon {
+    background-image: url('./assets/icons/icons8-pencil.png');
+}
+
+#inspection .button-icon {
+    background-image: url('./assets/icons/icons8-visible.png');
+}
+
+#menu-toolbar {
+    margin-left: auto;
+    order: 1000;
+}
+
+#menu .button-icon {
+    background-image: url('./assets/icons/icons8-menu.png');
+}
+
+.patron {
+    display: inline-block;
+    border: 0.1em solid #f96854;;
+    border-radius: 0.3em;
+    padding: 0.1em 0.4em 0.2em 0.4em;
+    margin-right: 0.4em;
+    margin-bottom: 0.4em;
+    color: #f96854;;
+}
+
+.window.menu {
+    width: 40em;
+    height: calc(100% - 3.5em);
+    margin-left: auto;
+    z-index: 2000;
+    padding-bottom: 0;
+
+    .ant-tabs {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .ant-tabs-content {
+            overflow-y: auto;
+        }
+    }
+
+    .ant-tabs-tabpane {
+        padding: 1em;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0.5rem;
+        width: 0;
+        height: 0;
+        border: 8px solid transparent;
+        border-top-color: #ffffff;
+        border-bottom: 0;
+        margin-left: -8px;
+        margin-bottom: -8px;
+    }
+}
+
+.formItem {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border-top: 1px solid #eee;
+    min-height: 3em;
+
+    & > * {
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+    label {
+        width: 10em;
+    }
+
+    input {
+        width: auto;
+    }
+
+    .ant-select {
+        min-width: 10em;
+    }
+
+    .ant-slider {
+        flex-grow: 1;
+    }
+}
+
+.become-patron {
+    display: block;
+    float: right;
+    width: 20em;
+    height: 4em;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    padding-top: 0em;
+    padding-bottom: 0em;
+    background-color: #f96854;
+    background-image: url("./assets/patron.png");
+    background-position: 50% 55%;
+    background-size: 217px;
+    background-repeat: no-repeat;
+}
+
+#budgeting .button-icon {
+    background-image: url('./assets/icons/icons8-cash.png');
+}
+
+#undo .button-icon {
+    background-image: url('./assets/icons/icons8-undo.png');
+}
+
+#redo .button-icon {
+    background-image: url('./assets/icons/icons8-redo.png');
+}
+
+
+#roads .button-icon {
+    background-image: url('./assets/icons/icons8-road.png');
+}
+
+#zoning .button-icon {
+    background-image: url('./assets/icons/icons8-categorize.png');
+}
+
+#zoning-toolbar {
+    grid-template-columns: initial;
+    grid-column-gap: 0.5em;
+    grid-row-gap: 0.5em;
+    grid-auto-flow: column;
+
+    button {
+        width: 2.75em;
+        height: 2.75em;
+        padding: 0;
+        .button-icon {
+            background-blend-mode: overlay;
+            background-clip: padding-box;
+            border-radius: 1.5em;
+            opacity: 1.0;
+            border: 1px solid #555555;
+            padding: 2px;
+            background-clip: content-box;
+            filter: none;
+        }
+
+        &:hover .button-icon {
+            border: 1px solid #fff;
+        }
+
+        &.active .button-icon {
+            border: 3px solid #fff;
+        }
+    }
+
+    #residential .button-icon {
+        background-image: url('./assets/icons/icons8-cottage.png');
+    }
+
+    #commercial .button-icon {
+        background-image: url('./assets/icons/icons8-shop.png');
+    }
+
+    #offices .button-icon {
+        background-image: url('./assets/icons/icons8-company.png');
+    }
+
+    #industrial .button-icon {
+        background-image: url('./assets/icons/icons8-factory.png');
+    }
+
+    #agricultural .button-icon {
+        background-image: url('./assets/icons/icons8-farm.png');
+    }
+
+    #recreational .button-icon {
+        background-image: url('./assets/icons/icons8-forest.png');
+    }
+
+    #administrative .button-icon {
+        background-image: url('./assets/icons/icons8-city_hall.png');
+    }
+}
+
+.window.debug details > div {
+    margin-bottom: 1em;
+}
+
+.scrollableLog {
+    height: 19.5em;
+    max-width: 50em;
+    overflow-y: auto;
+    overflow-x: auto;
+    background-color: #333;
+    color: #fff;
+    font-family: monospace;
+    font-size: 0.75em;
+    padding: 1em;
+}
+
+.sim-time {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1000;
+    font-size: 1.1em;
+    color: #000;
+    opacity: 0.7;
+    width: 9em;
+
+    &:hover {
+        opacity: 1;
+
+        .ant-slider {
+            opacity: 1;
+        }
+
+        .ant-slider-mark {
+            opacity: 1;
+        }
+    }
+
+    .ant-slider {
+        float: right;
+        margin: 0.5em 0;
+        width: 7em;
+        opacity: 0.4;
+    }
+
+    .ant-slider-mark {
+        opacity: 0;
+        font-size: 0.7em;
+    }
+}
+
+.sim-time-colon {
+    position: relative;
+    top: -0.07em;
+}
+
+.window.building {
+    max-height: calc(100% - 3.5em);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15em;
+    height: 18em;
+    transition: width 0.3s, height 0.3s;
+    opacity: 0.8;
+    display: flex;
+    flex-direction: column;
+
+    &.pinned {
+        opacity: 1.0;
+    }
+
+    .household-list {
+        flex: 1 1 0;
+        overflow-y: auto;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: calc(50% - 8px);
+        width: 0;
+        height: 0;
+        border: 8px solid transparent;
+        border-top-color: #ffffff;
+        border-bottom: 0;
+        margin-left: -8px;
+        margin-bottom: -8px;
+    }
+
+    h1, h2, h3, h4 {
+        margin-top: 0.5em;
+        margin-bottom: 0.3em;
+    }
+
+    h1 {
+        font-size: 1.3em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    h3 {
+        font-size: 1em;
+    }
+
+    h4 {
+        font-size: 0.9em;
+    }
+
+    p {
+        font-size: 0.8em;
+        margin-bottom: 0;
+    }
+}

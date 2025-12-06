@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <title>Citybound</title>
+    <link href="main.less" rel="stylesheet">
+</head>
+
+<body>
+    <div style="width: 100%; height: 100%; -webkit-overflow-scrolling: touch;">
+        <div id="layers-root"></div>
+        <div id="tools-root" class="ui2dTools"></div>
+        <div id="windows-root" class="ui2d"></div>
+    </div>
+    <svg id="logo" width="188" height="71" viewBox="0 0 188 71" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M20 22.3759C19.3528 20.5898 18.2412 19.0527 16.8245 17.9355C15.2815 16.7187 13.3766 16 11.3153 16C6.1706 16 2 20.4772 2 26V44C2 49.5228 6.1706 54 11.3153 54C13.3766 54 15.2815 53.2813 16.8245 52.0645C17.8113 51.2863 18.65 50.3045 19.2869 49.1766"
+            stroke="black" stroke-width="3" stroke-linecap="round" />
+        <path d="M40 18V47C40 51.5228 42.4772 54 47 54" stroke="black" stroke-width="3" stroke-linecap="round" />
+        <path d="M71.2347 27.2284L59.7196 62.7865C58.5115 66.1059 55.7286 68.3968 52.5218 69.1228" stroke="black"
+            stroke-width="3" stroke-linecap="round" />
+        <path d="M52.5218 27.2284C52.5218 27.2284 58.658 46.1767 61.726 55.6509" stroke="black" stroke-width="3"
+            stroke-linecap="round" />
+        <path d="M28.3463 27.5V53.5" stroke="black" stroke-width="3" stroke-linecap="round" />
+        <path
+            d="M29.5 18.5C29.5 19.0523 29.0523 19.5 28.5 19.5C27.9477 19.5 27.5 19.0523 27.5 18.5C27.5 17.9477 27.9477 17.5 28.5 17.5C29.0523 17.5 29.5 17.9477 29.5 18.5Z"
+            fill="black" stroke="black" stroke-width="3" stroke-linecap="round" />
+        <path d="M36.3206 27.5H46" stroke="black" stroke-width="3" stroke-linecap="round" />
+        <rect x="78" y="27" width="15" height="27" rx="7.5" stroke="black" stroke-width="3" stroke-linecap="round" />
+        <rect width="15" height="27" rx="7.5" transform="matrix(-1 0 0 1 186 27)" stroke="black" stroke-width="3"
+            stroke-linecap="round" />
+        <path d="M186 53V16" stroke="black" stroke-width="3" stroke-linecap="round" />
+        <rect x="101" y="27" width="15" height="27" rx="7.5" stroke="black" stroke-width="3" stroke-linecap="round" />
+        <path d="M139 27.5V45.5C139 50.1944 135.642 54 131.5 54C127.358 54 124 50.1944 124 45.5V27.5" stroke="black"
+            stroke-width="3" stroke-linecap="round" />
+        <path d="M163 53.5V36.5C163 31.8056 159.642 28 155.5 28C151.358 28 148 31.8056 148 36.5V53.5" stroke="black"
+            stroke-width="3" stroke-linecap="round" />
+        <path d="M78 54V16" stroke="black" stroke-width="3" stroke-linecap="round" />
+        <path d="M148 38.5V28.5" stroke="black" stroke-width="3" stroke-linecap="round" />
+        <path d="M139 53.5V43.5" stroke="black" stroke-width="3" stroke-linecap="round" />
+    </svg>
+    <div id="version">CB_VERSION</div>
+    <div id="errors">
+        <a class="close-window" onclick="document.getElementById('errors').className=''">×</a>
+        <h1>USER INTERFACE BROKE 😔</h1>
+        <p>The simulation is most likely still running! Try just reloading this browser window to reconnect and see if
+            the error persists.</p>
+        <p><a href="https://github.com/citybound/citybound/blob/master/CONTRIBUTING.md#reporting-bugs"
+                target="_blank">How
+                to Report Bugs</a></p>
+        <p>Citybound version: CB_VERSION</p>
+        <p id="errorsloading">Figuring out where the error happened...</p>
+    </div>
+    <script>
+        window.cbversion = "CB_VERSION";
+        window.cbNetworkSettings = {
+            batchMessageBytes: CB_BATCH_MESSAGE_BYTES,
+            acceptableTurnDistance: CB_ACCEPTABLE_TURN_DISTANCE,
+            skipTurnsPerTurnAhead: CB_SKIP_TURNS_PER_TURN_AHEAD
+        };
+    </script>
+    <script src="./src/citybound.tsx"></script>
+</body>
+
+</html>

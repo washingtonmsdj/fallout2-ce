@@ -1,0 +1,255 @@
+[gd_scene load_steps=2 format=3 uid="uid://test_battle"]
+
+[ext_resource type="Script" path="res://scripts/test/test_battle.gd" id="1_main"]
+
+[node name="TestBattle" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="BattleUI" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopPanel" type="Panel" parent="UI/BattleUI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+
+[node name="TurnLabel" type="Label" parent="UI/BattleUI/TopPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -20.0
+offset_right = 200.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "COMBAT TEST - Turn: Player"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomPanel" type="Panel" parent="UI/BattleUI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PlayerStats" type="VBoxContainer" parent="UI/BattleUI/BottomPanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -50.0
+offset_right = 250.0
+offset_bottom = 50.0
+grow_vertical = 2
+
+[node name="PlayerName" type="Label" parent="UI/BattleUI/BottomPanel/PlayerStats"]
+layout_mode = 2
+text = "PLAYER"
+
+[node name="PlayerHP" type="Label" parent="UI/BattleUI/BottomPanel/PlayerStats"]
+layout_mode = 2
+text = "HP: 100/100"
+
+[node name="PlayerAP" type="Label" parent="UI/BattleUI/BottomPanel/PlayerStats"]
+layout_mode = 2
+text = "AP: 10/10"
+
+[node name="ActionButtons" type="HBoxContainer" parent="UI/BattleUI/BottomPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -40.0
+offset_right = 150.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AttackBtn" type="Button" parent="UI/BattleUI/BottomPanel/ActionButtons"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+text = "ATTACK
+(5 AP)"
+
+[node name="HealBtn" type="Button" parent="UI/BattleUI/BottomPanel/ActionButtons"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+text = "HEAL
+(3 AP)"
+
+[node name="EndTurnBtn" type="Button" parent="UI/BattleUI/BottomPanel/ActionButtons"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+text = "END
+TURN"
+
+[node name="EnemyStats" type="VBoxContainer" parent="UI/BattleUI/BottomPanel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -50.0
+offset_right = -20.0
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="EnemyName" type="Label" parent="UI/BattleUI/BottomPanel/EnemyStats"]
+layout_mode = 2
+text = "ENEMY"
+horizontal_alignment = 2
+
+[node name="EnemyHP" type="Label" parent="UI/BattleUI/BottomPanel/EnemyStats"]
+layout_mode = 2
+text = "HP: 80/80"
+horizontal_alignment = 2
+
+[node name="EnemyAP" type="Label" parent="UI/BattleUI/BottomPanel/EnemyStats"]
+layout_mode = 2
+text = "AP: 8/8"
+horizontal_alignment = 2
+
+[node name="CombatLog" type="Panel" parent="UI/BattleUI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -350.0
+offset_bottom = -160.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="LogLabel" type="RichTextLabel" parent="UI/BattleUI/CombatLog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[b]Combat Log[/b]
+Battle started!"
+scroll_following = true
+
+[node name="GameOverPanel" type="Panel" parent="UI/BattleUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResultLabel" type="Label" parent="UI/BattleUI/GameOverPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -50.0
+offset_right = 150.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "VICTORY!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartBtn" type="Button" parent="UI/BattleUI/GameOverPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = 20.0
+offset_right = 75.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RESTART"
+
+[node name="Arena" type="Node2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Background" type="ColorRect" parent="Arena"]
+offset_left = -500.0
+offset_top = -250.0
+offset_right = 500.0
+offset_bottom = 250.0
+color = Color(0.15, 0.15, 0.2, 1)
+
+[node name="PlayerSprite" type="Polygon2D" parent="Arena"]
+position = Vector2(-200, 50)
+color = Color(0.2, 0.6, 1, 1)
+polygon = PackedVector2Array(-30, 50, 30, 50, 40, -20, 20, -50, -20, -50, -40, -20)
+
+[node name="PlayerLabel" type="Label" parent="Arena/PlayerSprite"]
+offset_left = -40.0
+offset_top = -80.0
+offset_right = 40.0
+offset_bottom = -60.0
+text = "PLAYER"
+horizontal_alignment = 1
+
+[node name="EnemySprite" type="Polygon2D" parent="Arena"]
+position = Vector2(200, 50)
+color = Color(1, 0.3, 0.3, 1)
+polygon = PackedVector2Array(-30, 50, 30, 50, 40, -20, 20, -50, -20, -50, -40, -20)
+
+[node name="EnemyLabel" type="Label" parent="Arena/EnemySprite"]
+offset_left = -40.0
+offset_top = -80.0
+offset_right = 40.0
+offset_bottom = -60.0
+text = "ENEMY"
+horizontal_alignment = 1
+
+[node name="DamageLabel" type="Label" parent="Arena"]
+visible = false
+position = Vector2(0, -100)
+text = "-15"
+horizontal_alignment = 1

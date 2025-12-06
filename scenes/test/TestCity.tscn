@@ -1,0 +1,221 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/city_simulation.gd" id="1_sim"]
+[ext_resource type="Script" path="res://scripts/systems/city_renderer.gd" id="2_render"]
+[ext_resource type="Script" path="res://scripts/test/test_city.gd" id="3_test"]
+[ext_resource type="Script" path="res://scripts/entities/player_city.gd" id="4_player"]
+
+[node name="TestCity" type="Node2D"]
+script = ExtResource("3_test")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 800)
+zoom = Vector2(0.7, 0.7)
+
+[node name="CitySimulation" type="Node" parent="."]
+script = ExtResource("1_sim")
+immigration_rate = 1.5
+max_population = 50
+initial_buildings = 8
+
+[node name="CityRenderer" type="Node2D" parent="."]
+script = ExtResource("2_render")
+tile_width = 64.0
+tile_height = 32.0
+show_grid = false
+show_zones = true
+
+[node name="Player" type="Node2D" parent="."]
+z_index = 100
+script = ExtResource("4_player")
+move_speed = 120.0
+tile_width = 64.0
+tile_height = 32.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="CityPanel" type="Panel" parent="UI"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 200.0
+offset_bottom = 280.0
+
+[node name="VBox" type="VBoxContainer" parent="UI/CityPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="Title" type="Label" parent="UI/CityPanel/VBox"]
+layout_mode = 2
+text = "🏙️ CITY"
+horizontal_alignment = 1
+
+[node name="Sep1" type="HSeparator" parent="UI/CityPanel/VBox"]
+layout_mode = 2
+
+[node name="PopulationLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "👥 Pop: 0"
+
+[node name="BuildingsLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "🏗️ Build: 0"
+
+[node name="Sep2" type="HSeparator" parent="UI/CityPanel/VBox"]
+layout_mode = 2
+
+[node name="FoodLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "🍖 0"
+
+[node name="WaterLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "💧 0"
+
+[node name="CapsLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "💰 0"
+
+[node name="MaterialsLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "🧱 0"
+
+[node name="Sep3" type="HSeparator" parent="UI/CityPanel/VBox"]
+layout_mode = 2
+
+[node name="HappinessLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "😊 50%"
+
+[node name="SpeedLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "⏱️ 1.0x"
+
+[node name="PlayerPanel" type="Panel" parent="UI"]
+offset_left = 10.0
+offset_top = 290.0
+offset_right = 200.0
+offset_bottom = 420.0
+
+[node name="VBox" type="VBoxContainer" parent="UI/PlayerPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="PlayerNameLabel" type="Label" parent="UI/PlayerPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "👤 PLAYER"
+horizontal_alignment = 1
+
+[node name="Sep1" type="HSeparator" parent="UI/PlayerPanel/VBox"]
+layout_mode = 2
+
+[node name="PlayerHPLabel" type="Label" parent="UI/PlayerPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "❤️ 30/30"
+
+[node name="PlayerLevelLabel" type="Label" parent="UI/PlayerPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "⭐ Lv.1"
+
+[node name="PlayerPosLabel" type="Label" parent="UI/PlayerPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "📍 25,25"
+
+[node name="BuildPanel" type="Panel" parent="UI"]
+offset_left = 10.0
+offset_top = 430.0
+offset_right = 200.0
+offset_bottom = 560.0
+
+[node name="VBox" type="VBoxContainer" parent="UI/BuildPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="Title" type="Label" parent="UI/BuildPanel/VBox"]
+layout_mode = 2
+text = "🔨 BUILD"
+horizontal_alignment = 1
+
+[node name="Row1" type="HBoxContainer" parent="UI/BuildPanel/VBox"]
+layout_mode = 2
+
+[node name="BuildHouseBtn" type="Button" parent="UI/BuildPanel/VBox/Row1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🏠"
+
+[node name="BuildShopBtn" type="Button" parent="UI/BuildPanel/VBox/Row1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🏪"
+
+[node name="Row2" type="HBoxContainer" parent="UI/BuildPanel/VBox"]
+layout_mode = 2
+
+[node name="BuildFarmBtn" type="Button" parent="UI/BuildPanel/VBox/Row2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🌾"
+
+[node name="BuildWaterBtn" type="Button" parent="UI/BuildPanel/VBox/Row2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "💧"
+
+[node name="SpeedRow" type="HBoxContainer" parent="UI/BuildPanel/VBox"]
+layout_mode = 2
+
+[node name="SlowBtn" type="Button" parent="UI/BuildPanel/VBox/SpeedRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "⏪"
+
+[node name="FastBtn" type="Button" parent="UI/BuildPanel/VBox/SpeedRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "⏩"
+
+[node name="Instructions" type="Label" parent="UI"]
+offset_left = 10.0
+offset_top = 570.0
+offset_right = 200.0
+offset_bottom = 650.0
+text = "WASD - Move
+Q/E/Z/X - Diagonal
+Scroll - Zoom"
+

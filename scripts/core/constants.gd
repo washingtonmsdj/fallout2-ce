@@ -1,57 +1,35 @@
 extends Node
 class_name GameConstants
-## Constantes globais do jogo baseadas no Fallout 2 original
+## Constantes globais do jogo inspiradas no sistema Fallout
 
-# === GAME STATES ===
-enum GameState {
-	MAIN_MENU,
-	LOADING,
-	WORLD_MAP,
-	LOCAL_MAP,
-	COMBAT,
-	DIALOG,
-	INVENTORY,
-	PIPBOY,
-	CHARACTER_SCREEN,
-	BARTER,
-	LOOT,
-	SKILLDEX,
-	PAUSED
+# SPECIAL Stats (Primary)
+enum PrimaryStat {
+	STRENGTH,      # Força física, dano corpo-a-corpo
+	PERCEPTION,    # Percepção, precisão
+	ENDURANCE,     # Resistência, HP
+	CHARISMA,      # Carisma, reações sociais
+	INTELLIGENCE,  # Inteligência, pontos de skill
+	AGILITY,       # Agilidade, Action Points
+	LUCK          # Sorte, críticos
 }
 
-# === COMBAT ===
-enum CombatState {
-	INACTIVE,
-	STARTING,
-	PLAYER_TURN,
-	NPC_TURN,
-	ENDING
+const PRIMARY_STAT_MIN := 1
+const PRIMARY_STAT_MAX := 10
+const PRIMARY_STAT_COUNT := 7
+
+# Derived Stats
+enum DerivedStat {
+	MAX_HP,
+	MAX_AP,
+	ARMOR_CLASS,
+	MELEE_DAMAGE,
+	CARRY_WEIGHT,
+	SEQUENCE,
+	HEALING_RATE,
+	CRITICAL_CHANCE
 }
 
-enum HitMode {
-	PUNCH,
-	KICK,
-	SWING,
-	THRUST,
-	THROW,
-	FIRE_SINGLE,
-	FIRE_BURST,
-	FLAME,
-	CALLED_SHOT
-}
-
-enum HitLocation {
-	TORSO,
-	HEAD,
-	EYES,
-	GROIN,
-	LEFT_ARM,
-	RIGHT_ARM,
-	LEFT_LEG,
-	RIGHT_LEG,
-	UNCALLED
-}
-
+# Damage Types
 enum DamageType {
 	NORMAL,
 	LASER,
@@ -59,155 +37,78 @@ enum DamageType {
 	PLASMA,
 	ELECTRICAL,
 	EMP,
-	EXPLOSIVE
+	EXPLOSION,
+	POISON
 }
 
-# === STATS (S.P.E.C.I.A.L.) ===
-enum Stat {
-	STRENGTH,
-	PERCEPTION,
-	ENDURANCE,
-	CHARISMA,
-	INTELLIGENCE,
-	AGILITY,
-	LUCK,
-	# Derived Stats
-	MAX_HIT_POINTS,
-	MAX_ACTION_POINTS,
-	ARMOR_CLASS,
-	MELEE_DAMAGE,
-	CARRY_WEIGHT,
-	SEQUENCE,
-	HEALING_RATE,
-	CRITICAL_CHANCE,
-	RADIATION_RESISTANCE,
-	POISON_RESISTANCE
+# Hit Locations
+enum HitLocation {
+	HEAD,
+	LEFT_ARM,
+	RIGHT_ARM,
+	TORSO,
+	RIGHT_LEG,
+	LEFT_LEG,
+	EYES,
+	GROIN,
+	UNCALLED  # Ataque normal sem alvo específico
 }
 
-# === SKILLS ===
-enum Skill {
-	SMALL_GUNS,
-	BIG_GUNS,
-	ENERGY_WEAPONS,
-	UNARMED,
-	MELEE_WEAPONS,
-	THROWING,
-	FIRST_AID,
-	DOCTOR,
-	SNEAK,
-	LOCKPICK,
-	STEAL,
-	TRAPS,
-	SCIENCE,
-	REPAIR,
-	SPEECH,
-	BARTER,
-	GAMBLING,
-	OUTDOORSMAN
+# Combat States
+enum CombatState {
+	IDLE,
+	PLAYER_TURN,
+	ENEMY_TURN,
+	ANIMATING,
+	ENDED
 }
 
-# === ITEM TYPES ===
+# Item Types
 enum ItemType {
-	ARMOR,
-	CONTAINER,
-	DRUG,
 	WEAPON,
+	ARMOR,
+	CONSUMABLE,
 	AMMO,
 	MISC,
-	KEY
+	QUEST
 }
 
+# Weapon Types
 enum WeaponType {
-	UNARMED,
 	MELEE,
-	THROWING,
+	UNARMED,
 	SMALL_GUN,
 	BIG_GUN,
-	ENERGY_WEAPON
+	ENERGY_WEAPON,
+	THROWING
 }
 
-# === CRITTER ===
-enum CritterState {
-	NORMAL,
-	SNEAKING,
-	KNOCKED_OUT,
-	DEAD,
-	CRIPPLED,
-	FLEEING
+# Armor Types
+enum ArmorType {
+	LIGHT,
+	MEDIUM,
+	HEAVY,
+	POWER_ARMOR
 }
 
-enum BodyType {
-	BIPED,
-	QUADRUPED,
-	ROBOTIC
+# AI States
+enum AIState {
+	IDLE,
+	PATROL,
+	ALERT,
+	COMBAT,
+	FLEE,
+	SEARCH
 }
 
-# === ANIMATION ===
-enum AnimationType {
-	STAND,
-	WALK,
-	RUN,
-	CLIMB_LADDER,
-	FALLING,
-	UP_STAIRS_RIGHT,
-	UP_STAIRS_LEFT,
-	DOWN_STAIRS_RIGHT,
-	DOWN_STAIRS_LEFT,
-	MAGIC_HANDS_GROUND,
-	MAGIC_HANDS_MIDDLE,
-	DODGE_ANIM,
-	HIT_FROM_FRONT,
-	HIT_FROM_BACK,
-	THROW_PUNCH,
-	KICK_LEG,
-	THROW_ANIM,
-	RUNNING,
-	FALL_BACK,
-	FALL_FRONT,
-	BAD_LANDING,
-	BIG_HOLE,
-	CHARRED_BODY,
-	CHUNKS_OF_FLESH,
-	DANCING_AUTOFIRE,
-	ELECTRIFY,
-	SLICED_IN_HALF,
-	BURNED_TO_NOTHING,
-	ELECTRIFIED_TO_NOTHING,
-	EXPLODED_TO_NOTHING,
-	MELTED_TO_NOTHING,
-	FIRE_SINGLE,
-	FIRE_BURST,
-	FIRE_CONTINUOUS,
-	FALL_BACK_BLOOD,
-	FALL_FRONT_BLOOD,
-	PRONE_TO_STANDING,
-	BACK_TO_STANDING,
-	TAKE_OUT,
-	PUT_AWAY,
-	PARRY_ANIM,
-	THRUST_ANIM,
-	SWING_ANIM,
-	POINT,
-	UNPOINT,
-	FIRE_DANCE,
-	CALLED_SHOT_PIC
-}
+# Game Constants
+const MAX_LEVEL := 99
+const BASE_AP := 5
+const BASE_HP := 20
+const XP_MULTIPLIER := 1000
 
-# === GAME CONSTANTS ===
-const MAX_STAT_VALUE := 10
-const MIN_STAT_VALUE := 1
-const STARTING_STAT_POINTS := 40
-const MAX_SKILL_VALUE := 300
-const BASE_SKILL_POINTS_PER_LEVEL := 5
-
-const HEX_GRID_SIZE := 32
-const MAX_PARTY_SIZE := 5
-const MAX_INVENTORY_WEIGHT := 999999
-
-const CRITICAL_HIT_MULTIPLIER := 2.0
-const SNEAK_CRITICAL_BONUS := 40
-
-# === PATHS ===
-const SAVE_DIR := "user://saves/"
-const CONFIG_PATH := "user://config.cfg"
-const CHARACTERS_DIR := "user://characters/"
+# Combat Constants
+const CRITICAL_HIT_BASE_CHANCE := 5.0  # 5%
+const HEADSHOT_DAMAGE_MULTIPLIER := 2.0
+const BACKSTAB_DAMAGE_MULTIPLIER := 1.5
+const MAX_RANGE_PENALTY := 0.5  # 50% de penalidade em alcance máximo
