@@ -143,3 +143,48 @@ func get_skill_description(skill: Skill) -> String:
 			return "Jogos de azar"
 		_:
 			return ""
+
+func skill_from_string(skill_name: String) -> int:
+	match skill_name.to_upper():
+		"SMALL_GUNS":
+			return Skill.SMALL_GUNS
+		"BIG_GUNS":
+			return Skill.BIG_GUNS
+		"ENERGY_WEAPONS":
+			return Skill.ENERGY_WEAPONS
+		"UNARMED":
+			return Skill.UNARMED
+		"MELEE_WEAPONS":
+			return Skill.MELEE_WEAPONS
+		"THROWING":
+			return Skill.THROWING
+		"SNEAK":
+			return Skill.SNEAK
+		"LOCKPICK":
+			return Skill.LOCKPICK
+		"STEAL":
+			return Skill.STEAL
+		"TRAPS":
+			return Skill.TRAPS
+		"SPEECH":
+			return Skill.SPEECH
+		"BARTER":
+			return Skill.BARTER
+		"FIRST_AID":
+			return Skill.FIRST_AID
+		"DOCTOR":
+			return Skill.DOCTOR
+		"SCIENCE":
+			return Skill.SCIENCE
+		"REPAIR":
+			return Skill.REPAIR
+		"OUTDOORSMAN":
+			return Skill.OUTDOORSMAN
+		"GAMBLING":
+			return Skill.GAMBLING
+		_:
+			return -1
+
+func modify_skill(skill: Skill, amount: int) -> void:
+	var current: int = skill_values.get(skill, 0)
+	skill_values[skill] = clamp(current + amount, 0, 200)

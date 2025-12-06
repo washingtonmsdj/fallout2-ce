@@ -20,7 +20,7 @@ var grid_position: Vector2i = Vector2i(25, 25)
 ## Estado
 var is_moving: bool = false
 var target_position: Vector2 = Vector2.ZERO
-var move_queue: Array[Vector2i] = []
+var input_buffer: Vector2i = Vector2i.ZERO
 
 ## Referência à simulação da cidade (para verificar estradas)
 var city_simulation: CitySimulation
@@ -55,48 +55,39 @@ func _ready():
 	_update_visual_position()
 
 func _process(delta):
-	_handle_input()
+	_update_input()
 	_process_movement(delta)
 
-func _handle_input():
-	if is_moving:
-		return
+func _update_input():
+	# Captura direção atual do input
+	input_buffer = Vector2i.ZERO
 	
-	var move_dir = Vector2i.ZERO
-	
-	# Movimento nas 4 direções cardeais (funciona melhor com estradas)
-	# W/Up = Norte (diminui Y no grid)
-	# S/Down = Sul (aumenta Y no grid)
-	# A/Left = Oeste (diminui X no grid)
-	# D/Right = Leste (aumenta X no grid)
 	if Input.is_action_pressed("ui_up") or Input.is_key_pressed(KEY_W):
-		move_dir = Vector2i(0, -1)   # Norte
+		input_buffer = Vector2i(0, -1)
 	elif Input.is_action_pressed("ui_down") or Input.is_key_pressed(KEY_S):
-		move_dir = Vector2i(0, 1)    # Sul
+		input_buffer = Vector2i(0, 1)
 	elif Input.is_action_pressed("ui_left") or Input.is_key_pressed(KEY_A):
-		move_dir = Vector2i(-1, 0)   # Oeste
+		input_buffer = Vector2i(-1, 0)
 	elif Input.is_action_pressed("ui_right") or Input.is_key_pressed(KEY_D):
-		move_dir = Vector2i(1, 0)    # Leste
-	
-	if move_dir != Vector2i.ZERO:
-		_try_move(move_dir)
+		input_buffer = Vector2i(1, 0)
 
-func _try_move(direction: Vector2i):
+func _try_move(direction: Vector2i) -> bool:
 	var new_pos = grid_position + direction
 	
 	# Verificar limites do mapa
 	if new_pos.x < 0 or new_pos.x >= 50 or new_pos.y < 0 or new_pos.y >= 50:
-		return
+		return false
 	
 	# Verificar se a nova posição é uma estrada
 	if not _is_road(new_pos):
-		return
+		return false
 	
 	# Iniciar movimento
 	grid_position = new_pos
 	target_position = grid_to_iso(Vector2(grid_position))
 	is_moving = true
 	moved.emit(grid_position)
+	return true
 
 ## Verifica se a posição é uma estrada
 func _is_road(pos: Vector2i) -> bool:
@@ -130,18 +121,32 @@ func spawn_on_road():
 		print("Player spawned at road: ", grid_position)
 
 func _process_movement(delta):
+	# Se não está movendo, tenta iniciar movimento com input atual
 	if not is_moving:
+		if input_buffer != Vector2i.ZERO:
+			_try_move(input_buffer)
 		return
 	
-	var current_pos = position
-	var direction = (target_position - current_pos).normalized()
-	var distance = current_pos.distance_to(target_position)
+	# Movimento linear constante
+	var move_step = move_speed * delta
+	var remaining = position.distance_to(target_position)
 	
-	if distance < move_speed * delta:
+	if remaining <= move_step:
+		# Chegou no destino - usa o movimento restante para continuar
+		var leftover = move_step - remaining
 		position = target_position
 		is_moving = false
+		
+		# Continuar imediatamente se ainda há input pressionado
+		if input_buffer != Vector2i.ZERO and _try_move(input_buffer):
+			# Aplica o movimento restante do frame
+			if leftover > 0:
+				var direction = (target_position - position).normalized()
+				position += direction * leftover
 	else:
-		position += direction * move_speed * delta
+		# Mover em direção ao alvo
+		var direction = (target_position - position).normalized()
+		position += direction * move_step
 
 func _update_visual_position():
 	position = grid_to_iso(Vector2(grid_position))

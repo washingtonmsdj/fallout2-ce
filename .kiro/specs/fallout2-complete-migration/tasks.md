@@ -2,135 +2,204 @@
 
 ## Phase 1: Core Systems Foundation
 
-- [ ] 1. Implement Perk System
-  - [ ] 1.1 Create PerkEffect resource class
+- [x] 1. Implement Perk System
+
+
+
+  - [x] 1.1 Create PerkEffect resource class
+
+
     - Define EffectType enum (STAT_BONUS, SKILL_BONUS, DAMAGE_BONUS, SPECIAL_ABILITY)
     - Implement effect application logic
     - _Requirements: 1.3, 1.5, 1.6_
-  - [ ] 1.2 Write property test for PerkEffect
+  - [x] 1.2 Write property test for PerkEffect
+
+
+
+
     - **Property 3: Perk Effect Application**
     - **Validates: Requirements 1.3, 1.5, 1.6**
-  - [ ] 1.3 Create PerkData resource with all 119 perks
+  - [x] 1.3 Create PerkData resource with all 119 perks
+
+
+
+
     - Define Perk enum with all perk IDs
     - Create perk definitions with requirements and effects
     - _Requirements: 1.1_
-  - [ ] 1.4 Write property test for perk completeness
+
+  - [x] 1.4 Write property test for perk completeness
+
+
+
     - **Property 1: Perk Definition Completeness**
     - **Validates: Requirements 1.1**
-  - [ ] 1.5 Create PerkSystem manager
+
+
+  - [x] 1.5 Create PerkSystem manager
+
+
     - Implement get_available_perks() with requirement filtering
     - Implement acquire_perk() with rank tracking
     - _Requirements: 1.2, 1.4_
-  - [ ] 1.6 Write property tests for perk system
+
+
+  - [x] 1.6 Write property tests for perk system
+
     - **Property 2: Perk Availability Filtering**
     - **Property 4: Perk Rank Bounds**
     - **Validates: Requirements 1.2, 1.4**
 
-- [ ] 2. Checkpoint - Ensure all tests pass
+- [x] 2. Checkpoint - Ensure all tests pass
+
+
+
   - Ensure all tests pass, ask the user if questions arise.
 
 
-- [ ] 3. Implement AI Combat System
-  - [ ] 3.1 Create BehaviorTree base classes
+- [x] 3. Implement AI Combat System
+
+
+
+  - [x] 3.1 Create BehaviorTree base classes
+
     - Implement BTNode, BTStatus, BTSelector, BTSequence
     - Create context dictionary structure
     - _Requirements: 2.1_
-  - [ ] 3.2 Create AIController with personality system
+
+
+  - [x] 3.2 Create AIController with personality system
+
     - Define AIPersonality and AIState enums
     - Implement state machine transitions
     - _Requirements: 2.1, 2.2_
-  - [ ] 3.3 Write property test for AI action validity
+  - [x] 3.3 Write property test for AI action validity
+
+
     - **Property 5: AI Action Validity**
     - **Validates: Requirements 2.1**
-  - [ ] 3.4 Implement flee behavior logic
+  - [x] 3.4 Implement flee behavior logic
+
+
     - Add flee_threshold checking
     - Implement should_flee() based on personality
     - _Requirements: 2.2_
-  - [ ] 3.5 Write property test for flee behavior
+  - [x] 3.5 Write property test for flee behavior
+
+
     - **Property 6: AI Flee Behavior**
     - **Validates: Requirements 2.2**
-  - [ ] 3.6 Implement weapon selection AI
+  - [x] 3.6 Implement weapon selection AI
+
+
     - Create select_best_weapon() with damage calculation
     - Handle ammo management and reload decisions
+
     - _Requirements: 2.3, 2.6_
-  - [ ] 3.7 Write property tests for weapon AI
+  - [x] 3.7 Write property tests for weapon AI
+
     - **Property 7: AI Weapon Selection**
     - **Property 8: AI Ammo Management**
     - **Validates: Requirements 2.3, 2.6**
-  - [ ] 3.8 Implement cover and positioning AI
+  - [x] 3.8 Implement cover and positioning AI
+
+
     - Create find_cover() pathfinding
     - Implement threat evaluation
     - _Requirements: 2.4, 2.5_
 
-- [ ] 4. Checkpoint - Ensure all tests pass
+
+- [x] 4. Checkpoint - Ensure all tests pass
+
+
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 2: World Systems
 
-- [ ] 5. Implement Map System
-  - [ ] 5.1 Create MapData and TileData resources
+- [x] 5. Implement Map System
+
+
+
+  - [x] 5.1 Create MapData and TileData resources
+
+
+
     - Define tile properties (walkable, blocking, etc)
     - Create map loading structure
     - _Requirements: 3.1_
-  - [ ] 5.2 Write property test for map data integrity
+
+  - [x] 5.2 Write property test for map data integrity
+
     - **Property 9: Map Data Integrity**
     - **Validates: Requirements 3.1**
-  - [ ] 5.3 Create MapSystem manager
+
+  - [x] 5.3 Create MapSystem manager
+
+
     - Implement load_map() with scene instantiation
     - Create tile query functions
     - _Requirements: 3.1_
-  - [ ] 5.4 Implement pathfinding system
+  - [x] 5.4 Implement pathfinding system
+
+
     - Create A* pathfinding for tile-based movement
     - Handle obstacles and blocked tiles
     - _Requirements: 3.2_
-  - [ ] 5.5 Write property test for pathfinding
+
+  - [x] 5.5 Write property test for pathfinding
+
     - **Property 10: Pathfinding Validity**
     - **Validates: Requirements 3.2**
-  - [ ] 5.6 Create MapObject base class
+  - [x] 5.6 Create MapObject base class
+
     - Implement Door, Container, Scenery types
     - Add interaction handlers
     - _Requirements: 3.3, 3.4_
-  - [ ] 5.7 Write property test for door states
+
+  - [x] 5.7 Write property test for door states
+
     - **Property 11: Door State Transitions**
     - **Validates: Requirements 3.3**
-  - [ ] 5.8 Implement trigger zones
+
+  - [x] 5.8 Implement trigger zones
+
     - Create TriggerZone with script execution
     - Handle elevation transitions
     - _Requirements: 3.5, 3.6_
 
 
-- [ ] 6. Implement Worldmap System
-  - [ ] 6.1 Create Location resource
+- [x] 6. Implement Worldmap System
+  - [x] 6.1 Create Location resource
     - Define location properties (position, danger, faction)
     - Create location database
     - _Requirements: 4.1, 4.5_
-  - [ ] 6.2 Create WorldmapSystem manager
+  - [x] 6.2 Create WorldmapSystem manager
     - Implement player position tracking
     - Create discovered locations array
     - _Requirements: 4.1_
-  - [ ] 6.3 Implement travel mechanics
+  - [x] 6.3 Implement travel mechanics
     - Calculate travel time with modifiers
     - Handle vehicle speed bonuses
     - _Requirements: 4.2, 4.6_
-  - [ ] 6.4 Write property test for travel time
+  - [x] 6.4 Write property test for travel time
     - **Property 12: Travel Time Calculation**
     - **Validates: Requirements 4.2, 4.6**
-  - [ ] 6.5 Implement random encounters
+  - [x] 6.5 Implement random encounters
     - Create RandomEncounter resource
     - Implement encounter probability checks
     - _Requirements: 4.3, 4.4_
-  - [ ] 6.6 Write property test for encounter probability
+  - [x] 6.6 Write property test for encounter probability
     - **Property 13: Encounter Probability Bounds**
     - **Validates: Requirements 4.3**
-  - [ ] 6.7 Implement location discovery
+  - [x] 6.7 Implement location discovery
     - Add discover_location() with persistence
     - Create worldmap UI markers
     - _Requirements: 4.5_
-  - [ ] 6.8 Write property test for discovery persistence
+  - [x] 6.8 Write property test for discovery persistence
     - **Property 14: Location Discovery Persistence**
     - **Validates: Requirements 4.5**
 
-- [ ] 7. Checkpoint - Ensure all tests pass
+- [x] 7. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 3: Dialog and Quest Systems

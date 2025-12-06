@@ -2,7 +2,7 @@
 
 ## Phase 1: Core Infrastructure
 
-- [-] 1. Set up project structure and core systems
+- [x] 1. Set up project structure and core systems
 
 
 
@@ -13,25 +13,28 @@
     - _Requirements: 23.1_
 
 
-  - [ ] 1.2 Implement EventBus for inter-system communication
+  - [x] 1.2 Implement EventBus for inter-system communication
     - Create `scripts/city/core/event_bus.gd` with all signals defined in design
     - Implement singleton pattern for global access
     - _Requirements: 23.4_
-  - [ ] 1.3 Create CityConfig with all constants
+  - [x] 1.3 Create CityConfig with all constants
     - Create `scripts/city/core/city_config.gd` with grid sizes, decay rates, prices
     - _Requirements: 23.6_
-  - [-] 1.4 Implement CityManager coordinator
+  - [x] 1.4 Implement CityManager coordinator
+
 
     - Create `scripts/city/core/city_manager.gd` to initialize and coordinate all systems
     - Implement system lifecycle management (init, update, cleanup)
     - _Requirements: 23.1, 23.3_
 
-- [ ] 2. Checkpoint - Ensure core infrastructure works
+- [x] 2. Checkpoint - Ensure core infrastructure works
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 2: Grid and Terrain System
 
-- [ ] 3. Implement GridSystem
+- [-] 3. Implement GridSystem
+
+
   - [ ] 3.1 Create TileData class and TerrainType enum
     - Implement `scripts/city/systems/grid_system.gd`
     - Define TileData with terrain_type, elevation, walkable, radiation_level

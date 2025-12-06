@@ -1,0 +1,312 @@
+extends Resource
+class_name PerkData
+## Dados de um perk individual do Fallout 2
+
+enum Perk {
+	# Combat Perks
+	AWARENESS,
+	BONUS_HTH_ATTACKS,
+	BONUS_HTH_DAMAGE,
+	BONUS_RATE_OF_FIRE,
+	BONUS_RANGED_DAMAGE,
+	BETTER_CRITICALS,
+	BLOODY_MESS,
+	BURST_FIRE,
+	CRITICAL_STRIKE,
+	DODGER,
+	EARLIER_SEQUENCE,
+	FASTER_HEALING,
+	HEAVE_HO,
+	HUNTER,
+	LIVING_ANATOMY,
+	MORE_CRITICALS,
+	NEVER_MISS,
+	PENETRATOR,
+	PICKPOCKET,
+	POWER_ATTACK,
+	QUICK_POCKETS,
+	RANGER,
+	RAPID_RELOAD,
+	SCAVENGER,
+	SHARPSHOOTER,
+	SLAYER,
+	SNIPER,
+	STEADY_AIM,
+	STRONG_BACK,
+	SWIFT_LEARNER,
+	TAG_SKILL,
+	TOUGHNESS,
+	WEAPON_HANDLING,
+	
+	# Utility Perks
+	ADRENALINE_RUSH,
+	BETTER_HEALING,
+	COMPREHENSION,
+	EDUCATED,
+	EMPATHY,
+	EXPLORER,
+	FORTUNE_FINDER,
+	FRIENDLY_FOE,
+	GAIN_INTELLIGENCE,
+	GAIN_LUCK,
+	GAIN_PERCEPTION,
+	GAIN_STRENGTH,
+	GAIN_AGILITY,
+	GAIN_CHARISMA,
+	GAIN_ENDURANCE,
+	GHOST_TOWN_GHOST,
+	GOOD_NATURED,
+	HARMLESS,
+	HEALER,
+	HEAVY_HANDED,
+	HERE_AND_NOW,
+	HIDDEN_VALLEY_BUNKER_DWELLER,
+	INTENSE_FIRE,
+	IRON_FIST,
+	JUNK_TOWN_JERKY,
+	KLAMATH_BOY,
+	LIGHT_STEP,
+	LIGHT_TOUCH,
+	LONE_WANDERER,
+	MASTER_TRADER,
+	MATH_WRATH,
+	MYSTERIOUS_STRANGER,
+	NIGHT_VISION,
+	PACK_RAT,
+	PATHFINDER,
+	PERK_RATE,
+	PYROMANIAC,
+	QUICK_REFLEXES,
+	RADIATED,
+	RANGER_ARMOR,
+	RECOVERY,
+	RECKLESS_ABANDON,
+	REINFORCED_SPINE,
+	RETENTION,
+	REVERSAL_OF_FORTUNE,
+	SALESMAN,
+	SILENT_DEATH,
+	SILENT_RUNNING,
+	SLIPPERY_CLIMBER,
+	SMOOTH_TALKER,
+	SNEAK_SUIT,
+	SNIPER_PERKS,
+	SOLAR_POWERED,
+	SPEAKER_FOR_THE_DEAD,
+	STONEWALL,
+	SURVIVALIST,
+	THIEF_OF_THE_WASTES,
+	TIMEBOMB,
+	TOUGH_AS_NAILS,
+	TUNNEL_RUNNER,
+	UNARMED_MASTER,
+	VAULT_CITY_INOCULATIONS,
+	VAULT_CITY_TRAINING,
+	VAULT_DWELLER,
+	VAULT_DWELLER_LEGACY,
+	VAULT_DWELLER_LEGACY_2,
+	VAULT_DWELLER_LEGACY_3,
+	VAULT_DWELLER_LEGACY_4,
+	VAULT_DWELLER_LEGACY_5,
+	VAULT_DWELLER_LEGACY_6,
+	VAULT_DWELLER_LEGACY_7,
+	VAULT_DWELLER_LEGACY_8,
+	VAULT_DWELLER_LEGACY_9,
+	VAULT_DWELLER_LEGACY_10,
+	VAULT_DWELLER_LEGACY_11,
+	VAULT_DWELLER_LEGACY_12,
+	VAULT_DWELLER_LEGACY_13,
+	VAULT_DWELLER_LEGACY_14,
+	VAULT_DWELLER_LEGACY_15,
+	VAULT_DWELLER_LEGACY_16,
+	VAULT_DWELLER_LEGACY_17,
+	VAULT_DWELLER_LEGACY_18,
+	VAULT_DWELLER_LEGACY_19,
+	VAULT_DWELLER_LEGACY_20,
+	VAULT_DWELLER_LEGACY_21,
+	VAULT_DWELLER_LEGACY_22,
+	VAULT_DWELLER_LEGACY_23,
+	VAULT_DWELLER_LEGACY_24,
+	VAULT_DWELLER_LEGACY_25,
+	VAULT_DWELLER_LEGACY_26,
+	VAULT_DWELLER_LEGACY_27,
+	VAULT_DWELLER_LEGACY_28,
+	VAULT_DWELLER_LEGACY_29,
+	VAULT_DWELLER_LEGACY_30,
+	VAULT_DWELLER_LEGACY_31,
+	VAULT_DWELLER_LEGACY_32,
+	VAULT_DWELLER_LEGACY_33,
+	VAULT_DWELLER_LEGACY_34,
+	VAULT_DWELLER_LEGACY_35,
+	VAULT_DWELLER_LEGACY_36,
+	VAULT_DWELLER_LEGACY_37,
+	VAULT_DWELLER_LEGACY_38,
+	VAULT_DWELLER_LEGACY_39,
+	VAULT_DWELLER_LEGACY_40,
+	VAULT_DWELLER_LEGACY_41,
+	VAULT_DWELLER_LEGACY_42,
+	VAULT_DWELLER_LEGACY_43,
+	VAULT_DWELLER_LEGACY_44,
+	VAULT_DWELLER_LEGACY_45,
+	VAULT_DWELLER_LEGACY_46,
+	VAULT_DWELLER_LEGACY_47,
+	VAULT_DWELLER_LEGACY_48,
+	VAULT_DWELLER_LEGACY_49,
+	VAULT_DWELLER_LEGACY_50,
+	VAULT_DWELLER_LEGACY_51,
+	VAULT_DWELLER_LEGACY_52,
+	VAULT_DWELLER_LEGACY_53,
+	VAULT_DWELLER_LEGACY_54,
+	VAULT_DWELLER_LEGACY_55,
+	VAULT_DWELLER_LEGACY_56,
+	VAULT_DWELLER_LEGACY_57,
+	VAULT_DWELLER_LEGACY_58,
+	VAULT_DWELLER_LEGACY_59,
+	VAULT_DWELLER_LEGACY_60,
+	VAULT_DWELLER_LEGACY_61,
+	VAULT_DWELLER_LEGACY_62,
+	VAULT_DWELLER_LEGACY_63,
+	VAULT_DWELLER_LEGACY_64,
+	VAULT_DWELLER_LEGACY_65,
+	VAULT_DWELLER_LEGACY_66,
+	VAULT_DWELLER_LEGACY_67,
+	VAULT_DWELLER_LEGACY_68,
+	VAULT_DWELLER_LEGACY_69,
+	VAULT_DWELLER_LEGACY_70,
+	VAULT_DWELLER_LEGACY_71,
+	VAULT_DWELLER_LEGACY_72,
+	VAULT_DWELLER_LEGACY_73,
+	VAULT_DWELLER_LEGACY_74,
+	VAULT_DWELLER_LEGACY_75,
+	VAULT_DWELLER_LEGACY_76,
+	VAULT_DWELLER_LEGACY_77,
+	VAULT_DWELLER_LEGACY_78,
+	VAULT_DWELLER_LEGACY_79,
+	VAULT_DWELLER_LEGACY_80,
+	VAULT_DWELLER_LEGACY_81,
+	VAULT_DWELLER_LEGACY_82,
+	VAULT_DWELLER_LEGACY_83,
+	VAULT_DWELLER_LEGACY_84,
+	VAULT_DWELLER_LEGACY_85,
+	VAULT_DWELLER_LEGACY_86,
+	VAULT_DWELLER_LEGACY_87,
+	VAULT_DWELLER_LEGACY_88,
+	VAULT_DWELLER_LEGACY_89,
+	VAULT_DWELLER_LEGACY_90,
+	VAULT_DWELLER_LEGACY_91,
+	VAULT_DWELLER_LEGACY_92,
+	VAULT_DWELLER_LEGACY_93,
+	VAULT_DWELLER_LEGACY_94,
+	VAULT_DWELLER_LEGACY_95,
+	VAULT_DWELLER_LEGACY_96,
+	VAULT_DWELLER_LEGACY_97,
+	VAULT_DWELLER_LEGACY_98,
+	VAULT_DWELLER_LEGACY_99,
+	VAULT_DWELLER_LEGACY_100,
+	VAULT_DWELLER_LEGACY_101,
+	VAULT_DWELLER_LEGACY_102,
+	VAULT_DWELLER_LEGACY_103,
+	VAULT_DWELLER_LEGACY_104,
+	VAULT_DWELLER_LEGACY_105,
+	VAULT_DWELLER_LEGACY_106,
+	VAULT_DWELLER_LEGACY_107,
+	VAULT_DWELLER_LEGACY_108,
+	VAULT_DWELLER_LEGACY_109,
+	VAULT_DWELLER_LEGACY_110,
+	VAULT_DWELLER_LEGACY_111,
+	VAULT_DWELLER_LEGACY_112,
+	VAULT_DWELLER_LEGACY_113,
+	VAULT_DWELLER_LEGACY_114,
+	VAULT_DWELLER_LEGACY_115,
+	VAULT_DWELLER_LEGACY_116,
+	VAULT_DWELLER_LEGACY_117,
+	VAULT_DWELLER_LEGACY_118,
+	VAULT_DWELLER_LEGACY_119,
+}
+
+@export var perk_id: Perk
+@export var name: String = ""
+@export var description: String = ""
+@export var max_ranks: int = 1
+@export var level_requirement: int = 1
+@export var stat_requirements: Dictionary = {}  # {stat: min_value}
+@export var skill_requirements: Dictionary = {}  # {skill: min_value}
+@export var effects: Array[PerkEffect] = []
+
+## Verifica se um personagem pode adquirir este perk
+func can_acquire(critter: Critter) -> bool:
+	if not critter:
+		return false
+	
+	# Verificar nível
+	if critter.level < level_requirement:
+		return false
+	
+	# Verificar requisitos de stats
+	for stat in stat_requirements:
+		var stat_enum: GameConstants.PrimaryStat = stat as GameConstants.PrimaryStat
+		var stat_value = _get_stat_value(critter, stat_enum)
+		if stat_value < stat_requirements[stat]:
+			return false
+	
+	# Verificar requisitos de skills
+	for skill in skill_requirements:
+		var skill_enum: SkillData.Skill = skill as SkillData.Skill
+		var skill_value = critter.skills.get_skill_value(skill_enum)
+		if skill_value < skill_requirements[skill]:
+			return false
+	
+	return true
+
+## Aplica os efeitos do perk a um personagem
+func apply_effects(critter: Critter) -> void:
+	if not critter:
+		return
+	
+	for effect in effects:
+		if effect:
+			effect.apply_effect(critter)
+
+## Remove os efeitos do perk de um personagem
+func remove_effects(critter: Critter) -> void:
+	if not critter:
+		return
+	
+	for effect in effects:
+		if effect:
+			effect.remove_effect(critter)
+
+## Obtém o valor de um stat primário
+func _get_stat_value(critter: Critter, stat: GameConstants.PrimaryStat) -> int:
+	if not critter or not critter.stats:
+		return 0
+	
+	match stat:
+		GameConstants.PrimaryStat.STRENGTH:
+			return critter.stats.strength
+		GameConstants.PrimaryStat.PERCEPTION:
+			return critter.stats.perception
+		GameConstants.PrimaryStat.ENDURANCE:
+			return critter.stats.endurance
+		GameConstants.PrimaryStat.CHARISMA:
+			return critter.stats.charisma
+		GameConstants.PrimaryStat.INTELLIGENCE:
+			return critter.stats.intelligence
+		GameConstants.PrimaryStat.AGILITY:
+			return critter.stats.agility
+		GameConstants.PrimaryStat.LUCK:
+			return critter.stats.luck
+		_:
+			return 0
+
+## Retorna o nome do perk
+func get_name() -> String:
+	return name if name else _get_default_name()
+
+## Retorna a descrição do perk
+func get_description() -> String:
+	return description if description else "No description available"
+
+## Retorna o nome padrão baseado no ID do perk
+func _get_default_name() -> String:
+	return Perk.keys()[perk_id].replace("_", " ").capitalize()
