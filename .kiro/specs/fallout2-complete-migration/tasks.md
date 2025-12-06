@@ -204,58 +204,63 @@
 
 ## Phase 3: Dialog and Quest Systems
 
-- [ ] 8. Implement Dialog System
-  - [ ] 8.1 Create DialogNode and DialogOption resources
+- [x] 8. Implement Dialog System
+
+
+  - [x] 8.1 Create DialogNode and DialogOption resources
+
     - Define node structure with conditions
     - Create option with skill/stat checks
     - _Requirements: 5.1, 5.2_
-  - [ ] 8.2 Create DialogTree resource
+
+  - [x] 8.2 Create DialogTree resource
     - Implement tree structure with node lookup
     - Create greeting selection logic
     - _Requirements: 5.1_
-  - [ ] 8.3 Create DialogSystem manager
+  - [x] 8.3 Create DialogSystem manager
+
     - Implement start_dialog() and select_option()
     - Track dialog history
     - _Requirements: 5.1, 5.2_
-  - [ ] 8.4 Write property test for option filtering
+  - [x] 8.4 Write property test for option filtering
     - **Property 15: Dialog Option Filtering**
     - **Validates: Requirements 5.2**
-  - [ ] 8.5 Implement skill and stat checks
+  - [x] 8.5 Implement skill and stat checks
     - Create check_skill() with probability
     - Create check_stat() with threshold
     - _Requirements: 5.3, 5.4_
-  - [ ] 8.6 Write property test for skill checks
+  - [x] 8.6 Write property test for skill checks
     - **Property 16: Skill Check Probability**
     - **Validates: Requirements 5.3**
-  - [ ] 8.7 Implement dialog effects
+  - [x] 8.7 Implement dialog effects
     - Apply reputation changes
     - Trigger quest updates
     - _Requirements: 5.5, 5.6_
-  - [ ] 8.8 Write property test for reputation changes
+  - [x] 8.8 Write property test for reputation changes
     - **Property 17: Reputation Change Application**
     - **Validates: Requirements 5.6**
 
 
-- [ ] 9. Implement Quest System
-  - [ ] 9.1 Create Quest and QuestObjective resources
+- [x] 9. Implement Quest System
+  - [x] 9.1 Create Quest and QuestObjective resources
     - Define quest states and objectives
     - Create reward structure
     - _Requirements: 6.1_
-  - [ ] 9.2 Create QuestSystem manager
+  - [x] 9.2 Create QuestSystem manager
     - Implement add_quest() and update_objective()
     - Track active, completed, failed quests
     - _Requirements: 6.1, 6.2_
-  - [ ] 9.3 Write property test for quest state transitions
+  - [x] 9.3 Write property test for quest state transitions
     - **Property 18: Quest State Transitions**
     - **Validates: Requirements 6.1, 6.2, 6.3, 6.6**
-  - [ ] 9.4 Implement quest completion
+  - [x] 9.4 Implement quest completion
     - Create complete_quest() with reward distribution
     - Handle multiple completion paths
     - _Requirements: 6.3, 6.4, 6.5_
-  - [ ] 9.5 Write property test for quest rewards
+  - [x] 9.5 Write property test for quest rewards
     - **Property 19: Quest Reward Distribution**
     - **Validates: Requirements 6.4**
-  - [ ] 9.6 Implement quest failure
+  - [x] 9.6 Implement quest failure
     - Create fail_quest() with consequences
     - Update quest log appropriately
     - _Requirements: 6.6_
@@ -265,63 +270,63 @@
 
 ## Phase 4: UI Systems
 
-- [ ] 11. Implement Pipboy UI
-  - [ ] 11.1 Create PipboyUI main controller
+- [x] 11. Implement Pipboy UI
+  - [x] 11.1 Create PipboyUI main controller
     - Implement tab switching
     - Create open/close animations
     - _Requirements: 7.1_
-  - [ ] 11.2 Create StatusPanel
+  - [x] 11.2 Create StatusPanel
     - Display SPECIAL stats and derived stats
     - Show skills, perks, and effects
     - _Requirements: 7.2_
-  - [ ] 11.3 Create InventoryPanel
+  - [x] 11.3 Create InventoryPanel
     - Display items by category
     - Show weight and value totals
     - _Requirements: 7.3_
-  - [ ] 11.4 Create MapPanel
+  - [x] 11.4 Create MapPanel
     - Display local area map
     - Add location markers
     - _Requirements: 7.4_
-  - [ ] 11.5 Create DataPanel
+  - [x] 11.5 Create DataPanel
     - Display quest log
     - Show game statistics
     - _Requirements: 7.5_
-  - [ ] 11.6 Implement item usage from Pipboy
+  - [x] 11.6 Implement item usage from Pipboy
     - Handle consumable items
     - Update inventory after use
     - _Requirements: 7.6_
 
-- [ ] 12. Implement Character Editor
-  - [ ] 12.1 Create CharacterEditor UI
+- [x] 12. Implement Character Editor
+  - [x] 12.1 Create CharacterEditor UI
     - Build SPECIAL allocation interface
     - Create point distribution controls
     - _Requirements: 8.1_
-  - [ ] 12.2 Implement SPECIAL allocation
+  - [x] 12.2 Implement SPECIAL allocation
     - Enforce min/max bounds
     - Track remaining points
     - _Requirements: 8.2_
-  - [ ] 12.3 Write property test for SPECIAL bounds
+  - [x] 12.3 Write property test for SPECIAL bounds
     - **Property 20: SPECIAL Bounds Enforcement**
     - **Validates: Requirements 8.2**
-  - [ ] 12.4 Implement trait selection
+  - [x] 12.4 Implement trait selection
     - Create trait selection UI
     - Enforce 2 trait maximum
     - _Requirements: 8.3_
-  - [ ] 12.5 Write property test for trait limits
+  - [x] 12.5 Write property test for trait limits
     - **Property 21: Trait Limit Enforcement**
     - **Validates: Requirements 8.3**
-  - [ ] 12.6 Implement skill tagging
+  - [x] 12.6 Implement skill tagging
     - Create skill tag UI
     - Apply +20 bonus to tagged skills
     - _Requirements: 8.4_
-  - [ ] 12.7 Write property test for tagged skill bonus
+  - [x] 12.7 Write property test for tagged skill bonus
     - **Property 22: Tagged Skill Bonus**
     - **Validates: Requirements 8.4**
-  - [ ] 12.8 Implement character finalization
+  - [x] 12.8 Implement character finalization
     - Calculate all derived stats
     - Create final Critter instance
     - _Requirements: 8.5, 8.6_
-  - [ ] 12.9 Write property test for derived stats
+  - [x] 12.9 Write property test for derived stats
     - **Property 23: Derived Stat Calculation**
     - **Validates: Requirements 8.6**
 
