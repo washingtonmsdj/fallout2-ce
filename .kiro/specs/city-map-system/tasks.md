@@ -2,10 +2,17 @@
 
 ## Phase 1: Core Infrastructure
 
-- [ ] 1. Set up project structure and core systems
-  - [ ] 1.1 Create directory structure for city systems
+- [-] 1. Set up project structure and core systems
+
+
+
+  - [x] 1.1 Create directory structure for city systems
+
+
     - Create `scripts/city/core/`, `scripts/city/systems/`, `scripts/city/data/`, `scripts/city/rendering/`, `scripts/city/utils/`
     - _Requirements: 23.1_
+
+
   - [ ] 1.2 Implement EventBus for inter-system communication
     - Create `scripts/city/core/event_bus.gd` with all signals defined in design
     - Implement singleton pattern for global access
@@ -13,7 +20,8 @@
   - [ ] 1.3 Create CityConfig with all constants
     - Create `scripts/city/core/city_config.gd` with grid sizes, decay rates, prices
     - _Requirements: 23.6_
-  - [ ] 1.4 Implement CityManager coordinator
+  - [-] 1.4 Implement CityManager coordinator
+
     - Create `scripts/city/core/city_manager.gd` to initialize and coordinate all systems
     - Implement system lifecycle management (init, update, cleanup)
     - _Requirements: 23.1, 23.3_
