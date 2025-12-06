@@ -33,10 +33,16 @@ const BUILDING_COLORS = {
 }
 
 func _ready():
+	# Se não foi atribuído no editor, procura na cena
+	if not city_simulation:
+		city_simulation = get_parent().find_child("CitySimulation", true, false)
+	
 	if city_simulation:
 		city_simulation.building_constructed.connect(_on_building_constructed)
 		city_simulation.citizen_spawned.connect(_on_citizen_spawned)
 		city_simulation.city_updated.connect(_on_city_updated)
+	else:
+		push_error("CityRenderer: CitySimulation not found!")
 
 ## Converte coordenadas do grid para isométrico
 func grid_to_iso(grid_pos: Vector2) -> Vector2:
@@ -296,4 +302,9 @@ func _on_city_updated():
 	queue_redraw()
 
 func _process(_delta):
+	# Redesenhar a cada frame para animações suaves
 	queue_redraw()
+	
+	# Debug: mostrar se está renderizando
+	if city_simulation and city_simulation.buildings.size() > 0:
+		pass  # Renderizando normalmente

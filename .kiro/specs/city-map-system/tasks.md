@@ -2,7 +2,8 @@
 
 ## Phase 1: Core Infrastructure
 
-- [x] 1. Set up project structure and core systems
+- [-] 1. Set up project structure and core systems
+
 
 
 
@@ -32,223 +33,306 @@
 
 ## Phase 2: Grid and Terrain System
 
-- [-] 3. Implement GridSystem
+- [x] 3. Implement GridSystem
 
 
-  - [ ] 3.1 Create TileData class and TerrainType enum
+  - [x] 3.1 Create TileData class and TerrainType enum
+
+
     - Implement `scripts/city/systems/grid_system.gd`
     - Define TileData with terrain_type, elevation, walkable, radiation_level
     - _Requirements: 1.1, 1.2, 1.3_
-  - [ ] 3.2 Implement grid storage with Dictionary for O(1) access
+
+
+  - [x] 3.2 Implement grid storage with Dictionary for O(1) access
     - Use Vector2i keys for tile lookup
+
+
     - Support configurable grid sizes 50x50 to 500x500
     - _Requirements: 1.1, 1.4_
-  - [ ] 3.3 Write property test for grid consistency
+  - [x] 3.3 Write property test for grid consistency
     - **Property 1: Grid Consistency**
     - **Validates: Requirements 1.4**
-  - [ ] 3.4 Implement grid utility functions
+  - [x] 3.4 Implement grid utility functions
+
+
     - get_tile, set_tile, is_walkable, get_tiles_in_area, get_neighbors, raycast
+
     - _Requirements: 1.2, 1.4_
-  - [ ] 3.5 Implement grid serialization
+  - [x] 3.5 Implement grid serialization
+
     - Serialize to PackedByteArray for efficient save/load
     - _Requirements: 1.5_
-  - [ ] 3.6 Write property test for serialization round-trip
+
+  - [x] 3.6 Write property test for serialization round-trip
+
     - **Property 9: Save/Load Round Trip**
     - **Validates: Requirements 1.5, 10.1**
 
-- [ ] 4. Checkpoint - Grid system complete
+- [x] 4. Checkpoint - Grid system complete
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 3: Road System and Pathfinding
 
 - [ ] 5. Implement RoadSystem
-  - [ ] 5.1 Create RoadSegment class and RoadType enum
+  - [x] 5.1 Create RoadSegment class and RoadType enum
+
+
     - Implement `scripts/city/systems/road_system.gd`
     - Support curved roads with Bezier control points
     - _Requirements: 2.1, 21.1, 21.2_
-  - [ ] 5.2 Implement road creation with organic layouts
+
+  - [x] 5.2 Implement road creation with organic layouts
+
     - create_road, create_curved_road functions
     - Avoid perfect grids, support curves and diagonals
     - _Requirements: 21.4, 21.5_
-  - [ ] 5.3 Implement road connectivity
+  - [x] 5.3 Implement road connectivity
+
+
     - Automatically connect adjacent road segments
     - Track intersections and connections
     - _Requirements: 2.2_
-  - [ ] 5.4 Write property test for road connectivity
+
+  - [x] 5.4 Write property test for road connectivity
+
     - **Property 7: Road Connectivity**
     - **Validates: Requirements 2.2**
 
-- [ ] 6. Implement Pathfinding
-  - [ ] 6.1 Create pathfinding utility
+- [-] 6. Implement Pathfinding
+
+  - [x] 6.1 Create pathfinding utility
+
     - Implement `scripts/city/utils/pathfinding.gd`
     - A* algorithm with heuristics
     - _Requirements: 2.3_
-  - [ ] 6.2 Implement landmark system for optimization
+
+  - [x] 6.2 Implement landmark system for optimization
+
     - Precompute landmarks at key intersections
     - Cache frequently used routes
     - _Requirements: 2.3, 2.4_
-  - [ ] 6.3 Implement PathResult class
+
+  - [x] 6.3 Implement PathResult class
+
+
     - Return path, cost, estimated_time
     - Support road-only and off-road modes
+
     - _Requirements: 2.5_
-  - [ ] 6.4 Write property test for pathfinding validity
+  - [x] 6.4 Write property test for pathfinding validity
+
     - **Property 2: Pathfinding Validity**
     - **Validates: Requirements 2.3, 2.5**
 
-- [ ] 7. Checkpoint - Roads and pathfinding complete
+
+
+- [x] 7. Checkpoint - Roads and pathfinding complete
+
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 4: Zone and Building Systems
 
-- [ ] 8. Implement ZoneSystem
-  - [ ] 8.1 Create ZoneData class and ZoneType enum
+
+- [x] 8. Implement ZoneSystem
+
+  - [x] 8.1 Create ZoneData class and ZoneType enum
+
     - Implement `scripts/city/systems/zone_system.gd`
     - Support 6 zone types: Residential, Commercial, Industrial, Agricultural, Military, Restricted
     - _Requirements: 3.1_
-  - [ ] 8.2 Implement zone creation with lot subdivision
+
+
+  - [x] 8.2 Implement zone creation with lot subdivision
+
     - Automatically create buildable lots within zones
     - Track zone statistics
+
     - _Requirements: 3.2, 3.4_
-  - [ ] 8.3 Implement zone restrictions
+
+  - [x] 8.3 Implement zone restrictions
+
     - Enforce building type restrictions per zone
     - _Requirements: 3.3_
 
-- [ ] 9. Implement BuildingSystem
-  - [ ] 9.1 Create BuildingData class and BuildingType enum
+
+- [x] 9. Implement BuildingSystem
+
+  - [x] 9.1 Create BuildingData class and BuildingType enum
+
     - Implement `scripts/city/systems/building_system.gd`
     - Define 20+ building types with unique sizes
     - _Requirements: 4.1, 22.1-22.6_
-  - [ ] 9.2 Create building templates data
+
+  - [x] 9.2 Create building templates data
+
     - Implement `scripts/city/data/building_templates.gd`
     - Define sizes, capacities, production/consumption for each type
     - _Requirements: 22.6, 4.5_
-  - [ ] 9.3 Implement building construction
+  - [x] 9.3 Implement building construction
+
+
     - construct_building with resource deduction and time
     - Mark tiles as occupied
     - _Requirements: 4.3_
-  - [ ] 9.4 Write property test for building placement
+
+  - [x] 9.4 Write property test for building placement
+
     - **Property 3: Building Placement Integrity**
     - **Validates: Requirements 4.1, 4.3**
-  - [ ] 9.5 Implement building upgrades and destruction
+
+
+  - [x] 9.5 Implement building upgrades and destruction
+
+
     - upgrade_building, destroy_building, repair_building
     - Handle occupant displacement
+
     - _Requirements: 4.4, 4.6_
+
 
 - [ ] 10. Checkpoint - Zones and buildings complete
   - Ensure all tests pass, ask the user if questions arise.
 
+
 ## Phase 5: Citizen System
 
-- [ ] 11. Implement CitizenSystem
-  - [ ] 11.1 Create CitizenData class and enums
+
+- [x] 11. Implement CitizenSystem
+
+  - [x] 11.1 Create CitizenData class and enums
+
     - Implement `scripts/city/systems/citizen_system.gd`
     - Define NeedType, Activity enums
+
     - _Requirements: 5.1, 5.2_
-  - [ ] 11.2 Implement need tracking and decay
+  - [x] 11.2 Implement need tracking and decay
+
     - Track 6 needs: hunger, thirst, rest, happiness, health, safety
     - Implement decay rates from config
     - _Requirements: 5.1_
-  - [ ] 11.3 Write property test for need bounds
+  - [x] 11.3 Write property test for need bounds
+
     - **Property 4: Citizen Need Bounds**
     - **Validates: Requirements 5.1**
-  - [ ] 11.4 Implement autonomous decision-making
+  - [x] 11.4 Implement autonomous decision-making
     - Priority-based need fulfillment
     - Seek resources when needs are critical
     - _Requirements: 5.2, 5.3_
-  - [ ] 11.5 Implement daily schedules
+  - [x] 11.5 Implement daily schedules
     - ScheduleEntry class with hour, activity, location
     - Work, rest, leisure activities
     - _Requirements: 5.5_
-  - [ ] 11.6 Implement citizen attributes
+  - [x] 11.6 Implement citizen attributes
     - Skills, faction affiliation, relationships
     - _Requirements: 5.6_
-  - [ ] 11.7 Implement home and job assignment
+  - [x] 11.7 Implement home and job assignment
     - assign_job, housing capacity checks
     - Immigration slowdown when over capacity
     - _Requirements: 5.4, 5.7_
 
-- [ ] 12. Checkpoint - Citizens complete
+- [x] 12. Checkpoint - Citizens complete
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 6: Economy System
 
-- [ ] 13. Implement EconomySystem
-  - [ ] 13.1 Create ResourceData class and ResourceType enum
+- [x] 13. Implement EconomySystem
+  - [x] 13.1 Create ResourceData class and ResourceType enum
     - Implement `scripts/city/systems/economy_system.gd`
     - Track 9 resources: Food, Water, Caps, Materials, Power, Medicine, Weapons, Fuel, Components
     - _Requirements: 6.1_
-  - [ ] 13.2 Implement production and consumption tracking
+  - [x] 13.2 Implement production and consumption tracking
     - Calculate rates from all buildings
     - _Requirements: 6.2, 6.3_
-  - [ ] 13.3 Write property test for resource conservation
+  - [x] 13.3 Write property test for resource conservation
     - **Property 5: Resource Conservation**
     - **Validates: Requirements 6.2, 6.3**
-  - [ ] 13.4 Implement dynamic pricing
+  - [x] 13.4 Implement dynamic pricing
     - Price increases when demand > supply
     - Price decreases when supply > demand
     - _Requirements: 6.4, 6.5_
-  - [ ] 13.5 Implement trade system
+  - [x] 13.5 Implement trade system
     - TradeOffer class, external settlement trade
     - _Requirements: 6.6_
-  - [ ] 13.6 Implement economic reports
+  - [x] 13.6 Implement economic reports
     - Statistics and trends
     - _Requirements: 6.7_
 
-- [ ] 14. Checkpoint - Economy complete
+- [x] 14. Checkpoint - Economy complete
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 7: Faction System
 
-- [ ] 15. Implement FactionSystem
-  - [ ] 15.1 Create FactionData class and RelationType enum
+- [x] 15. Implement FactionSystem
+  - [x] 15.1 Create FactionData class and RelationType enum
     - Implement `scripts/city/systems/faction_system.gd`
     - _Requirements: 12.1_
-  - [ ] 15.2 Implement territory control
+  - [x] 15.2 Implement territory control
     - claim_territory, get_faction_at
     - Ensure territory exclusivity
     - _Requirements: 12.2_
-  - [ ] 15.3 Write property test for territory exclusivity
+  - [x] 15.3 Write property test for territory exclusivity
     - **Property 6: Faction Territory Exclusivity**
     - **Validates: Requirements 12.2**
-  - [ ] 15.4 Implement faction relations
+  - [x] 15.4 Implement faction relations
     - Allied, Friendly, Neutral, Unfriendly, Hostile
     - _Requirements: 12.3_
-  - [ ] 15.5 Implement territorial disputes
+  - [x] 15.5 Implement territorial disputes
     - Trigger conflicts when factions clash
     - _Requirements: 12.4_
-  - [ ] 15.6 Implement player reputation
+  - [x] 15.6 Implement player reputation
     - Track reputation per faction
     - _Requirements: 12.6, 17.1-17.5_
 
-- [ ] 16. Checkpoint - Factions complete
+- [x] 16. Checkpoint - Factions complete
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 8: Infrastructure Systems
 
-- [ ] 17. Implement PowerSystem
-  - [ ] 17.1 Create power grid implementation
+- [x] 17. Implement PowerSystem
+
+
+
+
+  - [x] 17.1 Create power grid implementation
+
+
     - Implement `scripts/city/systems/power_system.gd`
     - Track generation and consumption
     - _Requirements: 19.1, 19.2_
-  - [ ] 17.2 Implement power connections
+  - [x] 17.2 Implement power connections
+
+
     - Connection range, conduits
     - _Requirements: 19.3, 19.5_
-  - [ ] 17.3 Write property test for power grid consistency
+
+  - [x] 17.3 Write property test for power grid consistency
+
     - **Property 8: Power Grid Consistency**
     - **Validates: Requirements 19.3, 19.4**
-  - [ ] 17.4 Implement power shortage effects
+  - [x] 17.4 Implement power shortage effects
+
+
     - Reduce building functionality when power insufficient
     - _Requirements: 19.4_
 
-- [ ] 18. Implement WaterSystem
-  - [ ] 18.1 Create water network implementation
+- [x] 18. Implement WaterSystem
+
+
+  - [x] 18.1 Create water network implementation
+
+
     - Implement `scripts/city/systems/water_system.gd`
     - Track sources: Wells, Purifiers, Rivers
     - _Requirements: 20.1, 20.2_
-  - [ ] 18.2 Implement pipe network
+  - [x] 18.2 Implement pipe network
+
+
     - Distribution through pipes
     - _Requirements: 20.3_
-  - [ ] 18.3 Implement water quality
+
+  - [x] 18.3 Implement water quality
+
     - Dirty, clean, purified levels
     - Health effects from contamination
     - _Requirements: 20.4, 20.5_

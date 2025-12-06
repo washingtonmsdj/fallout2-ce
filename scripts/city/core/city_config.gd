@@ -630,3 +630,11 @@ const CAMERA_PAN_SPEED := 500.0
 const COLOR_ROAD := Color(0.25, 0.22, 0.2)
 const COLOR_GROUND := Color(0.6, 0.5, 0.35)
 const COLOR_GRID := Color(0.4, 0.4, 0.4, 0.15)
+
+# =============================================================================
+# HELPER METHODS
+# =============================================================================
+
+func get_need_decay_rate(need_type: int) -> float:
+	"""Obtém a taxa de decay para um tipo de necessidade"""
+	return NEED_DECAY_RATES.get(need_type, 0.1)

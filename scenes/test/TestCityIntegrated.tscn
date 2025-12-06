@@ -1,0 +1,102 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/test/test_city_integrated.gd" id="1_test"]
+
+[node name="TestCityIntegrated" type="Node2D"]
+script = ExtResource("1_test")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 800)
+zoom = Vector2(0.7, 0.7)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="CityPanel" type="Panel" parent="UI"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 250.0
+offset_bottom = 320.0
+
+[node name="VBox" type="VBoxContainer" parent="UI/CityPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="Title" type="Label" parent="UI/CityPanel/VBox"]
+layout_mode = 2
+text = "🏙️ CITY MAP SYSTEM"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 14
+
+[node name="Sep1" type="HSeparator" parent="UI/CityPanel/VBox"]
+layout_mode = 2
+
+[node name="PopulationLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "👥 Pop: 0"
+
+[node name="BuildingsLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "🏗️ Build: 0"
+
+[node name="Sep2" type="HSeparator" parent="UI/CityPanel/VBox"]
+layout_mode = 2
+
+[node name="FoodLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "🍖 0"
+
+[node name="WaterLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "💧 0"
+
+[node name="CapsLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "💰 0"
+
+[node name="MaterialsLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "🧱 0"
+
+[node name="Sep3" type="HSeparator" parent="UI/CityPanel/VBox"]
+layout_mode = 2
+
+[node name="HappinessLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "😊 50%"
+
+[node name="SpeedLabel" type="Label" parent="UI/CityPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "⏱️ 1.0x"
+
+[node name="Instructions" type="Label" parent="UI"]
+offset_left = 10.0
+offset_top = 330.0
+offset_right = 250.0
+offset_bottom = 450.0
+text = "🎮 CONTROLS
+Scroll - Zoom
+Space - Build Mode
+ESC - Cancel
+
+📊 SYSTEMS
+✅ Grid System
+✅ Road System
+✅ Zone System
+✅ Building System
+✅ Citizen System
+✅ Economy System
+✅ Faction System"
