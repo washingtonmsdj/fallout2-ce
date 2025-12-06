@@ -1,0 +1,71 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/test/test_citybound_style.gd" id="1_test"]
+
+[node name="TestCityboundStyle" type="Node2D"]
+script = ExtResource("1_test")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 1600)
+zoom = Vector2(0.6, 0.6)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="InfoPanel" type="Panel" parent="UI"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 260.0
+offset_bottom = 220.0
+
+[node name="InfoLabel" type="Label" parent="UI/InfoPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 130.0
+text = "🏙️ CITYBOUND-STYLE RENDERER
+
+🏗️ Buildings: 0
+👥 Citizens: 0
+🛣️ Roads: 0
+⏱️ Speed: 1.0x
+🔍 Zoom: 60%"
+
+[node name="StatsLabel" type="Label" parent="UI/InfoPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 130.0
+offset_right = -10.0
+offset_bottom = 200.0
+text = "💰 Caps: 0
+🍖 Food: 0
+💧 Water: 0
+🧱 Materials: 0"
+
+[node name="ControlsPanel" type="Panel" parent="UI"]
+offset_left = 10.0
+offset_top = 230.0
+offset_right = 260.0
+offset_bottom = 380.0
+
+[node name="ControlsLabel" type="Label" parent="UI/ControlsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+text = "🎮 CONTROLS
+
+WASD/Arrows - Move camera
+Mouse wheel - Zoom in/out
+Space - Add random building
+C - Add citizen
++/- - Change game speed
+R - Rebuild render cache"

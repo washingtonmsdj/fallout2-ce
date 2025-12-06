@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Fallout 2: Godot Edition"
-run/main_scene="res://scenes/test/TestCity.tscn"
+run/main_scene="res://scenes/test/TestCityboundStyle.tscn"
 config/features=PackedStringArray("4.5")
 config/icon="res://icon.svg"
 

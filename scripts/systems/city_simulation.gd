@@ -46,11 +46,17 @@ var cell_size: float = 32.0
 func _ready():
 	_initialize_resources()
 	_generate_initial_city()
+	
+	# Criar dados de teste para visualização
+	call_deferred("_create_test_data")
 
 func _process(delta):
 	_update_immigration(delta)
 	_update_economy(delta)
 	_update_citizens(delta)
+	
+	# Emitir sinal de atualização para forçar redesenho
+	emit_signal("city_updated")
 
 ## Inicializa recursos
 func _initialize_resources():
@@ -451,3 +457,85 @@ func _calculate_average_happiness() -> float:
 		total += citizen["needs"]["happiness"]
 	
 	return total / citizens.size()
+
+## Cria dados de teste para visualização inicial
+func _create_test_data():
+	print("🏗️ Creating test city data...")
+	
+	# Garantir que temos estradas
+	if roads.is_empty():
+		print("  - Creating roads...")
+		for x in range(10):
+			var cell = Vector2i(x, 5)
+			roads.append(cell)
+			_set_cell(cell, "road")
+		for y in range(10):
+			var cell = Vector2i(5, y)
+			if cell not in roads:
+				roads.append(cell)
+				_set_cell(cell, "road")
+	
+	# Garantir que temos edifícios
+	if buildings.size() < 3:
+		print("  - Creating buildings...")
+		# Casa
+		buildings.append({
+			"id": 0,
+			"type": BuildingType.HOUSE,
+			"position": Vector2i(2, 2),
+			"lot": {},
+			"capacity": 4,
+			"occupants": 0,
+			"production": {},
+			"health": 100.0
+		})
+		# Loja
+		buildings.append({
+			"id": 1,
+			"type": BuildingType.SHOP,
+			"position": Vector2i(7, 2),
+			"lot": {},
+			"capacity": 2,
+			"occupants": 0,
+			"production": {CityResource.CAPS: 3.0},
+			"health": 100.0
+		})
+		# Fazenda
+		buildings.append({
+			"id": 2,
+			"type": BuildingType.FARM,
+			"position": Vector2i(2, 7),
+			"lot": {},
+			"capacity": 3,
+			"occupants": 0,
+			"production": {CityResource.FOOD: 5.0},
+			"health": 100.0
+		})
+	
+	# Garantir que temos cidadãos
+	if citizens.size() < 3:
+		print("  - Creating citizens...")
+		for i in range(3):
+			citizens.append({
+				"id": i,
+				"name": "Citizen %d" % i,
+				"home": buildings[0] if buildings.size() > 0 else {},
+				"job": null,
+				"needs": {
+					"hunger": 80.0,
+					"thirst": 80.0,
+					"rest": 80.0,
+					"happiness": 60.0
+				},
+				"position": Vector2i(3 + i, 3),
+				"state": "idle"
+			})
+		population = citizens.size()
+	
+	print("✅ Test city created!")
+	print("  - Roads: %d" % roads.size())
+	print("  - Buildings: %d" % buildings.size())
+	print("  - Citizens: %d" % citizens.size())
+	
+	# Emitir sinal de atualização
+	emit_signal("city_updated")

@@ -139,15 +139,18 @@ signal pipe_removed(from: Vector2i, to: Vector2i)
 # =============================================================================
 # VEHICLE EVENTS
 # =============================================================================
+signal vehicle_created(vehicle_id: int, type: int, position: Vector2i)
 signal vehicle_spawned(vehicle_id: int, type: int, position: Vector2i)
 signal vehicle_destroyed(vehicle_id: int)
 signal vehicle_moved(vehicle_id: int, from: Vector2, to: Vector2)
 signal vehicle_fuel_changed(vehicle_id: int, old_fuel: float, new_fuel: float)
 signal vehicle_fuel_empty(vehicle_id: int)
-signal vehicle_damaged(vehicle_id: int, damage: float)
+signal vehicle_damaged(vehicle_id: int, damage: float, new_health: float)
 signal vehicle_repaired(vehicle_id: int, amount: float)
 signal vehicle_entered(vehicle_id: int, entity_id: int)
 signal vehicle_exited(vehicle_id: int, entity_id: int)
+signal vehicle_upgraded(vehicle_id: int, upgrade_name: String)
+signal vehicle_fired(vehicle_id: int, target_position: Vector2i, damage: float)
 
 # =============================================================================
 # CRAFTING EVENTS

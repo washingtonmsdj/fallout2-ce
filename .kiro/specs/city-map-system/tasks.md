@@ -337,109 +337,169 @@
     - Health effects from contamination
     - _Requirements: 20.4, 20.5_
 
-- [ ] 19. Checkpoint - Infrastructure complete
+- [x] 19. Checkpoint - Infrastructure complete
+
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 9: Weather and Events
 
-- [ ] 20. Implement WeatherSystem
-  - [ ] 20.1 Create weather implementation
+- [x] 20. Implement WeatherSystem
+
+  - [x] 20.1 Create weather implementation
+
+
     - Implement `scripts/city/systems/weather_system.gd`
     - Support 7 weather types
     - _Requirements: 13.1_
-  - [ ] 20.2 Implement weather effects
+  - [x] 20.2 Implement weather effects
+
     - Visibility, movement speed, radiation damage
     - Citizens seek shelter during hazards
     - _Requirements: 13.2, 13.3, 13.4_
-  - [ ] 20.3 Implement day/night cycle
+  - [x] 20.3 Implement day/night cycle
+
     - 24-hour simulation
     - Affect resource production
     - _Requirements: 13.5, 13.6_
 
-- [ ] 21. Implement EventSystem
-  - [ ] 21.1 Create event implementation
+- [x] 21. Implement EventSystem
+
+  - [x] 21.1 Create event implementation
+
+
     - Implement `scripts/city/systems/event_system.gd`
     - Support Raids, Traders, Disasters, Opportunities
     - _Requirements: 9.1_
-  - [ ] 21.2 Implement event triggers and notifications
+
+  - [x] 21.2 Implement event triggers and notifications
+
     - Notify player and affected citizens
     - _Requirements: 9.2_
-  - [ ] 21.3 Implement event scaling
+
+
+  - [x] 21.3 Implement event scaling
+
     - Frequency and intensity based on prosperity
     - _Requirements: 9.3_
-  - [ ] 21.4 Implement event chains
+  - [x] 21.4 Implement event chains
+
     - Consequences and branching outcomes
     - _Requirements: 9.4_
 
-- [ ] 22. Checkpoint - Weather and events complete
+- [x] 22. Checkpoint - Weather and events complete
+
+
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 10: Defense System
 
-- [ ] 23. Implement DefenseSystem
-  - [ ] 23.1 Create defense structures
+- [x] 23. Implement DefenseSystem
+
+
+  - [x] 23.1 Create defense structures
+
+
     - Implement `scripts/city/systems/defense_system.gd`
     - Walls, Gates, Guard Towers, Turrets, Traps
     - _Requirements: 15.1_
-  - [ ] 23.2 Implement defense rating calculation
+
+
+  - [x] 23.2 Implement defense rating calculation
+
+
+
     - Sum of all active defense structures
     - _Requirements: 15.2_
-  - [ ] 23.3 Write property test for defense rating
+  - [x] 23.3 Write property test for defense rating
+
     - **Property 10: Defense Rating Calculation**
     - **Validates: Requirements 15.2**
-  - [ ] 23.4 Implement automatic engagement
+
+  - [x] 23.4 Implement automatic engagement
+
     - Defenses engage hostiles during raids
     - Track ammunition
     - _Requirements: 15.3, 15.4_
-  - [ ] 23.5 Implement guard patrols
+
+  - [x] 23.5 Implement guard patrols
+
     - Guard NPCs with patrol routes
     - _Requirements: 15.5_
-  - [ ] 23.6 Implement early warning
+
+  - [x] 23.6 Implement early warning
+
     - Alert for incoming threats
     - _Requirements: 15.6_
 
-- [ ] 24. Checkpoint - Defense complete
+- [x] 24. Checkpoint - Defense complete
+
+
+
+
+
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 11: Additional Systems
 
-- [ ] 25. Implement VehicleSystem
-  - [ ] 25.1 Create vehicle implementation
+- [-] 25. Implement VehicleSystem
+
+
+  - [x] 25.1 Create vehicle implementation
+
+
+
+
+
+
     - Implement `scripts/city/systems/vehicle_system.gd`
     - Car, Motorcycle, Truck, Vertibird
     - _Requirements: 14.1_
-  - [ ] 25.2 Implement vehicle mechanics
+  - [x] 25.2 Implement vehicle mechanics
+
     - Condition, fuel, cargo capacity
     - Physics with acceleration and turning
     - _Requirements: 14.2, 14.4_
-  - [ ] 25.3 Implement vehicle combat and upgrades
+
+  - [x] 25.3 Implement vehicle combat and upgrades
+
     - Damage, customization
     - _Requirements: 14.5, 14.6_
 
 - [ ] 26. Implement CraftingSystem
-  - [ ] 26.1 Create crafting implementation
+  - [x] 26.1 Create crafting implementation
+
+
     - Implement `scripts/city/systems/crafting_system.gd`
     - Weapons, Armor, Chems, Food, Components
     - _Requirements: 18.1_
+
   - [ ] 26.2 Implement workbench requirements
     - Different benches for different crafting
     - _Requirements: 18.2_
-  - [ ] 26.3 Implement crafting mechanics
+
+  - [x] 26.3 Implement crafting mechanics
+
     - Material consumption, skill levels, recipes
     - _Requirements: 18.3, 18.4, 18.5_
 
 - [ ] 27. Implement QuestSystem
-  - [ ] 27.1 Create quest implementation
+  - [x] 27.1 Create quest implementation
+
+
     - Implement `scripts/city/systems/quest_system.gd`
     - Generate quests from city problems
     - _Requirements: 16.1_
-  - [ ] 27.2 Implement quest types
+  - [x] 27.2 Implement quest types
+
     - Fetch, Eliminate, Escort, Build, Investigate
     - _Requirements: 16.2_
-  - [ ] 27.3 Implement quest tracking and rewards
+  - [x] 27.3 Implement quest tracking and rewards
+
     - Progress, objectives, completion rewards
     - _Requirements: 16.3, 16.4_
-  - [ ] 27.4 Implement quest chains
+
+  - [x] 27.4 Implement quest chains
+
     - Branching outcomes, faction integration
     - _Requirements: 16.5, 16.6_
 
@@ -449,23 +509,39 @@
 ## Phase 12: Rendering System
 
 - [ ] 29. Implement CityRenderer
-  - [ ] 29.1 Create main renderer
+  - [x] 29.1 Create main renderer
+
     - Implement `scripts/city/rendering/city_renderer.gd`
     - Isometric projection with proper tile rendering
     - _Requirements: 7.1_
-  - [ ] 29.2 Implement depth sorting
+
+  - [x] 29.2 Implement depth sorting
+
+
+
+
+
     - Correct visual layering for all entities
     - _Requirements: 7.2_
-  - [ ] 29.3 Implement camera controls
+  - [x] 29.3 Implement camera controls
+
     - Smooth movement, zoom 0.25x to 4x
     - _Requirements: 7.3_
 
-- [ ] 30. Implement specialized renderers
-  - [ ] 30.1 Create BuildingRenderer
+- [x] 30. Implement specialized renderers
+
+  - [x] 30.1 Create BuildingRenderer
+
+
+
+
+
     - 3D-looking isometric cubes with shading
     - Visual variants (damaged, pristine, makeshift)
     - _Requirements: 7.4, 22.7_
-  - [ ] 30.2 Create CitizenRenderer
+
+  - [x] 30.2 Create CitizenRenderer
+
     - Animated citizens moving along paths
     - _Requirements: 7.5_
   - [ ] 30.3 Create RoadRenderer
@@ -475,82 +551,99 @@
     - Day/night cycle, weather effects
     - _Requirements: 7.6_
 
-- [ ] 31. Checkpoint - Rendering complete
+- [x] 31. Fix rendering issues - Empty screen bug
+  - [x] 31.1 Add test data initialization to CitySimulation
+    - Created `_create_test_data()` method to populate initial roads, buildings, citizens
+    - Ensures city has visible content on startup
+    - _Bug Fix: Empty screen issue_
+  - [x] 31.2 Fix camera positioning
+    - Camera now centers on city grid center using isometric projection
+    - Set appropriate zoom level (0.8x)
+    - _Bug Fix: Camera looking at wrong location_
+  - [x] 31.3 Add continuous update signal
+    - Emit `city_updated` signal in `_process()` to force renderer updates
+    - _Bug Fix: Renderer not being notified to redraw_
+  - [x] 31.4 Add debug visualization
+    - Added visibility guarantees and debug counters
+    - Console diagnostics for troubleshooting
+    - _Enhancement: Better debugging_
+
+- [x] 32. Checkpoint - Rendering complete and working
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 13: Player Integration
 
-- [ ] 32. Implement Player System
-  - [ ] 32.1 Update PlayerCity for new systems
+- [ ] 33. Implement Player System
+  - [ ] 33.1 Update PlayerCity for new systems
     - Integrate with GridSystem for movement
     - Restrict to walkable tiles
     - _Requirements: 8.1, 8.2_
-  - [ ] 32.2 Implement camera follow
+  - [ ] 33.2 Implement camera follow
     - Smooth follow with configurable offset
     - _Requirements: 8.3_
-  - [ ] 32.3 Implement building interaction
+  - [ ] 33.3 Implement building interaction
     - Enable interaction when approaching buildings
     - _Requirements: 8.4_
-  - [ ] 32.4 Integrate with Critter/SPECIAL system
+  - [ ] 33.4 Integrate with Critter/SPECIAL system
     - Display player stats in UI
     - _Requirements: 8.5, 8.6_
 
-- [ ] 33. Checkpoint - Player integration complete
+- [ ] 34. Checkpoint - Player integration complete
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 14: Save/Load and Performance
 
-- [ ] 34. Implement Save System
-  - [ ] 34.1 Create CityState serialization
+- [ ] 35. Implement Save System
+  - [ ] 35.1 Create CityState serialization
     - Implement `scripts/city/utils/serialization.gd`
     - Serialize all system states
     - _Requirements: 10.1_
-  - [ ] 34.2 Implement save slots
+  - [ ] 35.2 Implement save slots
     - Multiple save support
     - _Requirements: 10.2_
-  - [ ] 34.3 Implement load with validation
+  - [ ] 35.3 Implement load with validation
     - Restore exact state, validate integrity
     - _Requirements: 10.3, 10.4_
 
-- [ ] 35. Implement Performance Optimizations
-  - [ ] 35.1 Create SpatialHash utility
+- [ ] 36. Implement Performance Optimizations
+  - [ ] 36.1 Create SpatialHash utility
     - Implement `scripts/city/utils/spatial_hash.gd`
     - Efficient entity queries
     - _Requirements: 11.2_
-  - [ ] 35.2 Implement LOD system
+  - [ ] 36.2 Implement LOD system
     - Level of detail for distant entities
     - _Requirements: 11.3_
-  - [ ] 35.3 Implement draw call batching
+  - [ ] 36.3 Implement draw call batching
     - Batch similar entities
     - _Requirements: 11.4_
-  - [ ] 35.4 Implement object pooling
+  - [ ] 36.4 Implement object pooling
     - Pool frequently created/destroyed objects
     - _Requirements: 11.5_
 
-- [ ] 36. Checkpoint - Save/Load and performance complete
+- [ ] 37. Checkpoint - Save/Load and performance complete
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 15: Scene and UI
 
-- [ ] 37. Create City Scene
-  - [ ] 37.1 Create CityMap.tscn
+- [ ] 38. Create City Scene
+  - [ ] 38.1 Create CityMap.tscn
     - Main scene with all systems
     - _Requirements: All_
-  - [ ] 37.2 Create CityUI.tscn
+  - [ ] 38.2 Create CityUI.tscn
     - UI panels for city stats, player stats, building menu
     - _Requirements: 8.5_
-  - [ ] 37.3 Create building prefabs
+  - [ ] 38.3 Create building prefabs
     - Visual prefabs for each building type
     - _Requirements: 22.1-22.5_
 
-- [ ] 38. Final Integration
-  - [ ] 38.1 Wire all systems together
+- [ ] 39. Final Integration
+  - [ ] 39.1 Wire all systems together
     - Connect EventBus signals
     - Initialize systems in correct order
     - _Requirements: 23.1, 23.4_
-  - [ ] 38.2 Create debug tools
+  - [ ] 39.2 Create debug tools
     - Debug overlays for each system
     - _Requirements: 23.5_
 
-- [ ] 39. Final Checkpoint - All systems integrated
+- [ ] 40. Final Checkpoint - All systems integrated
   - Ensure all tests pass, ask the user if questions arise.

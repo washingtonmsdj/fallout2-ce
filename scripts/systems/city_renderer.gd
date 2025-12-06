@@ -33,16 +33,47 @@ const BUILDING_COLORS = {
 }
 
 func _ready():
+	print("🎨 CityRenderer _ready() called")
+	
 	# Se não foi atribuído no editor, procura na cena
 	if not city_simulation:
+		print("  - Looking for CitySimulation...")
 		city_simulation = get_parent().find_child("CitySimulation", true, false)
+		if not city_simulation:
+			# Tentar buscar de outra forma
+			var parent = get_parent()
+			if parent:
+				for child in parent.get_children():
+					if child is CitySimulation:
+						city_simulation = child
+						break
 	
 	if city_simulation:
 		city_simulation.building_constructed.connect(_on_building_constructed)
 		city_simulation.citizen_spawned.connect(_on_citizen_spawned)
 		city_simulation.city_updated.connect(_on_city_updated)
+		
+		# Garantir visibilidade
+		visible = true
+		z_index = 10
+		
+		# Forçar primeiro desenho
+		queue_redraw()
+		
+		print("🎨 CityRenderer initialized!")
+		print("  - Visible: %s" % visible)
+		print("  - Z-Index: %s" % z_index)
+		print("  - Position: %s" % position)
+		print("  - Grid Size: %s" % city_simulation.grid_size)
+		
+		# Calcular centro da cidade em coordenadas isométricas
+		var center_grid = Vector2(city_simulation.grid_size.x / 2.0, city_simulation.grid_size.y / 2.0)
+		var center_iso = grid_to_iso(center_grid)
+		print("  - City Center (grid): %s" % center_grid)
+		print("  - City Center (iso): %s" % center_iso)
 	else:
 		push_error("CityRenderer: CitySimulation not found!")
+		print("❌ CityRenderer: CitySimulation NOT FOUND!")
 
 ## Converte coordenadas do grid para isométrico
 func grid_to_iso(grid_pos: Vector2) -> Vector2:
@@ -119,8 +150,26 @@ func _draw_iso_cube(grid_pos: Vector2, width: int, depth: int, height: float, co
 	draw_line(p_top_left, p_base_left, outline_color, 1.0)
 
 func _draw():
+	# DEBUG: Sempre desenhar um marcador grande para confirmar que _draw está sendo chamado
+	draw_rect(Rect2(-50, -50, 100, 100), Color.RED, false, 3.0)
+	draw_circle(Vector2.ZERO, 20, Color.GREEN)
+	draw_string(ThemeDB.fallback_font, Vector2(-100, -80), "RENDERER OK", 
+				HORIZONTAL_ALIGNMENT_LEFT, -1, 24, Color.WHITE)
+	
 	if not city_simulation:
+		# Debug: Desenhar mensagem de erro
+		draw_string(ThemeDB.fallback_font, Vector2(0, 0), "NO SIMULATION", 
+					HORIZONTAL_ALIGNMENT_LEFT, -1, 32, Color.RED)
 		return
+	
+	# Debug: Mostrar contadores
+	var debug_text = "Roads: %d | Buildings: %d | Citizens: %d" % [
+		city_simulation.roads.size(),
+		city_simulation.buildings.size(),
+		city_simulation.citizens.size()
+	]
+	draw_string(ThemeDB.fallback_font, Vector2(-200, -60), debug_text, 
+				HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color.YELLOW)
 	
 	# Desenhar chão base
 	_draw_ground()
@@ -133,14 +182,8 @@ func _draw():
 	if show_zones:
 		_draw_zones()
 	
-	# Desenhar estradas
-	_draw_roads()
-	
-	# Desenhar edifícios (ordenados por profundidade)
-	_draw_buildings()
-	
-	# Desenhar cidadãos
-	_draw_citizens()
+	# Desenhar todas as entidades com depth sorting correto
+	_draw_entities_with_depth_sorting()
 
 func _draw_ground():
 	var grid_size = city_simulation.grid_size
@@ -185,6 +228,62 @@ func _get_zone_color(type: CitySimulation.ZoneType) -> Color:
 		_:
 			return Color.WHITE
 
+## Estrutura para entidades renderizáveis com profundidade
+class RenderEntity:
+	var type: String  # "road", "building", "citizen"
+	var depth: float  # Profundidade para ordenação (y + x)
+	var data: Dictionary  # Dados da entidade
+	
+	func _init(p_type: String, p_depth: float, p_data: Dictionary):
+		type = p_type
+		depth = p_depth
+		data = p_data
+
+## Desenha todas as entidades com depth sorting correto
+func _draw_entities_with_depth_sorting():
+	var entities: Array[RenderEntity] = []
+	
+	# Adicionar estradas
+	for road_cell in city_simulation.roads:
+		var pos = Vector2(road_cell)
+		var depth = pos.x + pos.y
+		entities.append(RenderEntity.new("road", depth, {"position": pos}))
+	
+	# Adicionar edifícios
+	for building in city_simulation.buildings:
+		var pos = Vector2(building["position"])
+		# Edifícios usam a posição frontal para depth (y + x + tamanho)
+		var depth = pos.x + pos.y + 2.0  # +2 para considerar o tamanho do edifício
+		entities.append(RenderEntity.new("building", depth, building))
+	
+	# Adicionar cidadãos
+	for citizen in city_simulation.citizens:
+		var pos = Vector2(citizen["position"]) + Vector2(0.5, 0.5)
+		var depth = pos.x + pos.y
+		entities.append(RenderEntity.new("citizen", depth, citizen))
+	
+	# Ordenar todas as entidades por profundidade
+	entities.sort_custom(func(a, b): return a.depth < b.depth)
+	
+	# Desenhar entidades na ordem correta
+	for entity in entities:
+		match entity.type:
+			"road":
+				_draw_road_entity(entity.data)
+			"building":
+				_draw_building_entity(entity.data)
+			"citizen":
+				_draw_citizen_entity(entity.data)
+
+## Desenha uma entidade de estrada
+func _draw_road_entity(data: Dictionary):
+	var pos = data["position"]
+	_draw_iso_tile(pos, COLOR_ROAD)
+	
+	# Linha amarela central
+	var center = grid_to_iso(pos + Vector2(0.5, 0.5))
+	draw_circle(center, 2, Color.YELLOW)
+
 func _draw_roads():
 	for road_cell in city_simulation.roads:
 		_draw_iso_tile(Vector2(road_cell), COLOR_ROAD)
@@ -192,6 +291,34 @@ func _draw_roads():
 		# Linha amarela central
 		var center = grid_to_iso(Vector2(road_cell) + Vector2(0.5, 0.5))
 		draw_circle(center, 2, Color.YELLOW)
+
+## Desenha uma entidade de edifício
+func _draw_building_entity(building: Dictionary):
+	var pos = Vector2(building["position"])
+	var color = BUILDING_COLORS.get(building["type"], Color.WHITE)
+	var height = _get_building_height(building["type"])
+	
+	# Desenhar cubo isométrico
+	_draw_iso_cube(pos, 2, 2, height, color)
+	
+	# Desenhar ícone/detalhe no topo
+	_draw_building_detail(building, pos, height)
+
+## Desenha uma entidade de cidadão
+func _draw_citizen_entity(citizen: Dictionary):
+	var grid_pos = Vector2(citizen["position"]) + Vector2(0.5, 0.5)
+	var iso_pos = grid_to_iso(grid_pos)
+	
+	var color = _get_citizen_color(citizen)
+	
+	# Sombra
+	draw_ellipse(iso_pos + Vector2(0, 2), Vector2(4, 2), Color(0, 0, 0, 0.3))
+	
+	# Corpo (elipse vertical)
+	draw_ellipse(iso_pos + Vector2(0, -4), Vector2(3, 6), color)
+	
+	# Cabeça
+	draw_circle(iso_pos + Vector2(0, -12), 4, Color(0.9, 0.75, 0.6))
 
 func _draw_buildings():
 	# Ordenar edifícios por profundidade (y + x) para desenhar corretamente
@@ -306,5 +433,10 @@ func _process(_delta):
 	queue_redraw()
 	
 	# Debug: mostrar se está renderizando
-	if city_simulation and city_simulation.buildings.size() > 0:
-		pass  # Renderizando normalmente
+	if city_simulation:
+		if Engine.get_frames_drawn() % 60 == 0:  # A cada segundo
+			print("🎨 Rendering: Roads=%d, Buildings=%d, Citizens=%d" % [
+				city_simulation.roads.size(),
+				city_simulation.buildings.size(),
+				city_simulation.citizens.size()
+			])

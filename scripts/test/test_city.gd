@@ -64,8 +64,8 @@ func _ready():
 	slow_btn.pressed.connect(_on_slow_down)
 	fast_btn.pressed.connect(_on_speed_up)
 	
-	# Posicionar câmera no player
-	camera.position = player.position
+	# Posicionar câmera no centro da cidade
+	call_deferred("_setup_camera")
 	
 	# Atualizar UI inicial
 	_update_city_ui()
@@ -75,9 +75,58 @@ func _ready():
 	print("👤 Player: %s" % player.critter.critter_name)
 	print("Use WASD to move, scroll to zoom")
 
+func _setup_camera():
+	# Centralizar câmera na cidade
+	# Grid 50x50, centro em (25, 25)
+	# Em isométrico: x = (25-25)*32 = 0, y = (25+25)*16 = 800
+	var grid_center = Vector2(city_simulation.grid_size.x / 2.0, city_simulation.grid_size.y / 2.0)
+	var iso_center = city_renderer.grid_to_iso(grid_center)
+	
+	print("📷 Grid center: %s" % grid_center)
+	print("📷 Iso center: %s" % iso_center)
+	
+	camera.position = iso_center
+	camera.zoom = Vector2(0.5, 0.5)  # Zoom mais afastado para ver mais
+	
+	print("📷 Camera positioned at: %s (zoom: %s)" % [camera.position, camera.zoom])
+	
+	# Executar diagnóstico
+	call_deferred("_diagnose")
+
+func _diagnose():
+	print("\n=== 🔍 DIAGNÓSTICO DO SISTEMA ===")
+	print("\n📊 CitySimulation:")
+	print("  - Grid Size: %s" % city_simulation.grid_size)
+	print("  - Roads: %d" % city_simulation.roads.size())
+	print("  - Buildings: %d" % city_simulation.buildings.size())
+	print("  - Citizens: %d" % city_simulation.citizens.size())
+	print("  - Population: %d" % city_simulation.population)
+	
+	print("\n🎨 CityRenderer:")
+	print("  - Exists: %s" % (city_renderer != null))
+	print("  - Visible: %s" % city_renderer.visible)
+	print("  - Position: %s" % city_renderer.position)
+	print("  - Z-Index: %s" % city_renderer.z_index)
+	print("  - Show Grid: %s" % city_renderer.show_grid)
+	print("  - Show Zones: %s" % city_renderer.show_zones)
+	
+	print("\n📷 Camera:")
+	print("  - Position: %s" % camera.position)
+	print("  - Zoom: %s" % camera.zoom)
+	
+	print("\n🖥️ Viewport:")
+	print("  - Size: %s" % get_viewport().size)
+	
+	print("\n👤 Player:")
+	print("  - Position: %s" % player.position)
+	print("  - Grid Position: %s" % player.grid_position)
+	
+	print("\n=== ✅ DIAGNÓSTICO COMPLETO ===\n")
+
 func _process(delta):
-	# Câmera segue o player suavemente
-	camera.position = camera.position.lerp(player.position, camera_smoothing * delta)
+	# NÃO seguir o player automaticamente - deixar câmera fixa no centro
+	# Se quiser seguir o player, descomente a linha abaixo:
+	# camera.position = camera.position.lerp(player.position, camera_smoothing * delta)
 	
 	# Aplicar velocidade do jogo
 	Engine.time_scale = game_speed

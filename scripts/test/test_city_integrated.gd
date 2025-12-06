@@ -14,6 +14,9 @@ var faction_system
 var event_bus
 var shared_config
 
+# Renderer
+var city_renderer
+
 # UI References
 @onready var camera: Camera2D = $Camera2D
 @onready var population_label: Label = %PopulationLabel
@@ -111,8 +114,19 @@ func _ready() -> void:
 	# Conectar sinais
 	_connect_signals()
 	
+	# Criar Renderer
+	print("\n🎨 Creating renderer...")
+	var RendererScript = load("res://scripts/city/rendering/integrated_renderer.gd")
+	city_renderer = RendererScript.new()
+	add_child(city_renderer)
+	city_renderer.set_systems(grid_system, road_system, building_system, citizen_system, zone_system)
+	print("✅ Renderer created!")
+	
 	# Inicializar cidade
 	_initialize_city()
+	
+	# Posicionar câmera no centro
+	_setup_camera()
 	
 	print("✅ City Map System initialized!")
 	print("📊 Grid: 100x100")
@@ -213,6 +227,20 @@ func _process(delta: float) -> void:
 	# Aplicar velocidade do jogo
 	Engine.time_scale = game_speed
 	
+	# Movimento da câmera
+	var move_dir = Vector2.ZERO
+	if Input.is_action_pressed("ui_up") or Input.is_key_pressed(KEY_W):
+		move_dir.y -= 1
+	if Input.is_action_pressed("ui_down") or Input.is_key_pressed(KEY_S):
+		move_dir.y += 1
+	if Input.is_action_pressed("ui_left") or Input.is_key_pressed(KEY_A):
+		move_dir.x -= 1
+	if Input.is_action_pressed("ui_right") or Input.is_key_pressed(KEY_D):
+		move_dir.x += 1
+	
+	if move_dir != Vector2.ZERO:
+		camera.position += move_dir.normalized() * 400.0 * delta
+	
 	# Atualizar sistemas
 	citizen_system.update_citizen_needs(delta)
 	economy_system.update_economy(delta)
@@ -245,6 +273,14 @@ func _input(event: InputEvent) -> void:
 				Vector2(min_zoom, min_zoom),
 				Vector2(max_zoom, max_zoom)
 			)
+
+func _setup_camera() -> void:
+	"""Posiciona câmera no centro da cidade"""
+	if city_renderer:
+		var center = city_renderer.grid_to_iso(Vector2(50, 50))
+		camera.position = center
+		camera.zoom = Vector2(0.5, 0.5)
+		print("📷 Camera at: %s" % camera.position)
 
 func _toggle_building_mode() -> void:
 	"""Alterna modo de construção"""
