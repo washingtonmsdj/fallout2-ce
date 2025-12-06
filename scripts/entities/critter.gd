@@ -24,6 +24,7 @@ var level: int = 1
 var experience: int = 0
 var reputation: int = 0
 var karma: int = 0
+var caps: int = 0  # Moeda do jogo
 
 # Estado de combate
 var is_in_combat: bool = false

@@ -23,6 +23,10 @@ class_name Weapon
 @export var has_secondary_mode: bool = false
 @export var secondary_mode_name: String = "Burst"
 
+# Condição e estado
+@export var condition: float = 1.0  # 0.0 a 1.0
+@export var is_jammed: bool = false
+
 func _init() -> void:
 	item_type = GameConstants.ItemType.WEAPON
 	if uses_ammo:
@@ -32,6 +36,8 @@ func calculate_damage() -> int:
 	return randi_range(min_damage, max_damage)
 
 func can_attack() -> bool:
+	if is_jammed:
+		return false
 	if uses_ammo:
 		return current_ammo > 0
 	return true

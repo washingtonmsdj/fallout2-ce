@@ -331,194 +331,194 @@
     - **Validates: Requirements 8.6**
 
 
-- [ ] 13. Checkpoint - Ensure all tests pass
+- [x] 13. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 5: Party and Effects Systems
 
-- [ ] 14. Implement Party System
-  - [ ] 14.1 Create PartySystem manager
+- [x] 14. Implement Party System
+  - [x] 14.1 Create PartySystem manager
     - Implement party member array
     - Track player reference
     - _Requirements: 9.1_
-  - [ ] 14.2 Implement companion recruitment
+  - [x] 14.2 Implement companion recruitment
     - Create add_companion() with limit check
     - Handle companion initialization
     - _Requirements: 9.1, 9.6_
-  - [ ] 14.3 Write property test for party size
+  - [x] 14.3 Write property test for party size
     - **Property 24: Party Size Limit**
     - **Validates: Requirements 9.6**
-  - [ ] 14.4 Implement party combat integration
+  - [x] 14.4 Implement party combat integration
     - Add party members to turn order
     - Handle companion death/unconscious
     - _Requirements: 9.2, 9.3_
-  - [ ] 14.5 Write property test for combat inclusion
+  - [x] 14.5 Write property test for combat inclusion
     - **Property 25: Party Combat Inclusion**
     - **Validates: Requirements 9.2**
-  - [ ] 14.6 Implement party management UI
+  - [x] 14.6 Implement party management UI
     - Create equipment management
     - Add behavior settings
     - _Requirements: 9.4_
-  - [ ] 14.7 Implement companion dialogue
+  - [x] 14.7 Implement companion dialogue
     - Trigger contextual comments
     - Handle companion-specific events
     - _Requirements: 9.5_
 
-- [ ] 15. Implement Effect Queue System
-  - [ ] 15.1 Create TimedEffect resource
+- [x] 15. Implement Effect Queue System
+  - [x] 15.1 Create TimedEffect resource
     - Define effect properties
     - Create stat/skill modifiers
     - _Requirements: 10.1_
-  - [ ] 15.2 Create EffectQueue manager
+  - [x] 15.2 Create EffectQueue manager
     - Implement add_effect() and remove_effect()
     - Track active effects array
     - _Requirements: 10.1_
-  - [ ] 15.3 Implement effect duration ticking
+  - [x] 15.3 Implement effect duration ticking
     - Create tick_effects() with time passage
     - Remove expired effects
     - _Requirements: 10.2_
-  - [ ] 15.4 Write property test for duration decrement
+  - [x] 15.4 Write property test for duration decrement
     - **Property 26: Effect Duration Decrement**
     - **Validates: Requirements 10.2**
-  - [ ] 15.5 Implement drug system
+  - [x] 15.5 Implement drug system
     - Create apply_drug() with effects
     - Handle withdrawal scheduling
     - _Requirements: 10.3_
-  - [ ] 15.6 Implement addiction system
+  - [x] 15.6 Implement addiction system
     - Create check_addiction() logic
     - Apply permanent penalties
     - _Requirements: 10.4_
-  - [ ] 15.7 Implement crippled limb effects
+  - [x] 15.7 Implement crippled limb effects
     - Create limb damage effects
     - Apply stat reductions
     - _Requirements: 10.5_
-  - [ ] 15.8 Implement effect stacking
+  - [x] 15.8 Implement effect stacking
     - Calculate combined modifiers
     - Handle conflicting effects
     - _Requirements: 10.6_
-  - [ ] 15.9 Write property test for effect stacking
+  - [x] 15.9 Write property test for effect stacking
     - **Property 27: Effect Stacking Calculation**
     - **Validates: Requirements 10.6**
 
-- [ ] 16. Checkpoint - Ensure all tests pass
+- [x] 16. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 
 ## Phase 6: Advanced Combat
 
-- [ ] 17. Implement Advanced Combat Mechanics
-  - [ ] 17.1 Create critical hit tables
+- [x] 17. Implement Advanced Combat Mechanics
+  - [x] 17.1 Create critical hit tables
     - Define effects per hit location
     - Create massive critical effects
     - _Requirements: 11.1, 11.2_
-  - [ ] 17.2 Write property test for critical effects
+  - [x] 17.2 Write property test for critical effects
     - **Property 28: Critical Hit Location Effects**
     - **Validates: Requirements 11.1**
-  - [ ] 17.3 Implement knockback system
+  - [x] 17.3 Implement knockback system
     - Calculate knockback distance
     - Handle collision with obstacles
     - _Requirements: 11.3_
-  - [ ] 17.4 Implement burst fire
+  - [x] 17.4 Implement burst fire
     - Calculate cone of fire
     - Distribute hits among targets
     - _Requirements: 11.4_
-  - [ ] 17.5 Implement aimed shots
+  - [x] 17.5 Implement aimed shots
     - Create location selection UI
     - Apply accuracy penalties and damage bonuses
     - _Requirements: 11.5_
-  - [ ] 17.6 Write property test for aimed shot modifiers
+  - [x] 17.6 Write property test for aimed shot modifiers
     - **Property 29: Aimed Shot Modifiers**
     - **Validates: Requirements 11.5**
-  - [ ] 17.7 Implement weapon jamming
+  - [x] 17.7 Implement weapon jamming
     - Create jam probability calculation
     - Handle repair requirements
     - _Requirements: 11.6_
 
-- [ ] 18. Checkpoint - Ensure all tests pass
+- [x] 18. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 7: Economy and Reputation
 
-- [ ] 19. Implement Economy System
-  - [ ] 19.1 Create trade interface
+- [x] 19. Implement Economy System
+  - [x] 19.1 Create trade interface
     - Display both inventories
     - Calculate prices with Barter modifier
     - _Requirements: 12.1_
-  - [ ] 19.2 Write property test for trade values
+  - [x] 19.2 Write property test for trade values
     - **Property 30: Trade Value Calculation**
     - **Validates: Requirements 12.1, 12.2**
-  - [ ] 19.3 Implement trade execution
+  - [x] 19.3 Implement trade execution
     - Transfer items between parties
     - Handle currency exchange
     - _Requirements: 12.2, 12.3_
-  - [ ] 19.4 Write property test for trade integrity
+  - [x] 19.4 Write property test for trade integrity
     - **Property 31: Trade Execution Integrity**
     - **Validates: Requirements 12.3**
-  - [ ] 19.5 Implement merchant caps limit
+  - [x] 19.5 Implement merchant caps limit
     - Track merchant available currency
     - Prevent over-limit trades
     - _Requirements: 12.4_
-  - [ ] 19.6 Implement reputation price modifiers
+  - [x] 19.6 Implement reputation price modifiers
     - Apply faction-based discounts/markups
     - _Requirements: 12.5_
-  - [ ] 19.7 Implement stealing from merchants
+  - [x] 19.7 Implement stealing from merchants
     - Use Steal skill check
     - Apply consequences if caught
     - _Requirements: 12.6_
 
-- [ ] 20. Implement Reputation System
-  - [ ] 20.1 Create karma tracking
+- [x] 20. Implement Reputation System
+  - [x] 20.1 Create karma tracking
     - Implement karma value storage
     - Create karma change functions
     - _Requirements: 13.1, 13.2_
-  - [ ] 20.2 Implement karma titles
+  - [x] 20.2 Implement karma titles
     - Create title threshold table
     - Assign titles based on karma
     - _Requirements: 13.3_
-  - [ ] 20.3 Write property test for karma titles
+  - [x] 20.3 Write property test for karma titles
     - **Property 32: Karma Title Assignment**
     - **Validates: Requirements 13.3**
-  - [ ] 20.4 Implement faction reputation
+  - [x] 20.4 Implement faction reputation
     - Track reputation per faction
     - Handle reputation changes
     - _Requirements: 13.4_
-  - [ ] 20.5 Implement reputation consequences
+  - [x] 20.5 Implement reputation consequences
     - Trigger hostile reactions at low rep
     - Unlock rewards at high rep
     - _Requirements: 13.5, 13.6_
 
-- [ ] 21. Checkpoint - Ensure all tests pass
+- [x] 21. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 
 ## Phase 8: Save System and Audio
 
-- [ ] 22. Implement Complete Save System
-  - [ ] 22.1 Create save data serialization
+- [x] 22. Implement Complete Save System
+  - [x] 22.1 Create save data serialization
     - Serialize character state
     - Serialize world state
     - Serialize quest state
     - _Requirements: 14.1_
-  - [ ] 22.2 Implement save file management
+  - [x] 22.2 Implement save file management
     - Create multiple save slots
     - Store timestamps and character info
     - _Requirements: 14.3_
-  - [ ] 22.3 Implement load functionality
+  - [x] 22.3 Implement load functionality
     - Deserialize all game state
     - Restore exact game state
     - _Requirements: 14.2_
-  - [ ] 22.4 Write property test for save/load round trip
+  - [x] 22.4 Write property test for save/load round trip
     - **Property 33: Save/Load Round Trip**
     - **Validates: Requirements 14.1, 14.2**
-  - [ ] 22.5 Implement auto-save
+  - [x] 22.5 Implement auto-save
     - Create auto-save triggers
     - Use dedicated slot
     - _Requirements: 14.4_
-  - [ ] 22.6 Implement save validation
+  - [x] 22.6 Implement save validation
     - Add checksum verification
     - Detect corrupted saves
     - _Requirements: 14.5_
-  - [ ] 22.7 Implement quicksave
+  - [x] 22.7 Implement quicksave
     - Create quicksave/quickload hotkeys
     - Use dedicated quicksave slot
     - _Requirements: 14.6_

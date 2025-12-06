@@ -104,6 +104,37 @@ func get_party_for_combat() -> Array[Critter]:
 	
 	return combat_party
 
+## Integra party com sistema de combate
+func integrate_with_combat(combat_system: CombatSystem) -> void:
+	if not combat_system:
+		return
+	
+	# Conectar sinais para atualizar turn order quando necessário
+	# O CombatSystem deve chamar get_party_for_combat() ao iniciar combate
+	# Por enquanto, a integração é feita manualmente chamando get_party_for_combat()
+	pass
+
+## Handler para morte de companheiro (já implementado em _on_companion_died)
+## Este método é chamado quando um companheiro morre em combate
+func handle_companion_death(companion: Critter) -> void:
+	if not companion or not companion in party_members:
+		return
+	
+	# Verificar se está realmente morto (HP <= -max_hp)
+	if companion.stats and companion.stats.current_hp <= -companion.stats.max_hp:
+		companion_died.emit(companion)
+		# Não remover automaticamente - pode ser revivido
+
+## Handler para companheiro inconsciente
+func handle_companion_unconscious(companion: Critter) -> void:
+	if not companion or not companion in party_members:
+		return
+	
+	# Verificar se está inconsciente (HP <= 0 mas > -max_hp)
+	if companion.stats:
+		if companion.stats.current_hp <= 0 and companion.stats.current_hp > -companion.stats.max_hp:
+			companion_unconscious.emit(companion)
+
 ## Cura todos os membros do party
 func heal_party(amount: int) -> void:
 	if player and player.stats:
